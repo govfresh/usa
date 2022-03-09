@@ -1,0 +1,28 @@
+footer h3 {
+    color: white;
+}
+
+img.agency_logo {
+    max-height: 6rem;
+    width: auto;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.logo {
+    font-family: var(--font-3);
+    font-size: var(--size-10);
+    padding: var(--size-3) !important;
+}
+
+.logo a, .logo a:visited, .logo a:hover {
+    color: var(--color-4);
+    text-decoration: none;
+    letter-spacing: -.03rem;
+}
+
+body {
+    overflow-x: hidden;
+}
