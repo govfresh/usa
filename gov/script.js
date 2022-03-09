@@ -7,7 +7,7 @@ if (location.search != '') {
         if (agency.logo != null && agency.logo.medium_url != null && agency.short_name != 'USAID')
             img = '<img class="line md p-3 rounded" alt="' + agency.name + ' logo" src="' + agency.logo.medium_url + '">';
         else
-            img = '<img class="line md p-3 rounded" alt="' + agency.name + ' logo" src="./assets/img/seal.png">';
+            img = '<img class="line md p-3 rounded" alt="' + agency.name + ' logo" src="/assets/img/seal.png">';
         let parent_html = '';
         if (agency.parent_id != null)
             parent_html = '<li class="list-group-item"><a href="?agency-id=' + agency.parent_id + '"><i class="fa-solid fa-university"></i> Parent agency</a></li>';
@@ -60,7 +60,7 @@ else {
             if (agency.logo != null && agency.short_name != 'USAID')
                 img = '<img class="agency_logo card-img-top md" src="' + agency.logo.medium_url + '">';
             else
-                img = '<img class="agency_logo card-img-top md" src="./assets/img/seal.png">';
+                img = '<img class="agency_logo card-img-top md" src="/assets/img/seal.png">';
             document.querySelectorAll('div.agencies div.row')[document.querySelectorAll('div.agencies div.row').length - 1].innerHTML += '<div class="col-sm-12 col-md-6 col-lg-3 d-flex align-items-stretch"><a href="?agency-id=' + agency.id + '"><div class="card d-inline">' + img + '<div class="card-body">' + '<h2 class="h5">' + agency.name + '</h2></div></a></div></div>';
             angency_number++;
         }
