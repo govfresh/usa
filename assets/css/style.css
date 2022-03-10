@@ -1,0 +1,23 @@
+img.agency_logo {
+    max-height: 6rem;
+    width: auto;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.loading {
+    animation: load 1.25s linear infinite;
+    color: var(--color-1);
+}
+
+@keyframes load {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateZ(360deg);
+    }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head></head>
+    <body>
+        <script src="/includes/include.js"></script>
+        <script>
+        include('nav.html','.nav-include');
+        include('head.html','head');
+        include('footer.html','.footer-include');
+        </script>
+        <div class="nav-include"></div>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1>Welcome!</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-deck clean">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-university fa-3x"></i>
+                                    </div>
+                                    <h3 class="h4">
+                                        <a href="/government" class="stretched-link">Government</a>
+                                    </h3>
+                                    <p class="description">Official U.S. government agencies.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-include"></div>
+    </body>
+</html>
