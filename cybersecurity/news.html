@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head></head>
+</head>
+<body>
+    <script src="/includes/include.js"></script>
+    <script>
+    include('head.html','head');
+    include('nav.html','.nav-include');
+    include('loading.html','.loading-include');
+    include('footer.html','.footer-include');
+    include('js.html','.js-include');
+    </script>
+    <div class="nav-include"></div>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Cybersecurity news</h1>
+                    <p class="lead">Updates from the Cybersecurity Infrastructure and Security Agency.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="nav nav-tabs select-tab">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#all">All</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#alerts">Alerts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bulletins">Bulletins</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#analysis-reports">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tips">Tips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#current-activity">Activity</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row post">
+            <div class="col-sm-12">
+                <div class="card-deck posts"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-include"></div>
+    <script src="script.js"></script>
+    <div class="js-include"></div>
+</body>
+</html>

@@ -21,3 +21,24 @@ img.agency_logo {
         transform: rotateZ(360deg);
     }
 }
+
+.nav {
+    background-color: var(--color-4);
+    border-top: none;
+    font-family: var(--font-1) !important;
+    margin-bottom: var(--size-6);
+}
+
+.nav-tabs .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: var(--color-1);
+    color: var(--color-4);
+}
+
+.tag {
+    background-color: var(--color-1);
+    color: var(--color-4) !important;
+    display: inline;
+    padding-left: .25em;
+    padding-right: .25em;
+    border-radius: 7%;
+}
