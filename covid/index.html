@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+</head>
+<body class="home">
+    <script src="/includes/include.js"></script>
+    <script>
+    include('head.html','head');
+    include('nav.html','.nav-include');
+    include('footer.html','.footer-include');
+    include('js.html','.js-include');
+    </script>
+    <main>
+        <div class="nav-include"></div>
+        <div class="container">
+            <div class="row select">
+                <div class="col-sm-12">
+                    <div class="alert alert-light2">
+                        <img src="assets/img/covid.svg" alt="Covid icon" class="home-icon">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="states" class="mr-3">
+                                    <strong>Show COVID data for:</strong>
+                                </label>
+                                <select name="States" id="states" class="form-control">
+                                    <option value="" disabled selected>- select a state -</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <div class="state-icon"></div>
+                </div>
+                <div>
+                    <h1 class="display-4" id="name">-</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Status</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-group">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <i class="fas fa-syringe fa-5x mb-2"></i>
+                                <h5 class="card-title h2 vaccinated">-</h5>
+                                <p class="card-text">people vaccinated</p>
+                            </div>
+                            <div class="card-footer">
+                                <small>
+                                    Source:
+                                    <a href="https://data.cdc.gov/resource/unsk-b7fc">CDC</a>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <i class="fas fa-chart-pie fa-5x mb-2"></i>
+                                <h5 class="card-title h2 pie-chart">-</h5>
+                                <p class="card-text">of population</p>
+                            </div>
+                            <div class="card-footer">
+                                <small>
+                                    Source:
+                                    <a href="https://www.census.gov/data/developers/data-sets/census-microdata-api.html">
+                                        US
+                                        Census
+                                    </a>
+                                    /
+                                    <a href="https://data.cdc.gov/resource/unsk-b7fc">CDC</a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Yesterday</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-group">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <i class="fas fa-chart-line fa-5x mb-2"></i>
+                                <h5 class="card-title h2 vaccinated yesterday">-</h5>
+                                <p class="card-text">
+                                    people vaccinated on
+                                    <date>yesterday</date>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small>
+                                    Source:
+                                    <a href="https://data.cdc.gov/resource/unsk-b7fc">CDC</a>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <i class="fas fa-chart-line fa-5x mb-2"></i>
+                                <h5 class="card-title h2 pie-chart yesterday">-</h5>
+                                <p class="card-text">
+                                    of population vaccinated on
+                                    <date>yesterday</date>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small>
+                                    Source:
+                                    <a href="https://www.census.gov/data/developers/data-sets/census-microdata-api.html">
+                                        US
+                                        Census
+                                    </a>
+                                    /
+                                    <a href="https://data.cdc.gov/resource/unsk-b7fc">CDC</a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Mandates</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-group">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <i class="fa-solid fa-mask-face fa-5x mb-2"></i>
+                                <h5 class="card-title h2 mask">No</h5>
+                                <p class="card-text">mask mandate</p>
+                            </div>
+                            <!-- <div class="card-footer">
+                                <small>
+                                    Source:
+                                    <a href="https://data.cdc.gov/resource/tzyy-aayg">CDC</a>
+                                </small>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container locations">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 id="locations-header" class="display-5">Vaccine locations</h2>
+                    <p>
+                        <small>
+                            Source:
+                            <a href="https://data.cdc.gov/Vaccinations/Vaccines-gov-COVID-19-vaccinating-provider-locatio/5jp2-pgaw">Vaccines.gov</a>
+                        </small>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="locations">
+                        <div class="alert alert-warning container" role="alert">
+                            <i class="fas fa-spinner"></i>
+                            Locations loading. This may take around a minute
+                            with fast internet.
+                        </div>
+                        <button id="locations-button" type="button" class="btn btn-primary btn-md find-site">
+                            Show locations
+                        </button>
+                        <div class="col-sm-9 d-sm-block d-none">
+                            <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA1G0PbkHalaKDxMUnZR9-RTM1g8QI5lq4&q=Centers+for+Disease+Control+and+Prevention,+1600+Clifton+Road,+Atlanta,+GA+30329+USA" frameborder="0"></iframe>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="loading-include"></div>
+    <div class="agency-data"></div>
+    <div class="footer-include"></div>
+    <div class="js-include"></div>
+    <script src="js/script.js"></script>
+</body>
+</html>

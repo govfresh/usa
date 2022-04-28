@@ -15,7 +15,21 @@ window.onhashchange = () => {
                                 posts.sort((a, b) => {
                                     return new Date(a.pubDate).getTime() - new Date(b.pubDate).getTime()
                                 }).reverse().forEach(post => {
-                                    document.querySelector('.row.post .posts').innerHTML += `<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch"><div class="card"><div class="card-body"><i class="fa-solid fa-satellite-dish fa-2x"></i><h3 class="h4"><a href="${post.link}">${post.title}</a></h3><small><div>${new Date(post.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div><a class="tag" href="#${post.type.replace(' ', '-')}">${post.type}</a></small></div></div></div>`;
+                                    document.querySelector('.row.post .posts').innerHTML += `
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <i class="fa-solid fa-satellite-dish fa-2x"></i>
+                                                <h3 class="h4">
+                                                    <a href="?type=${post.type.replace(' ', '_')}&guid=${post.guid.substring(0, post.guid.indexOf(' '))}">${post.title}</a>
+                                                </h3>
+                                                <small>
+                                                    <div>${new Date(post.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                                                    <a class="tag" href="#${post.type.replace(' ', '-')}">${post.type}</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>`;
                                 })
                             })
                         })
@@ -29,7 +43,11 @@ window.onhashchange = () => {
 }
 
 window.onload = function () {
-    if (location.hash.length < 2)
+    if (location.search.includes('type') && location.search.includes('guid')) {
+        //find whcih one has the guid from the type xml
+        document.querySelector('.jumbotron').innerHTML = '<div class="container"><div class="row"><div class="col-sm-12"><h1>TITLE</h1></div></div></div>';
+    }
+    else if (location.hash.length < 2)
         location.hash = 'all';
     window.onhashchange();
 };
@@ -39,6 +57,7 @@ function getFeed(feed) {
     req.open('GET', `https://api.rss2json.com/v1/api.json?api_key=ljjuizqbsfmj2meszzzqf8ymzggnwy7jd5wbx2l4&rss_url=https://www.cisa.gov/uscert/ncas/${feed}.xml`, true);
     req.onload = function () {
         JSON.parse(this.response).items.forEach(post => {
+            console.log(JSON.parse(this.response));
             document.querySelector('.row.post .posts').innerHTML += `<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch"><div class="card"><div class="card-body"><i class="fa-solid fa-satellite-dish fa-2x"></i><h3 class="h4"><a href="${post.link}">${post.title}</a></h3><small>${new Date(post.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div></div></div>`;
         });
     };
