@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head></head>
-</head>
-<body>
-    <script src="/includes/include.js"></script>
-    <script>
-    include('head.html','head');
-    include('nav.html','.nav-include');
-    include('loading.html','.loading-include');
-    include('footer.html','.footer-include');
-    include('js.html','.js-include');
-    </script>
-    <div class="nav-include"></div>
-    <div class="jumbo-insert"></div>
-    <div class="loading-include"></div>
-    <div class="footer-include"></div>
-    <div class="js-include"></div>
-</body>
+    <head>
+        <title>Cybersecurity - USA.govfresh</title>
+    </head>
+    <body>
+        <script src="/includes/include.js"></script>
+        <script>
+            include("nav.html", ".nav-include");
+            include("head.html", "head");
+            include("footer.html", ".footer-include");
+            include("js.html", ".js-include");
+        </script>
+        <div class="nav-include"></div>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1>Cybersecurity</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-deck clean">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-university fa-3x"></i>
+                                    </div>
+                                    <h3 class="h4">
+                                        <a class="stretched-link" href="news.html">News</a>
+                                    </h3>
+                                    <p class="description">The latest cybersecurity news from CISA.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-include"></div>
+        <div class="js-include"></div>
+    </body>
 </html>

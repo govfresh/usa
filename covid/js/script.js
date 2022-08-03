@@ -30,7 +30,7 @@ request.onload = function () {
   });
   const vaccines = new Array();
   const vaccinesOld = new Array();
-  //var masks = new Array();
+  //let masks = new Array();
   const sites = new Array();
   const stateCodes = [
     {
@@ -289,26 +289,26 @@ request.onload = function () {
       "Code": "WY"
     }
   ];
-  var cdcRequest = new XMLHttpRequest();
+  let cdcRequest = new XMLHttpRequest();
   cdcRequest.open('GET', 'https://data.cdc.gov/resource/unsk-b7fc.json', true);
   cdcRequest.onload = function () {
-    var data = JSON.parse(this.response);
+    let data = JSON.parse(this.response);
     data.forEach(stat => {
-      var date = new Date(stat.date);
-      var yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 2);
-      var today = new Date();
-      today.setDate(today.getDate() - 1);
+      let date = new Date(stat.date);
+      let yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 5);
+      let today = new Date();
+      today.setDate(today.getDate() - 4);
       if (stat.location.length < 3 && date.getDate() == today.getDate())
         vaccines.push(stat);
-      else if (date.getDate() == yesterday.getDate())
+      if (date.getDate() == yesterday.getDate())
         vaccinesOld.push(stat);
     });
     vaccinesLoaded = false;/*
-var maskRequest = new XMLHttpRequest();
+let maskRequest = new XMLHttpRequest();
 maskRequest.open('GET', 'https://data.cdc.gov/resource/tzyy-aayg.json?$limit=50000', true);
 maskRequest.onload = function () {
-  var data = JSON.parse(this.response);
+  let data = JSON.parse(this.response);
   data.forEach(mandate => {
     if (mandate.state_tribe_territory != 'PR' && mandate.state_tribe_territory != 'GU' && mandate.state_tribe_territory != 'VI' && mandate.state_tribe_territory != 'AS')
       if (mandate.date == '8/15/2021')
@@ -320,12 +320,12 @@ maskRequest.onload = function () {
   masksLoaded = false;
 };
 maskRequest.send();*/
-    var locationsLoaded = false;
+    let locationsLoaded = false;
     if (location.hash != '') {
-      var siteRequest = new XMLHttpRequest();
+      let siteRequest = new XMLHttpRequest();
       siteRequest.open('GET', 'https://data.cdc.gov/resource/5jp2-pgaw.json?$limit=194000', true);
       siteRequest.onload = function () {
-        var data = JSON.parse(this.response);
+        let data = JSON.parse(this.response);
         data.forEach(location => {
           if (location.in_stock && !location.loc_name.includes('almart') && !location.loc_name.includes('afeway') && !location.loc_name.includes('algreens') && !location.loc_name.includes('CVS') && !location.loc_name.includes('ite Aid')) {
             sites.push(location);
@@ -338,15 +338,15 @@ maskRequest.send();*/
       }
       siteRequest.send();
     }
-    var stateCode;
-    var nationwide;
-    var dataShown = false;
-    var usPercent;
+    let stateCode;
+    let nationwide;
+    let dataShown = false;
+    let usPercent;
     select.onchange = function () {
-      var siteRequest = new XMLHttpRequest();
+      let siteRequest = new XMLHttpRequest();
       siteRequest.open('GET', 'https://data.cdc.gov/resource/5jp2-pgaw.json?$limit=194000', true);
       siteRequest.onload = function () {
-        var data = JSON.parse(this.response);
+        let data = JSON.parse(this.response).filter(({ loc_admin_state }) => loc_admin_state == states[parseInt(select.value)]);
         data.forEach(location => {
           if (location.in_stock && !location.loc_name.includes('almart') && !location.loc_name.includes('afeway') && !location.loc_name.includes('algreens') && !location.loc_name.includes('CVS') && !location.loc_name.includes('ite Aid')) {
             sites.push(location);
@@ -361,17 +361,17 @@ maskRequest.send();*/
       htmlLocations = '';
       document.body.classList.remove('home');
       document.querySelectorAll('date').forEach(element => {
-        var yesterday = new Date();
+        let yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
         element.innerHTML = yesterday.getMonth() + 1 + '/' + yesterday.getDate() + '/' + yesterday.getFullYear().toString()[2] + yesterday.getFullYear().toString()[3];
       });
-      var sitesShown = 0;
+      let sitesShown = 0;
       if (!dataShown) {
-        document.head.innerHTML += '<style>img.icon {width: 0px; height: 0px;} div.select > div.col-sm-12 > div.alert {border: 1px solid var(--color-4);background-color: var(--color-4);}select {width: auto !important;height: calc(1.5em + .75rem + 2px) !important;font-size: 1rem !important; margin-bottom: 0px !important;}label > strong {font-size: 1rem;}label {padding-bottom: 0px;}div.form-group {margin: revert;text-align: left;display: flex !important;}div.row:not(div.row.select), div.container-fluid.locations {visibility: visible !important;height: 100% !important} div.state-icon {height:80px;}</style>';
+        document.head.innerHTML += '<style>img.icon {width: 0px; height: 0px;} div.select > div.col-sm-12 > div.alert {border: 1px solid let(--color-4);background-color: let(--color-4);}select {width: auto !important;height: calc(1.5em + .75rem + 2px) !important;font-size: 1rem !important; margin-bottom: 0px !important;}label > strong {font-size: 1rem;}label {padding-bottom: 0px;}div.form-group {margin: revert;text-align: left;display: flex !important;}div.row:not(div.row.select), div.container-fluid.locations {visibility: visible !important;height: 100% !important} div.state-icon {height:80px;}</style>';
         dataShown = true;
       }
-      var vaccinesGiven;
-      var yesterdayVaccinesGiven;
+      let vaccinesGiven;
+      let yesterdayVaccinesGiven;
       stateCodes.forEach(state => {
         if (state.State == states[parseInt(select.value)])
           vaccines.forEach(vaccine => {
@@ -384,9 +384,9 @@ maskRequest.send();*/
             }
           });
       });
-      var percent = Math.ceil((100 / (parseInt(populations[parseInt(select.value)]) / vaccinesGiven)) * 100) / 100;
-      var oldPercent = Math.ceil((100 / (parseInt(populations[parseInt(select.value)]) / yesterdayVaccinesGiven)) * 100) / 100;
-      var population = 0;
+      let percent = Math.ceil((100 / (parseInt(populations[parseInt(select.value)]) / vaccinesGiven)) * 100) / 100;
+      let oldPercent = Math.ceil((100 / (parseInt(populations[parseInt(select.value)]) / yesterdayVaccinesGiven)) * 100) / 100;
+      let population = 0;
       populations.forEach(pop => {
         population += parseInt(pop);
       });
@@ -394,8 +394,11 @@ maskRequest.send();*/
       document.querySelector('#name').innerHTML = states[parseInt(select.value)];
       document.querySelector("h5.vaccinated").innerHTML = vaccinesGiven.toLocaleString();
       document.querySelector('h5.pie-chart').innerHTML = percent + '%';
-      document.querySelector("h5.vaccinated.yesterday").innerHTML = yesterdayVaccinesGiven.toLocaleString();
-      document.querySelector('h5.pie-chart.yesterday').innerHTML = oldPercent + '%';
+      try {
+        document.querySelector("h5.vaccinated.yesterday").innerHTML = yesterdayVaccinesGiven.toLocaleString();
+        document.querySelector('h5.pie-chart.yesterday').innerHTML = oldPercent + '%';
+      }
+      catch (e) { }
       //  document.querySelector('h5.mask').innerHTML = masks[parseInt(select.value)];
       stateCodes.forEach(code => {
         if (code.State == states[parseInt(select.value)]) {
@@ -434,7 +437,7 @@ maskRequest.send();*/
 request.send();
 
 function locationsClick() {
-  var addLocations = true;
+  let addLocations = true;
   try {
     htmlLocations = htmlLocations.replace('undefined', '');
   }
