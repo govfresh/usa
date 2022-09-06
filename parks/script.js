@@ -9,6 +9,7 @@ if (urlParams.has('park')) {
 
         document.querySelector('.park-list').innerHTML = '';
         document.querySelector('.jumbotron h1').innerText = data.fullName;
+        document.querySelector('.jumbotron h1').classList.add('h2');
         document.querySelector('.jumbotron p.lead').innerText = data.description;
         document.title = data.fullName + '- USA.govfresh';
         document.querySelector('meta[property="og:title"').content = data.fullName + '- USA.govfresh';

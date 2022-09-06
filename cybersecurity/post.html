@@ -1,51 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title></title>
-    </head>
-    <body>
-        <script src="/includes/include.js"></script>
-        <script>
-        include('head.html','head');
-        include('nav.html','.nav-include');
-        include('loading.html','.loading-include');
-        include('footer.html','.footer-include');
-        include('js.html','.js-include');
-        </script>
-        <div class="nav-include"></div>
-        <div class="jumbotron radar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-10">
-                        <h1 class="h2">{{ page.title }}</h1>
-                        <p class="small">
-                            Source:
-                            <a href="{{ site.baseurl }}{{ author_data.url }}"> {{ author_data.title }}</a>
-                            &middot;
-                            Month Day, Year
-                        </p>
-                    </div>
-                    <div class="col-sm-1"></div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <script src="/includes/include.js"></script>
+    <script>
+        include('head.html', 'head');
+        include('nav.html', '.nav-include');
+        include('loading.html', '.loading-include');
+        include('footer.html', '.footer-include');
+        include('js.html', '.js-include');
+    </script>
+    <div class="nav-include"></div>
+    <div class="jumbotron radar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                    <h1 class="h2">{{ page.title }}</h1>
+                    <p class="small">
+                        Source:
+                        <a href="{{ site.baseurl }}{{ author_data.url }}"> {{ author_data.title }}</a>
+                        &middot;
+                        Month Day, Year
+                    </p>
                 </div>
+                <div class="col-sm-1"></div>
             </div>
         </div>
-        <main>
-            <div class="container">
-                <div class="row post">
-                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2"></div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                        {{ content }}
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2"></div>
+    </div>
+    <main>
+        <div class="container">
+            <div class="row post">
+                <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2"></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                    {{ content }}
                 </div>
+                <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2"></div>
             </div>
-        </main>
-        <div class="footer-include"></div>
-        <script src="script.js"></script>
-        <div class="js-include"></div>
-    </body>
+        </div>
+    </main>
+    <div class="footer-include"></div>
+    <script src="script.js"></script>
+    <div class="js-include"></div>
+</body>
+
 </html>

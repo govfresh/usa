@@ -3,7 +3,6 @@ if (location.search != '') {
     req.open('GET', 'https://www.federalregister.gov/api/v1/agencies/' + location.search.substring(location.search.indexOf('=') + 1), true);
     req.onload = function () {
         const agency = JSON.parse(this.response);
-        document.querySelector('meta[property="og:title"]').setAttribute('content', agency.name + ' - USA.govfresh');
         let img = '';
         if (agency.logo != null && agency.logo.medium_url != null && agency.short_name != 'USAID')
             img = '<img class="line p-3 rounded" alt="' + agency.name + ' logo" src="' + agency.logo.medium_url + '">';
@@ -20,7 +19,7 @@ if (location.search != '') {
         }
         else
             latest_short_name = '<p class="lead">Latest ' + agency.name + ' documents published to the Federal Register.</p>'
-        document.querySelector('div.agency-data').innerHTML += '<div class="jumbotron"><div class="container"><div class="row"><div class="col-sm-12"><h1>' + agency.name + short_name_text + '</h1></div></div></div></div><div class="container home-include"><div class="preview general"><div class="row"><div class="col-sm-12 col-md-3">' + img + '<ul class="list-unstyled pb-5">' + website + '<div class="parent-li"></div>' + '<li><a href="https://www.federalregister.gov/api/v1/agencies/' + agency.slug + '"><i class="fa-solid fa-database pr-2"></i> Data source</a></li>' + '</ul></div><div class="col-sm-12 col-md-9 post"><h2>About</h2><p>' + agency.description.replaceAll(/((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g, '<a href="$1" target="_blank">$1</a>') + '</p></div></div></div></div><div class="agency-children"></div></div><div class="container posts home-include"></div>';
+        document.querySelector('div.agency-data').innerHTML += '<div class="jumbotron"><div class="container"><div class="row"><div class="col-sm-12"><h1 class="h2">' + agency.name + short_name_text + '</h1></div></div></div></div><div class="container home-include"><div class="preview general"><div class="row"><div class="col-sm-12 col-md-3">' + img + '<ul class="list-unstyled pb-5">' + website + '<div class="parent-li"></div>' + '<li><a href="https://www.federalregister.gov/api/v1/agencies/' + agency.slug + '"><i class="fa-solid fa-database pr-2"></i> Data source</a></li>' + '</ul></div><div class="col-sm-12 col-md-9 post"><h2>About</h2><p>' + agency.description.replaceAll(/((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g, '<a href="$1" target="_blank">$1</a>') + '</p></div></div></div></div><div class="agency-children"></div></div><div class="container posts home-include"></div>';
         if (agency.parent_id != null) {
             const parent_req = new XMLHttpRequest();
             parent_req.open('GET', 'https://www.federalregister.gov/api/v1/agencies/' + agency.parent_id, true);
