@@ -43,8 +43,6 @@ img.agency_logo {
     border-radius: 7%;
 }
 
-a {}
-
 .card.button {
     margin-bottom: var(--size-10);
 }
@@ -334,4 +332,26 @@ img.md {
 
 .jumbotron h1 {
     word-break: break-all;
+}
+
+.filter p>input {
+    display: block;
+}
+
+.filter p>label {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+input[type=range] {
+    accent-color: var(--color-1);
+}
+
+.sort-order.asc::after {
+    content: '\2191';
+}
+
+.sort-order::after {
+    content: '\2193';
+    padding: .5rem;
 }

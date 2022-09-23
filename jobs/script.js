@@ -4,10 +4,13 @@ const params = new URLSearchParams(location.search);
 if (params.has('job') && params.has('code')) {
     req.open('GET', 'https://data.usajobs.gov/api/codelist/positionscheduletypes');
     req.onload = function () {
+        document.querySelector('.filter').innerHTML = '';
+        document.querySelector('.sort').innerHTML = '';
+
         const scheduleMap = new Map();
         JSON.parse(this.response).CodeList[0].ValidValue.forEach(item => { scheduleMap.set(item.Code, item.Value) });
 
-        req.open('GET', 'https://data.usajobs.gov/api/search?JobCategoryCode=' + params.get('code'));
+        req.open('GET', 'https://data.usajobs.gov/api/search?' + params);
         req.setRequestHeader('User-Agent', 'admin@govfresh.com');
         req.setRequestHeader('Authorization-Key', 'aJK6I8oFNizc/BUOqsEc2Uzv7I1On4wZRHa3iPYijEw=');
         req.onload = function () {
@@ -31,7 +34,7 @@ if (params.has('job') && params.has('code')) {
                             <div class="row">
                                 <div class="col-4">
                                     <img src="/assets/img/icons/1F4B5.png" class="xs">
-                                    <h2 class="h4">Salary</h2>
+                                    <h2 class="h4">Salary/${job.PositionRemuneration[0].Description.substring(4).toLowerCase()}</h2>
                                     <p>$${parseInt(job.PositionRemuneration[0].MinimumRange).toLocaleString()} -
                                         $${parseInt(job.PositionRemuneration[0].MaximumRange).toLocaleString()}</p>
                                 </div>
@@ -254,13 +257,14 @@ if (params.has('job') && params.has('code')) {
                         </div>
                     </div>`;
                     try {
-                        let number = job.UserArea.Details.AgencyContactPhone.toLowerCase().replaceAll(/-|\(|\)|\+| /gm, '');
-                        let ext = '';
-                        if (number.indexOf('x') != -1) {
-                            ext = number.slice(number.indexOf('x'));
-                            number = number.substring(0, number.indexOf('x'));
-                        }
-                        document.querySelector('.container.contact').innerHTML += `
+                        if (job.UserArea.Details.AgencyContactPhone.length >= 10) {
+                            let number = job.UserArea.Details.AgencyContactPhone.toLowerCase().replaceAll(/-|\(|\)|\+| /gm, '');
+                            let ext = '';
+                            if (number.indexOf('x') != -1) {
+                                ext = number.slice(number.indexOf('x'));
+                                number = number.substring(0, number.indexOf('x'));
+                            }
+                            document.querySelector('.container.contact').innerHTML += `
                         <div class="col-4">
                         <img src="/assets/img/icons/1F4F1.png" class="xs float-left">
                             <h3>Phone</h3>
@@ -269,9 +273,10 @@ if (params.has('job') && params.has('code')) {
                             ${(number.length > 10 ? '+' + number.slice(0, -10) + ' ' : '') + '(' + number.substring(number.length - 10, number.length - 7) + ') ' + number.substring(number.length - 7, number.length - 4) + '-' + number.slice(-4)} ${ext}</a>
                         </p>
                         </div>`;
+                        }
                     } catch (e) { }
                     document.querySelector('.job-info').innerHTML += '<h2>Categories</h2><p class="categories"></p';
-                    job.UserArea.Details.KeyRequirements.forEach(requirement => { document.querySelector('.requirements').innerHTML += '<li>' + requirement + '</li>'; });
+                    job.UserArea.Details.KeyRequirements.forEach(requirement => { document.querySelector('.requirements ul').innerHTML += '<li>' + requirement + '</li>'; });
                     job.JobCategory.forEach(category => {
                         document.querySelector('.categories').innerHTML += `<a href="?category=${category.Code}">
                     <i class="fa-solid fa-tags" style="color: var(--color-1);"></i>
@@ -283,13 +288,16 @@ if (params.has('job') && params.has('code')) {
                 }
             });
             document.querySelector('.loading-include').removeChild(document.querySelector('.loading-include > *'));
-            const arr = Array.from(document.querySelectorAll('.accordion-body'));
+            document.querySelectorAll('.accordion-body').forEach(element => {
+                if (!/\S[A-z]*/gm.test(element.innerText))
+                    element.parentElement.parentElement.removeChild(element.parentElement);
+            });
         };
         req.send();
     };
     req.send();
 } else {
-    req.open('GET', 'https://data.usajobs.gov/api/search');
+    req.open('GET', 'https://data.usajobs.gov/api/search?' + params);
     req.setRequestHeader('User-Agent', 'admin@govfresh.com');
     req.setRequestHeader('Authorization-Key', 'aJK6I8oFNizc/BUOqsEc2Uzv7I1On4wZRHa3iPYijEw=');
     req.onload = function () {

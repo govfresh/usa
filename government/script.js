@@ -76,9 +76,9 @@ else {
                 continue;
             let img = '';
             if (agency.logo != null && agency.short_name != 'USAID')
-                img = '<img class="agency_logo card-img-top md" src="' + agency.logo.medium_url + '">';
+                img = '<img class="agency_logo card-img-top" src="' + agency.logo.medium_url + '">';
             else
-                img = '<img class="agency_logo card-img-top md" src="/assets/img/seal.png">';
+                img = '<img class="agency_logo card-img-top" src="/assets/img/seal.png">';
             document.querySelectorAll('div.agencies div.row')[document.querySelectorAll('div.agencies div.row').length - 1].innerHTML += '<div class="col-sm-12 col-md-6 col-lg-3 d-flex align-items-stretch"><a href="?name=' + agency.slug + '"><div class="card d-inline">' + img + '<div class="card-body">' + '<h2 class="h5">' + agency.name + '</h2></div></a></div></div>';
             angency_number++;
         }
@@ -86,5 +86,5 @@ else {
 }
 req.send();
 req.onloadend = function () {
-    document.querySelector('i.loading').classList = '';
+    document.querySelector('.loading-include').removeChild(document.querySelector('.loading-include > *'));
 };

@@ -3,6 +3,7 @@
 
 <head>
     <title>Jobs - USA.govfresh</title>
+    <meta property="og:image" content="/assets/img/jobs.png">
 </head>
 
 <body>
@@ -25,10 +26,231 @@
                 </div>
             </div>
         </div>
+        <div class="filter mt-4">
+            <h3>Filter jobs listings</h3>
+            <div class="row">
+                <div class="col-sm-3">
+                    <p>
+                        <label for="keywords">Keywords (; separated)</label>
+                        <input name="keywords" placeholder="Keywords" param="Keyword">
+                    </p>
+                    <p>
+                        <label for="title">Title</label>
+                        <input name="title" placeholder="Job title" param="PositionTitle">
+                    </p>
+                    <p>
+                        <label for="orgs">Organizations (; separated) <a href="organizations.html"
+                                target="blank">list</a></label>
+                        <input placeholder="Organization codes" name="orgs" param="Organization">
+                    </p>
+                    <p>
+                        <label for="location">Location</label>
+                        <input name="location" placeholder="Job location" param="LocationName">
+                        <label for="radius">Radius: <span class="radius">1500</span> miles</label>
+                        <input type="range" name="radius" max="3000" style="width: 100%;"
+                            onchange="document.querySelector('.radius').innerText = this.value;" param="Radius">
+                    </p>
+                </div>
+                <div class="col-sm-3">
+                    <div>
+                        <form param="PositionSensitivity" offset="1">
+                            Sensitivity/risk
+                            <div class="form-check">
+                                <input type="checkbox" name="ns">
+                                <label for="ns">Non-sensitive/low risk</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="ncs">
+                                <label for="ncs">Noncritical-sensitive/moderate</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="cs">
+                                <label for="cs">Critical-sensitive/high risk</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="ss">
+                                <label for="ss">Special-sensitive/high risk</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="moderate">
+                                <label for="moderate">Moderate risk</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="high">
+                                <label for="high">High risk</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="ncs-high">
+                                <label for="ncs-high">Noncritical-sensitive/high</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <form param="PositionScheduleTypeCode" offset="1">
+                        Schedule
+                        <div class="form-check">
+                            <input type="checkbox" name="full">
+                            <label for="full">Full-time</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" name="part">
+                            <label for="full">Part-time</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" name="shift">
+                            <label for="shift">Shift work</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" name="intermittent">
+                            <label for="full">Intermittent</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" name="sharing">
+                            <label for="sharing">Job sharing</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" name="multiple">
+                            <label for="multiple">Multiple schedules</label>
+                        </div>
+                    </form>
+                    <div>
+                        <input type="checkbox" name="relocation" param="RelocationIndicator">
+                        <label for="relocation">Relocation okay?</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="remote" param="RemoteIndicator">
+                        <label for="remote">Remote work</label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div>
+                        <form param="SecurityClearanceRequired">
+                            Security clearance
+                            <div class="form-check">
+                                <input type="checkbox" name="none">
+                                <label for="none">None</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="confidential">
+                                <label for="confidential">Confidential</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="secret">
+                                <label for="secret">Secret</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="top-secret">
+                                <label for="top-secret">Top secret</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="sci">
+                                <label for="sci">Sensitive comparted information</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="q">
+                                <label for="q">Q access</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="l">
+                                <label for="l">L access</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" name="other">
+                                <label for="other">Other</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="apply">
+                        <a class="float-end btn btn-primary" style="transition: 0s;">Apply changes</a>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                window.onload = function () {
+                    const params = new URLSearchParams(location.search);
+                    params.forEach((value, key) => {
+                        const input = document.querySelector('input[param="' + key + '"]');
+                        if (input)
+                            if (input.type == 'checkbox')
+                                input.checked = value;
+                            else if (input.onchange)
+                                input.onchange();
+                            else {
+                                const form = document.querySelector('form[param="' + key + '"]');
+                                if (form) {
+                                    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                                    value.split(';').slice(0, -1).forEach(value => {
+                                        checkboxes[parseInt(value)].checked = true;
+                                    });
+                                }
+                            }
+                    });
+
+                    if (params.get('SortDirection') == 'Asc')
+                        document.querySelector('button.sort-order').classList.add('asc');
+                    if (params.has('SortField'))
+                        document.querySelector('select.filter-by').value = params.get('SortField');
+                    else {
+                        params.append('SortField', document.querySelector('select.filter-by').value);
+                        location.search = params;
+                    }
+                };
+
+                document.querySelector('div.apply').onclick = function () {
+                    let params = new URLSearchParams(location.search);
+
+                    document.querySelectorAll('input:not(form input)').forEach(input => {
+                        input.param = input.getAttribute('param');
+
+                        const value = (input.type != 'checkbox') ? (input.setValue || input.value) : input.checked;
+
+                        if (value)
+                            params.set(input.param, value);
+                    });
+
+                    document.querySelectorAll('form').forEach(form => {
+                        form.param = form.getAttribute('param');
+
+                        let value = '';
+                        const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                        for (let i = 0; i < checkboxes.length; i++)
+                            if (checkboxes[i].checked)
+                                value += i + (parseInt(form.offset) || 0) + ';';
+
+                        if (value)
+                            params.set(form.param, value);
+                    });
+
+                    location.search = params;
+                }
+            </script>
+        </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
+                <div class="sort">
+                    <label for="filter-by">Sort by:</label>
+                    <select name="filter-by" class="filter-by" onchange="
+                    const params = new URLSearchParams(location.search);
+                    params.delete('SortField');
+                    params.append('SortField',this.value);
+                    location.search = params;">
+                        <option value="jobtitle">title</option>
+                        <option value="opendate">start date</option>
+                        <option value="closedate">end date</option>
+                        <option value="organizationname">organization name</option>
+                        <option value="salarymin">minimum salary</option>
+                        <option value="location">location name</option>
+                    </select>
+                    <button class="sort-order" onclick="
+                    const button = document.querySelector('button.sort-order');
+                    button.classList.toggle('asc');
+                    params.set('SortDirection',button.classList.contains('asc')?'Asc':'desc');
+                    location.search = params;"></button>
+                </div>
                 <div class="job-list"></div>
                 <div class="job-info"></div>
             </div>
