@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drugs - USA.govfresh</title>
+</head>
+
+<body>
+    <script src="/includes/include.js"></script>
+    <script>
+        include("head.html", "head");
+        include("nav.html", ".nav-include");
+        include("loading.html", ".loading-include");
+        include("footer.html", ".footer-include");
+        include("js.html", ".js-include");
+    </script>
+    <div class="nav-include"></div>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>FDA approved drugs</h1>
+                    <p class="lead"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="drugs container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="drug-list"></div>
+            </div>
+        </div>
+    </div>
+    <div class="loading-include"></div>
+    <div class="drug-data"></div>
+    <div class="footer-include"></div>
+    <script src="script.js"></script>
+    <div class="js-include"></div>
+</body>
+
+</html>

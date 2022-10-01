@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<body>
+    <script src="/includes/include.js"></script>
+    <script>
+        include("head.html", "head");
+        include("nav.html", ".nav-include");
+        include("loading.html", ".loading-include");
+        include("footer.html", ".footer-include");
+        include("js.html", ".js-include");
+    </script>
+    <div class="nav-include"></div>
+    <main>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="display-4">Go .gov</h1>
+                        <p class="lead">Search available .gov domains (example: <a
+                                href="https://dotgov.gov">dotgov.gov)</a></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-lg-8">
+                        <form class="domain-form form-inline mb-4">
+                            <div class="form-group">
+                                <label for="search"></label>
+                                <input id="search" type="text" class="search-domains form-control form-control-lg mr-1">
+                                <button type="submit" class="btn btn-outline-dark btn-lg">Search</button>
+                            </div>
+                        </form>
+                        <p class="small">
+                            <i class="fa-solid fa-database"></i> <a href="https://home.dotgov.gov/data/">Data
+                                source</a>
+                        </p>
+                        <div class="url-result"></div>
+                    </div>
+                    <div class="col-md-4 col-lg-4"></div>
+                </div>
+            </div>
+        </div>
+        <script src="domain-search.js"></script>
+    </main>
+    <div class="footer-include"></div>
+</body>

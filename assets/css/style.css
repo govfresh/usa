@@ -1,3 +1,11 @@
+:root {
+    --color-1: #1e50a0;
+    --color-5: #0e62e9;
+    --color-6: #6380af;
+    --gradient-1: linear-gradient(135deg, #1e50a0 13%, #6380af 73%);
+    --gradient-2: linear-gradient(135deg, white 13%, #bfcadd 73%);
+}
+
 img.agency_logo {
     max-height: 6rem;
     width: auto;
@@ -10,6 +18,10 @@ img.agency_logo {
 .loading {
     animation: load 1.25s linear infinite;
     color: var(--color-1);
+}
+
+.small {
+    font-family: var(--font-8) !important;
 }
 
 @keyframes load {
@@ -55,7 +67,7 @@ img.agency_logo {
 
 .card.button:hover, .accordion-button:hover {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.3) !important;
-    background: linear-gradient(135deg, #b548ff0e 13%, #ffffff27 73%);
+    background: linear-gradient(135deg, #bfcadd 13%, #ffffff27 73%);
 }
 
 .card.button:active {
@@ -308,20 +320,73 @@ img.agency_logo {
     }
 }
 
+a, a:visited {
+    color: #1e50a0 !important;
+}
+
+/* Navbar */
+
+.navbar {
+    background: var(--color-4);
+    background: #1e50a0 !important;
+    border-bottom: none;
+    border-top: none;
+    border-radius: var(--size-1);
+}
+
+.navbar a {
+    color: var(--color-4) !important;
+}
+
+/* Jumbotron */
+
+.jumbotron {
+    background: var(--color-4);
+}
+
+/* Footer */
+
+.footer, .footer h5 {
+    border-top: none;
+    color: var(--color-2) !important;
+}
+
 /* Alerts */
 
 .alert-primary {
     color: var(--color-2);
 }
 
+/* Images */
+
 img.xs {
     margin-bottom: .75rem;
-    width: 4rem;
+    max-width: 4rem;
+}
+
+img.sm {
+    margin-bottom: .75rem;
+    max-width: 6rem;
 }
 
 img.md {
     margin-bottom: .75rem;
-    width: 8rem;
+    max-width: 8rem;
+}
+
+/* Logo */
+
+.logo, .footer {
+    background: var(--color-4);
+}
+
+.logo a, .logo a:visited {
+    color: var(--color-2) !important;
+}
+
+.logo img {
+    margin: var(--size-1);
+    padding: var(--size-1);
 }
 
 .info-job ul {
@@ -354,4 +419,33 @@ input[type=range] {
 .sort-order::after {
     content: '\2193';
     padding: .5rem;
+}
+
+/* GoDotGov */
+
+.help {
+    background-color: var(--color-6);
+    margin-top: var(--size-6);
+    padding-bottom: var(--size-6);
+    padding-top: var(--size-6);
+}
+
+.section {
+    border-bottom: var(--size-2) var(--color-6) solid;
+    margin-bottom: var(--size-6);
+    padding-bottom: var(--size-5);
+}
+
+.section2 {
+    border-bottom: var(--size-2) var(--color-4) solid;
+    margin-bottom: var(--size-6);
+    padding-bottom: var(--size-4);
+}
+
+.clean .card {
+    background-color: var(--color-6);
+}
+
+main .fa-solid {
+    color: var(--color-1);
 }

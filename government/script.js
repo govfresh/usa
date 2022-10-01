@@ -51,9 +51,9 @@ if (location.search != '') {
                     const child = JSON.parse(this.response);
                     let img = '';
                     if (child.logo != null && child.short_name != 'USAID')
-                        img = '<img class="agency_logo card-img-top md" src="' + child.logo.medium_url + '">';
+                        img = '<img class="agency_logo card-img-top" src="' + child.logo.medium_url + '">';
                     else
-                        img = '<img class="agency_logo card-img-top md" src="/assets/img/seal.png">';
+                        img = '<img class="agency_logo card-img-top" src="/assets/img/seal.png">';
                     document.querySelector('div.children.card-deck').innerHTML += '<div class="col-sm-12 col-md-6 col-lg-3 d-flex align-items-stretch"><a href="?name=' + child.slug + '"><div class="card d-inline">' + img + '<div class="card-body">' + '<h5>' + child.name + '</h5></div></a></div></div>';
                 }
                 child_req.open('GET', 'https://www.federalregister.gov/api/v1/agencies/' + child_id, true);
