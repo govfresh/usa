@@ -13,30 +13,53 @@
     <script>
         include("head.html", "head");
         include("nav.html", ".nav-include");
-        include("loading.html", ".loading-include");
         include("footer.html", ".footer-include");
         include("js.html", ".js-include");
     </script>
     <div class="nav-include"></div>
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1>FDA approved drugs</h1>
-                    <p class="lead"></p>
+    <ol class="breadcrumb">
+        <li aria-current="page" class="breadcrumb-item">
+            <a href="/drugs/">Drugs</a>
+        </li>
+    </ol>
+    <main>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="drugs">Drugs</h1>
+                        <p class="lead">Search medicines approved by the U.S. Food and Drug Administration.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-lg-8">
+                        <div class="drugs">
+                            <form class="form-inline mb-4">
+                                <div class="form-group">
+                                    <label for="search" class="d-none">Search</label>
+                                    <input id="search" type="text" class="form-control form-control-lg mr-1">
+                                    <button type="submit" class="btn btn-outline-dark btn-lg">Go</button>
+                                </div>
+                            </form>
+                            <p class="small">
+                                <i class="fa-solid fa-database"></i> <a href="https://open.fda.gov/apis/drug/ndc/">Data
+                                    source</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4"></div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="drugs container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="drug-list"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="drug-list"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="loading-include"></div>
-    <div class="drug-data"></div>
+        <div class="drug-data"></div>
+    </main>
     <div class="footer-include"></div>
     <script src="script.js"></script>
     <div class="js-include"></div>

@@ -4,8 +4,11 @@ function include(file_name, parent_selector) {
     req.onload = function () {
         if (this.status > 399)
             throw new Error('Could not load file /includes/' + file_name);
-        else
-            document.querySelector(parent_selector).innerHTML += this.response;
+        else {
+            const insert = document.createElement('div');
+            insert.innerHTML = this.response;
+            document.querySelector(parent_selector).appendChild(insert);
+        }
     };
     req.send();
 }

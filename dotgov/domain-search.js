@@ -7,7 +7,6 @@ request.onload = function () {
         usedBys[i] = usedBys[i].slice(usedBys[i].indexOf(',', usedBys[i].indexOf(',', usedBys[i].indexOf(',') + 1) + 1) + 1);
     for (let o = 0; o < usedBys.length; o++)
         usedBys[o] = usedBys[o].slice(0, usedBys[o].indexOf(usedBys[o].indexOf(',') + 1));
-    console.log(usedBys)
     for (let i = 0; i < response.length; i++)
         response[i] = response[i].slice(0, response[i].indexOf('.GOV') + 4);
     var input = document.querySelector('input.search-domains');

@@ -5,31 +5,27 @@ if (urlParams.has('park')) {
     req.open('GET', 'https://developer.nps.gov/api/v1/parks?api_key=fvA9u4qpBK9EY8vGLkPI55IDAh2qO0ImrORbmr0L&parkCode=' + urlParams.get('park'))
     req.onload = function () {
         const data = JSON.parse(this.response).data[0];
-        console.log(data);
 
         document.querySelector('.park-list').innerHTML = '';
         document.querySelector('.jumbotron h1').innerText = data.fullName;
         document.querySelector('.jumbotron h1').classList.add('h2');
-        document.querySelector('.jumbotron p.lead').innerText = data.description;
+        document.querySelector('.about .col-sm-10').innerText = data.description;
         document.title = data.fullName + '- USA.govfresh';
-        document.querySelector('meta[property="og:title"').content = data.fullName + '- USA.govfresh';
-        document.querySelector('meta[property="og:description"').content = data.description;
-        document.querySelector('meta[property="og:image"').content = data.images[0].url;
 
         data.images.forEach(image => {
-            document.querySelector('.carousel-inner').innerHTML += `
-            <div class="carousel-item">
-                <img src="${image.url}" alt="${image.altText}">
-                <div class="carousel-caption d-none d-md-block">
-                        <h5>${image.title}</h5>
-                        <p>${image.caption}</p>
+            document.querySelector('#photos .card-deck').innerHTML += `
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-body">
+                            <img class="card-img-top lg line" src="${image.url}" alt="${image.altText}">
+                        <h3 class="h5">
+                            ${image.title}
+                        </h3>
+                    </div>
                 </div>
             </div>
         `;
         });
-
-        document.querySelector('.carousel-inner .carousel-item').classList.add('active');
-        $('.carousel').carousel({ interval: 5000 });
 
         data.operatingHours.forEach(hours => {
             document.querySelector('div.park-info .hours .col-sm-10').innerHTML += `
