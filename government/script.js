@@ -7,7 +7,7 @@ if (location.search != '') {
         if (agency.logo != null && agency.logo.medium_url != null && agency.short_name != 'USAID')
             img = '<img class="line p-3 rounded" alt="' + agency.name + ' logo" src="' + agency.logo.medium_url + '">';
         else
-            img = '<img class="line p-3 rounded" alt="' + agency.name + ' logo" src="/assets/img/seal.png">';
+            img = '<img class="line p-3 rounded" alt="' + agency.name + ' logo" src="/assets/img/icons/1F3DB.png">';
         let website = '';
         if (agency.agency_url != null)
             website = '<li class="mb-2"><a href="' + agency.agency_url + '"><i class="fas fa-window-maximize pr-2"></i> Website</a></li>';
@@ -53,7 +53,7 @@ if (location.search != '') {
                     if (child.logo != null && child.short_name != 'USAID')
                         img = '<img class="agency_logo card-img-top" src="' + child.logo.medium_url + '">';
                     else
-                        img = '<img class="agency_logo card-img-top" src="/assets/img/seal.png">';
+                        img = '<img class="agency_logo card-img-top" src="/assets/img/icons/1F3DB.png">';
                     document.querySelector('div.children.card-deck').innerHTML += '<div class="col-sm-12 col-md-6 col-lg-3 d-flex align-items-stretch"><a href="?name=' + child.slug + '"><div class="card d-inline">' + img + '<div class="card-body">' + '<h5>' + child.name + '</h5></div></a></div></div>';
                 }
                 child_req.open('GET', 'https://www.federalregister.gov/api/v1/agencies/' + child_id, true);
@@ -76,10 +76,10 @@ else {
                 continue;
             let img = '';
             if (agency.logo != null && agency.short_name != 'USAID')
-                img = '<img class="agency_logo card-img-top" src="' + agency.logo.medium_url + '">';
+                img = '<img class="agency_logo img-thumbnail sm" src="' + agency.logo.medium_url + '">';
             else
-                img = '<img class="agency_logo card-img-top" src="/assets/img/seal.png">';
-            document.querySelectorAll('div.agencies div.row')[document.querySelectorAll('div.agencies div.row').length - 1].innerHTML += '<div class="col-sm-12 col-md-6 col-lg-3 d-flex align-items-stretch"><a href="?name=' + agency.slug + '"><div class="card d-inline">' + img + '<div class="card-body">' + '<h2 class="h5">' + agency.name + '</h2></div></a></div></div>';
+                img = '<img class="agency_logo img-thumbnail sm" src="/assets/img/icons/1F3DB.png">';
+            document.querySelectorAll('div.agencies div.row')[document.querySelectorAll('div.agencies div.row').length - 1].innerHTML += '<div class="col-sm-12 col-md-3 col-lg-3 d-flex align-items-stretch"><a href="?name=' + agency.slug + '"><div class="card d-inline">' + img + '<div class="card-body">' + '<h2 class="h6">' + agency.name + '</h2></div></a></div></div>';
             angency_number++;
         }
     };

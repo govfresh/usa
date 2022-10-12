@@ -41,9 +41,8 @@
                                     <button type="submit" class="btn btn-outline-dark btn-lg">Go</button>
                                 </div>
                             </form>
-                            <p class="small">
-                                <i class="fa-solid fa-database"></i> <a href="https://open.fda.gov/apis/drug/ndc/">Data
-                                    source</a>
+                            <p class="source">Example: <a href="javascript:void(0)"
+                                    onclick="document.querySelector('input').value='tylenol'; document.querySelector('form').onsubmit();">tylenol</a>
                             </p>
                         </div>
                     </div>
@@ -54,6 +53,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
+                    <h1 class="results-for h2 mb-4"></h1>
                     <div class="drug-list"></div>
                 </div>
             </div>

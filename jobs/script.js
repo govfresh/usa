@@ -22,7 +22,7 @@ if (params.has('job') && params.has('code')) {
                     document.querySelector('.breadcrumb-insert').innerHTML += `
                     <ol class="breadcrumb">
                         <li aria-current="page" class="breadcrumb-item">
-                            <a href="/jobs/">U.S. government jobs</a>
+                            <a href="/jobs/">Jobs</a>
                         </li>
                     </ol>`;
                     document.querySelector('.jumbotron h1').innerHTML = job.PositionTitle;

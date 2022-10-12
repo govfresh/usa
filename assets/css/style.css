@@ -97,6 +97,10 @@ img.agency_logo {
 }
 
 .small {
+    font-family: var(--font-1) !important;
+}
+
+.source {
     font-family: var(--font-8) !important;
 }
 
@@ -418,6 +422,7 @@ a, a:visited {
 .footer, .footer h5 {
     border-top: none;
     color: var(--color-2) !important;
+    margin-top: var(--size-8);
 }
 
 /* Alerts */
@@ -489,8 +494,6 @@ input[type=range] {
     padding-bottom: var(--size-4);
 }
 
-.clean .card {}
-
 main .fa-solid {
     color: var(--color-1);
 }
@@ -507,7 +510,7 @@ path:hover {
     max-width: 100%;
 }
 
-.drugs {
+.drugs, .drug-name {
     text-transform: capitalize;
 }
 
@@ -519,6 +522,4 @@ path:hover {
     font-family: var(--font-5) !important;
 }
 
-.breadcrumb a, .breadcrumb a:visited {
-    color: var(--color-2) !important;
-}
+.breadcrumb a, .breadcrumb a:visited {}
