@@ -6,29 +6,32 @@ if (params.has('drug')) {
     req.onload = function () {
         const data = JSON.parse(this.response).results[0];
         console.log(data);
-        document.querySelector('.jumbotron h1').innerHTML = data.brand_name.toLowerCase();
-        document.querySelector('.jumbotron p.lead').innerHTML = '';
-        document.querySelector('form').innerHTML = '';
+
+        document.querySelector('.jumbotron').parentElement.removeChild(document.querySelector('.jumbotron'));
         document.querySelector('.drug-data').innerHTML += `
-            <div class="container">
+            <div class="container mt-4">
                 <div class="row">
-                    <div class="col-sm-2">
-                        <img src="/assets/img/icons/E307.png" class="md line img-rounded">
+                    <div class="col-sm-3">
+                        <img src="/assets/img/icons/E307.png" class="lg line img-rounded">
                     </div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
+                        <h1 class="drugs">${data.brand_name.toLowerCase()}</h1>
                         <h2 class="h3">Generic name</h2>
-                        <p class="drugs">${data.generic_name.toString().toLowerCase()}</p>
+                        <p class="drugs">${data.generic_name.toLowerCase()}</p>
                         <h2 class="h3">Manufacturer</h2>
                         <p class="drugs">${data.openfda.manufacturer_name[0].toLowerCase()}</p>
+                        <h2 class="h3">Labeler</h2>
+                        <p class="drugs">${data.labeler_name.toLowerCase()}</p>
                         <h2 class="h3">Ingredients</h2>
                         <ul class="ingredients"></ul>
                         <h2 class="h3">Packaging</h2>
                         <p class="drugs">${data.packaging[0].description.toLowerCase()}</p>
                         <h2 class="h3">Type</h2>
-                        <p class="drugs">${data.product_type.toString().toLowerCase()}</p>
+                        <p class="drugs">${data.product_type.toLowerCase()}</p>
                         <h2 class="h3">Route</h2>
                         <p class="drugs">${data.route.toString().toLowerCase()}</p>
-                    </div >
+                        <p class="source mt-5">Data source: <a href="https://open.fda.gov/apis/drug/ndc/">National Drug Code Directory, U.S. Food and Drug Administration</a></p>
+                    </div>
                 </div>
             </div>
         `;
