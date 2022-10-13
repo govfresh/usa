@@ -14,7 +14,7 @@ if (params.has('drug')) {
                     <div class="col-sm-3">
                         <img src="/assets/img/icons/E307.png" class="lg line img-rounded">
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 post">
                         <h1 class="drugs">${data.brand_name.toLowerCase()}</h1>
                         <h2 class="h3">Generic name</h2>
                         <p class="drugs">${data.generic_name.toLowerCase()}</p>

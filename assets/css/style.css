@@ -25,6 +25,11 @@ img.agency_logo {
     font-size: var(--size-8) !important;
 }
 
+.post h2 {
+    margin-top: var(--size-5);
+    padding-bottom: var(--size-3);
+}
+
 /* About */
 
 .about {
@@ -73,7 +78,6 @@ img.agency_logo {
 }
 
 /* Logo */
-
 
 .logo {
     font-size: var(--size-8);
