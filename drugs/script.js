@@ -30,7 +30,7 @@ if (params.has('drug')) {
                         <p class="drugs">${data.product_type.toLowerCase()}</p>
                         <h2 class="h3">Route</h2>
                         <p class="drugs">${data.route.toString().toLowerCase()}</p>
-                        <p class="source mt-5">Data source: <a href="https://open.fda.gov/apis/drug/ndc/">National Drug Code Directory, U.S. Food and Drug Administration</a></p>
+                        <p class="source mt-5">Data source: <a href="https://open.fda.gov/apis/drug/ndc/">U.S. Food and Drug Administration</a></p>
                     </div>
                 </div>
             </div>

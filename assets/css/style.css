@@ -74,6 +74,11 @@ img.agency_logo {
 
 /* Logo */
 
+
+.logo {
+    font-size: var(--size-8);
+}
+
 .logo, .footer {
     background: var(--color-4);
 }
@@ -83,7 +88,7 @@ img.agency_logo {
 }
 
 .logo img {
-    margin: var(--size-1);
+    margin: var(--size-3);
     padding: var(--size-1) var(--size-4);
 }
 
