@@ -1,30 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Government - USA.govfresh</title>
-    </head>
-    <body>
-        <script src="/includes/include.js"></script>
-        <script>
-            include("head.html", "head");
-            include("nav.html", ".nav-include");
-            include("loading.html", ".loading-include");
-            include("footer.html", ".footer-include");
-            include("js.html", ".js-include");
-        </script>
-        <div class="nav-include"></div>
-        <div class="jumbo-insert"></div>
-        <div class="agencies container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card-deck"></div>
+
+<head>
+    <title>U.S. government - USA.GovFresh</title>
+</head>
+
+<body>
+    <script src="/includes/include.js"></script>
+    <script>
+        include("nav.html", ".nav-include");
+        include("head.html", "head");
+        include("footer.html", ".footer-include");
+        include("js.html", ".js-include");
+    </script>
+    <div class="nav-include"></div>
+    <main>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1>U.S. government</h1>
+                        <p class="lead">Branches of the United States federal government.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="loading-include"></div>
-        <div class="agency-data"></div>
-        <div class="footer-include"></div>
-        <script src="script.js"></script>
-        <div class="js-include"></div>
-    </body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-deck clean">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="">
+                                        <img src="/assets/img/icons/1F3DB.png" class="md line"
+                                            alt="U.S. government executive branch">
+                                    </div>
+                                    <h3 class="h4">
+                                        <a class="stretched-link" href="/government/executive/">Executive</a>
+                                    </h3>
+                                    <p class="description">U.S. government executive branch</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="">
+                                        <img src="/assets/img/icons/1F4DC.png" class="md line"
+                                            alt="U.S. government legislative branch">
+                                    </div>
+                                    <h3 class="h4">
+                                        <a class="stretched-link" href="/government/legislative/">Legislative</a>
+                                    </h3>
+                                    <p class="description">U.S. government legislative branch</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="">
+                                        <img src="/assets/img/icons/1F9D1-200D-2696-FE0F.png" class="md line"
+                                            alt="U.S. government judicial branch">
+                                    </div>
+                                    <h3 class="h4">
+                                        Judicial
+                                    </h3>
+                                    <p class="description">U.S. government judicial branch <em>(coming soon)</em>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="footer-include"></div>
+    <div class="js-include"></div>
+</body>
+
 </html>

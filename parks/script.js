@@ -300,7 +300,7 @@ else {
             document.querySelector('.park-list').innerHTML += `
         <div class="park">
             <a href="?park=${park.parkCode}">
-                <div class="card button shadow">
+                <div class="card button">
                     <div class="card-body">
                         <h2 class="h5">
                             <i class="fa-solid fa-angle-right" style="float: right"></i> ${park.fullName}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.S. Senate - USA.GovFresh</title>
+</head>
+
+<body>
+    <script src="/includes/include.js"></script>
+    <script>
+        include("nav.html", ".nav-include");
+        include("head.html", "head");
+        include("footer.html", ".footer-include");
+        include("js.html", ".js-include");
+        include("loading.html", ".loading1")
+    </script>
+    <div class="nav-include"></div>
+    <ol class="breadcrumb">
+        <li aria-current="page" class="breadcrumb-item">
+            <a href="/government/">Government</a>
+        </li>
+        <li aria-current="page" class="breadcrumb-item">
+            <a href="/government/legislative/">Legislative</a>
+        </li>
+        <li aria-current="page" class="breadcrumb-item">
+            <a href="/government/legislative/senate/">Senate</a>
+        </li>
+    </ol>
+    <main>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="h2">U.S. Senate</h1>
+                        <p class="lead"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="member-list">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="loading1"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-deck clean senators"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="member-data">
+            <div class="container post">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-9"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="source">Data: <a href="https://api.congress.gov/">Congress.gov</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+    <div class="footer-include"></div>
+    <div class="js-include"></div>
+</body>
+
+</html>

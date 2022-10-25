@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head></head>
+
+<body>
+    <script src="/includes/include.js"></script>
+    <script>
+        include("nav.html", ".nav-include");
+        include("head.html", "head");
+        include("footer.html", ".footer-include");
+        include("js.html", ".js-include");
+    </script>
+    <div class="nav-include"></div>
+    <main>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1>About</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <p><a href="https://usa.govfresh.com">USA.GovFresh</a> is a civic hacking project by Elias and <a
+                            href="https://lukefretwell.com">Luke
+                            Fretwell</a>.</p>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+    </main>
+    <div class="footer-include"></div>
+    <div class="js-include"></div>
+</body>
+
+</html>
