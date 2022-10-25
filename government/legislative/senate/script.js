@@ -12,7 +12,7 @@ if (params.has('member')) {
         document.querySelector('.jumbotron h1').innerHTML = 'Senator ' + data.directOrderName;
         document.querySelector('.jumbotron p.lead').innerHTML = `${data.state} (${data.party})`;
         document.querySelector('.member-data .col-sm-3').innerHTML = `
-            <div class="fancy-2"><img class="rounded-circle lg mb-3 ${data.party.toLowerCase().replace(' ', '-')}" alt="${data.directOrderName}" src="${data.depiction.imageUrl || '/assets/img/icons/1F9D1-200D-1F4BC.png'}"></div>
+            <div class="fancy-2"><img class="rounded-circle xl mb-3 ${data.party.toLowerCase().replace(' ', '-')}" alt="${data.directOrderName}" src="${data.depiction.imageUrl || '/assets/img/icons/1F9D1-200D-1F4BC.png'}"></div>
         `;
         document.querySelector('.member-data .col-sm-9').innerHTML = `
             <h2>Contact</h2>
