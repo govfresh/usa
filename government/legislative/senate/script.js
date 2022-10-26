@@ -17,7 +17,7 @@ if (params.has('member')) {
         document.querySelector('.member-data .col-sm-9').innerHTML = `
             <h2>Contact</h2>
             <ul>
-            <li>Mail: ${data.addressInformation.officeAddress}, ${data.addressInformation.city}, ${data.addressInformation.district}</li>
+            <li>Mail: ${data.addressInformation.officeAddress}</li>
             <li>Phone: <a href="tel:${data.addressInformation.officeTelephone.phoneNumber}">${data.addressInformation.officeTelephone.phoneNumber}</a></li>
             <li>Website: <a href="${data.officialWebsiteUrl}">${new URL(data.officialWebsiteUrl).hostname}</a></li>
             </ul>
