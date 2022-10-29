@@ -455,6 +455,7 @@ h1 {
 
 .source {
     font-family: var(--font-8) !important;
+    font-size: var(--size-6);
 }
 
 @keyframes load {
