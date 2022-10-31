@@ -878,6 +878,10 @@ div.card-body>i {
     padding: var(--size-5);
 }
 
+.alert-info a, .alert-info a:visited {
+    font-family: var(--font-4);
+}
+
 /* Forms */
 
 .form-control {
@@ -942,7 +946,7 @@ body.home label {
 }
 
 a, a:visited {
-    color: #1e50a0 !important;
+    color: #1e50a0;
 }
 
 /* Images */
@@ -1326,4 +1330,13 @@ html.dark .pagination>li>* {
 
 div.dark-toggle {
     display: inline;
+}
+
+.fancy-bottom {
+    border-bottom: var(--size-6) solid var(--color-1);
+    border-bottom-left-radius: var(--size-5);
+    padding-top: var(--size-10);
+    padding-bottom: var(--size-10);
+    margin-top: var(--size-10);
+    margin-bottom: var(--size-10);
 }

@@ -11,7 +11,7 @@
   font-weight: 400;
   font-display: $fa-font-display;
   src: url('#{$fa-font-path}/fa-brands-400.woff2') format('woff2'),
-    url('#{$fa-font-path}/fa-brands-400.ttf') format('truetype');
+  url('#{$fa-font-path}/fa-brands-400.ttf') format('truetype');
 }
 
 .fab,
@@ -20,6 +20,9 @@
   font-weight: 400;
 }
 
-@each $name, $icon in $fa-brand-icons {
-  .#{$fa-css-prefix}-#{$name}:before { content: fa-content($icon); }
+@each $name,
+$icon in $fa-brand-icons {
+  .#{$fa-css-prefix}-#{$name}:before {
+    content: fa-content($icon);
+  }
 }

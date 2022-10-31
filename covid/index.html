@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="css/style.css">
-        <title>Covid - USA.govfresh</title>
-    </head>
+
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Covid - USA.govfresh</title>
 </head>
+</head>
+
 <body class="home">
     <script src="/includes/include.js"></script>
     <script>
-    include('head.html','head');
-    include('nav.html','.nav-include');
-    include('footer.html','.footer-include');
-    include('js.html','.js-include');
+        include('head.html', 'head');
+        include('nav.html', '.nav-include');
+        include('footer.html', '.footer-include');
+        include('js.html', '.js-include');
     </script>
     <main>
         <div class="nav-include"></div>
@@ -71,7 +73,8 @@
                             <div class="card-footer">
                                 <small>
                                     Source:
-                                    <a href="https://www.census.gov/data/developers/data-sets/census-microdata-api.html">
+                                    <a
+                                        href="https://www.census.gov/data/developers/data-sets/census-microdata-api.html">
                                         US
                                         Census
                                     </a>
@@ -121,7 +124,8 @@
                             <div class="card-footer">
                                 <small>
                                     Source:
-                                    <a href="https://www.census.gov/data/developers/data-sets/census-microdata-api.html">
+                                    <a
+                                        href="https://www.census.gov/data/developers/data-sets/census-microdata-api.html">
                                         US
                                         Census
                                     </a>
@@ -167,7 +171,8 @@
                     <p>
                         <small>
                             Source:
-                            <a href="https://data.cdc.gov/Vaccinations/Vaccines-gov-COVID-19-vaccinating-provider-locatio/5jp2-pgaw">Vaccines.gov</a>
+                            <a
+                                href="https://data.cdc.gov/Vaccinations/Vaccines-gov-COVID-19-vaccinating-provider-locatio/5jp2-pgaw">Vaccines.gov</a>
                         </small>
                     </p>
                 </div>
@@ -184,7 +189,9 @@
                             Show locations
                         </button>
                         <div class="col-sm-9 d-sm-block d-none">
-                            <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA1G0PbkHalaKDxMUnZR9-RTM1g8QI5lq4&q=Centers+for+Disease+Control+and+Prevention,+1600+Clifton+Road,+Atlanta,+GA+30329+USA" frameborder="0"></iframe>
+                            <iframe
+                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA1G0PbkHalaKDxMUnZR9-RTM1g8QI5lq4&q=Centers+for+Disease+Control+and+Prevention,+1600+Clifton+Road,+Atlanta,+GA+30329+USA"
+                                frameborder="0"></iframe>
                         </div>
                         <div class="col-sm-3"></div>
                     </div>
@@ -197,5 +204,29 @@
     <div class="footer-include"></div>
     <div class="js-include"></div>
     <script src="js/script.js"></script>
+    <div class="scripts">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "G-NCRSGQDG05");
+            console.log('df');
+        </script>
+        <script crossorigin="anonymous"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script crossorigin="anonymous"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script crossorigin="anonymous"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    </div>
 </body>
+
 </html>
