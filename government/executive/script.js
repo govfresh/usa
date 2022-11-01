@@ -21,7 +21,7 @@ if (location.search != '') {
         else
             latest_short_name = '<p class="lead">Latest ' + agency.name + ' documents published to the Federal Register.</p>';
         document.head.querySelector('title').innerText = agency.name + ' - USA.govfresh'
-        document.querySelector('div.agency-data').innerHTML += '<div class="jumbotron"><div class="container"><div class="row"><div class="col-sm-12"><h1 class="h2">' + agency.name + short_name_text + '</h1></div></div></div></div><div class="container home-include fancy-bottom"><div class="row"><div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">' + img + '</div><div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 post"><h2>About</h2><p>' + agency.description.replaceAll(/((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g, '<a href="$1" target="_blank">$1</a>') + '</p><h2>Website</h2><p><a class="website" src=' + agency.agency_url + '>' + agency.agency_url + '</a></p></div></div></div></div><div class="agency-children"><div class="container posts home-include"></div>';
+        document.querySelector('div.agency-data').innerHTML += '<div class="jumbotron"><div class="container"><div class="row"><div class="col-sm-12"><h1 class="h2">' + agency.name + short_name_text + '</h1></div></div></div></div><div class="container home-include fancy-bottom"><div class="row"><div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">' + img + '</div><div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 post"><h2>About</h2><p>' + agency.description.replaceAll(/((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g, '<a href="$1" target="_blank">$1</a>') + '</p><h2>Website</h2><p><a class="website" src=' + agency.agency_url + '>' + agency.agency_url + '</a></p></div></div></div></div><div class="agency-children"></div>';
         document.querySelector('main .col-sm-12.source').innerHTML += `
             <p class="source">Data: 
                 <a href="https://www.federalregister.gov/api/v1/agencies/${agency.slug}">Library of Congress</a>
@@ -50,7 +50,7 @@ if (location.search != '') {
         };
         post_req.send();
         if (agency.child_ids.length != 0) {
-            document.querySelector('div.agency-children').innerHTML = '<div class="container home-include"><div class="preview general"><div class="row"><div class="col-sm-12"><h2>Agencies</h2></div></div><div class="row"><div class="col-sm-12"><div class="children card-deck"></div></div></div></div></div>';
+            document.querySelector('div.agency-children').innerHTML = '<div class="container fancy-bottom"><div class="preview general"><div class="row"><div class="col-sm-12"><h2>Agencies</h2></div></div><div class="row"><div class="col-sm-12"><div class="children card-deck"></div></div></div></div></div>';
             agency.child_ids.forEach(child_id => {
                 const child_req = new XMLHttpRequest();
                 child_req.onload = function () {
