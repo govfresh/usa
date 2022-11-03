@@ -945,10 +945,6 @@ body.home label {
     }
 }
 
-a, a:visited {
-    color: #1e50a0;
-}
-
 /* Images */
 
 img {
@@ -1339,4 +1335,15 @@ div.dark-toggle {
     padding-bottom: var(--size-10);
     margin-top: var(--size-10);
     margin-bottom: var(--size-10);
+}
+
+.dark-mode .jumbotron {
+    background-color: transparent;
+    border-bottom: none;
+    margin-bottom: var(--size-1);
+}
+
+.dark-mode .breadcrumb {
+    background-color: transparent;
+    margin-bottom: var(--size-1);
 }
