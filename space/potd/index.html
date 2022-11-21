@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Picture of the day - USA.GovFresh</title>
+    <title>Photo of the day - USA.GovFresh</title>
 
     <!-- Social media -->
     <meta content="/index" property="og:url">
     <meta content="website" property="og:type">
     <meta content="Photo of the day - USA.GovFresh" property="og:title">
     <meta content="NASA space picture or video of the day." property="og:description">
-    <meta content="https://usa.govfresh.com/assets/img/drugs.png" property="twitter:image">
-    <meta content="https://usa.govfresh.com/assets/img/drugs.png" property="og:image">
+    <meta content="/assets/img/icons/E142.png" property="twitter:image">
+    <meta content="/assets/img/icons/E142.png" property="og:image">
     <style>
         * {
             --color-1: #6192e0;
@@ -76,7 +76,10 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <img class="apod card-img-top">
-                        <iframe style="aspect-ratio: 1;" class="apod card-img-top"></iframe>
+                        <script src="https://player.vimeo.com/api/player.js"></script>
+                        <!--<div id="video"></div>-->
+                        <iframe frameborder="0" class="apod card-img-top" allow="autoplay; fullscreen"
+                            allowfullscreen></iframe>
                         <div class="card-body">
                             <h5 class="card-title"></h5>
                             <br>
@@ -89,9 +92,15 @@
         </div>
         <script>
             document.querySelector('p.lead').innerText = new Date().toLocaleString('en-US', { 'weekday': 'long', 'month': 'long', 'day': 'numeric', 'year': 'numeric' });
-            fetch('https://api.nasa.gov/planetary/apod?api_key=hExsrBBSxIrdS8bwKMuQd3oxFjLMEoIb4YkQZNMx').then(res => res.json()).then(data => {
-                console.log();
-                document.querySelector((data.media_type == 'image' ? 'img' : 'iframe') + '.apod').src = data.hdurl || data.url + '&autoplay=1&mute=1&loop=1&controls=0&disablekb=1&playlist=' + data.url.substring(data.url.indexOf('embed/') + 6, data.url.indexOf('?'));
+            fetch('https://api.nasa.gov/planetary/apod?api_key=hExsrBBSxIrdS8bwKMuQd3oxFjLMEoIb4YkQZNMx&date=2022-11-07').then(res => res.json()).then(data => {
+                console.log(data.url);
+                /* const videoPlayer = new Vimeo.Player('video', { url: data.url, autoplay: 1, loop: 1, autopause: 0 });
+                 Vimeo.play()
+                 videoPlayer.on('play', function () {
+                     console.log('Played the video');
+                 });*/
+                document.querySelector((data.media_type == 'image' ? 'img' : 'iframe') + '.apod').src = data.hdurl ||
+                    (data.url.includes('youtube') ? data.url + '&autoplay=1&mute=1&loop=1&controls=0&disablekb=1&playlist=' + data.url.substring(data.url.indexOf('embed/') + 6, data.url.indexOf('?')) : data.url + '?autoplay=1&loop=1&autopause=0');
                 if (data.media_type == 'video')
                     document.querySelector('.card').removeChild(document.querySelector('img.apod'));
                 else {

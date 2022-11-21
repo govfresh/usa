@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="css/style.css">
-    <title>Covid - USA.govfresh</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/covid.css">
+    <title>COVID-19 - USA.GovFresh</title>
 </head>
 </head>
 
@@ -17,29 +18,41 @@
     </script>
     <main>
         <div class="nav-include"></div>
-        <div class="container">
-            <div class="row select">
-                <div class="col-sm-12">
-                    <div class="alert alert-light2">
-                        <img src="assets/img/covid.svg" alt="Covid icon" class="home-icon">
-                        <form class="form-inline">
+    <ol class="breadcrumb">
+        <li aria-current="page" class="breadcrumb-item">
+            <a href="/covid/">COVID-19</a>
+        </li>
+    </ol>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row home">
+                    <div class="col-sm-12">
+                        <h1 class="display-4">COVID-19</h1>
+                        <p class="lead">State-by-state COVID status</p>
+                    </div>
+                </div>
+                <div class="row select">
+                    <div class="col-md-8 col-lg-8">
+                        <form class="mb-4">
                             <div class="form-group">
-                                <label for="states" class="mr-3">
-                                    <strong>Show COVID data for:</strong>
-                                </label>
+                                <label for="states" class="d-none">State selection</label>
+                            </div>
                                 <select name="States" id="states" class="form-control">
                                     <option value="" disabled selected>- select a state -</option>
                                 </select>
-                            </div>
                         </form>
+                        <p class="source">
+                            Data: <a href="https://data.cdc.gov/resource/unsk-b7fc">Centers for Disease Control and Prevention</a>
+                        </p>
+                        <div class="url-result"></div>
                     </div>
+                    <div class="col-md-4 col-lg-4"></div>
                 </div>
             </div>
-            <div class="row">
-                <div>
-                    <div class="state-icon"></div>
-                </div>
-                <div>
+        </div>
+        <div class="container">
+            <div class="row pt-4 pb-3">
+                <div class="col-12">
                     <h1 class="display-4" id="name">-</h1>
                 </div>
             </div>
@@ -53,29 +66,28 @@
                     <div class="card-group">
                         <div class="card text-center">
                             <div class="card-body">
-                                <i class="fas fa-syringe fa-5x mb-2"></i>
+                                <i class="fas fa-syringe fa-5x mb-3"></i>
                                 <h5 class="card-title h2 vaccinated">-</h5>
                                 <p class="card-text">people vaccinated</p>
                             </div>
                             <div class="card-footer">
                                 <small>
-                                    Source:
+                                    Data:
                                     <a href="https://data.cdc.gov/resource/unsk-b7fc">CDC</a>
                                 </small>
                             </div>
                         </div>
                         <div class="card text-center">
                             <div class="card-body">
-                                <i class="fas fa-chart-pie fa-5x mb-2"></i>
+                                <i class="fas fa-chart-pie fa-5x mb-3"></i>
                                 <h5 class="card-title h2 pie-chart">-</h5>
                                 <p class="card-text">of population</p>
                             </div>
                             <div class="card-footer">
                                 <small>
-                                    Source:
+                                    Data:
                                     <a
                                         href="https://www.census.gov/data/developers/data-sets/census-microdata-api.html">
-                                        US
                                         Census
                                     </a>
                                     /
@@ -90,7 +102,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h2>Yesterday</h2>
+                    <h2>Last week</h2>
                 </div>
             </div>
             <div class="row">
@@ -98,67 +110,38 @@
                     <div class="card-group">
                         <div class="card text-center">
                             <div class="card-body">
-                                <i class="fas fa-chart-line fa-5x mb-2"></i>
+                                <i class="fas fa-chart-line fa-5x mb-3"></i>
                                 <h5 class="card-title h2 vaccinated yesterday">-</h5>
                                 <p class="card-text">
-                                    people vaccinated on
-                                    <date>yesterday</date>
+                                    people vaccinated
                                 </p>
                             </div>
                             <div class="card-footer">
                                 <small>
-                                    Source:
+                                    Data:
                                     <a href="https://data.cdc.gov/resource/unsk-b7fc">CDC</a>
                                 </small>
                             </div>
                         </div>
                         <div class="card text-center">
                             <div class="card-body">
-                                <i class="fas fa-chart-line fa-5x mb-2"></i>
+                                <i class="fas fa-chart-line fa-5x mb-3"></i>
                                 <h5 class="card-title h2 pie-chart yesterday">-</h5>
                                 <p class="card-text">
-                                    of population vaccinated on
-                                    <date>yesterday</date>
+                                    of population vaccinated
                                 </p>
                             </div>
                             <div class="card-footer">
                                 <small>
-                                    Source:
+                                    Data:
                                     <a
                                         href="https://www.census.gov/data/developers/data-sets/census-microdata-api.html">
-                                        US
                                         Census
                                     </a>
                                     /
                                     <a href="https://data.cdc.gov/resource/unsk-b7fc">CDC</a>
                                 </small>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>Mandates</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card-group">
-                        <div class="card text-center">
-                            <div class="card-body">
-                                <i class="fa-solid fa-mask-face fa-5x mb-2"></i>
-                                <h5 class="card-title h2 mask">No</h5>
-                                <p class="card-text">mask mandate</p>
-                            </div>
-                            <!-- <div class="card-footer">
-                                <small>
-                                    Source:
-                                    <a href="https://data.cdc.gov/resource/tzyy-aayg">CDC</a>
-                                </small>
-                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -168,13 +151,6 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h2 id="locations-header" class="display-5">Vaccine locations</h2>
-                    <p>
-                        <small>
-                            Source:
-                            <a
-                                href="https://data.cdc.gov/Vaccinations/Vaccines-gov-COVID-19-vaccinating-provider-locatio/5jp2-pgaw">Vaccines.gov</a>
-                        </small>
-                    </p>
                 </div>
             </div>
             <div class="row">
@@ -197,13 +173,23 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <p>
+                        <small>
+                        Data:
+                        <a
+                        href="https://data.cdc.gov/Vaccinations/Vaccines-gov-COVID-19-vaccinating-provider-locatio/5jp2-pgaw">Vaccines.gov</a>
+                        </small>
+                    </p>
+                </div>
+            </div>
         </div>
     </main>
     <div class="loading-include"></div>
-    <div class="agency-data"></div>
     <div class="footer-include"></div>
     <div class="js-include"></div>
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
     <div class="scripts">
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>

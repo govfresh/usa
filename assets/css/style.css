@@ -326,11 +326,6 @@ h1 {
     font-family: var(--font-3) !important;
 }
 
-.post h2 {
-    margin-top: var(--size-5);
-    padding-bottom: var(--size-3);
-}
-
 /* Logo */
 
 .logo {
@@ -353,6 +348,7 @@ h1 {
 
 .navbar a {
     color: var(--color-4) !important;
+    text-decoration: none;
 }
 
 .navbar-light .navbar-toggler {
@@ -477,8 +473,10 @@ h1 {
     border-radius: 7%;
 }
 
+/* Post */
+
 .post h2, .post h3, .post h4 {
-    padding-bottom: var(--size-6);
+    padding-bottom: var(--size-3);
     padding-top: var(--size-6);
 }
 
@@ -813,7 +811,7 @@ div.card-body>i {
 }
 
 .card-footer {
-    background-color: var(--color-6);
+    background-color: var(--color-10);
 }
 
 /* Alerts */
@@ -1037,11 +1035,12 @@ img.xl {
     font-family: var(--font-5) !important;
     font-size: var(--size-6);
     margin-bottom: var(--size-1);
-    padding-bottom: var(--size-1);
+    padding-bottom: var(--size-6);
 }
 
 .breadcrumb a, .breadcrumb a:visited, .breadcrumb a:hover {
     color: var(--color-1);
+    text-decoration: none;
 }
 
 /* Link */
