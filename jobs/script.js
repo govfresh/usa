@@ -29,7 +29,7 @@ if (params.has('job') && params.has('code')) {
                     document.querySelector('.jumbotron h1').classList.add('h2');
                     document.querySelector('.jumbotron p').innerHTML = job.DepartmentName;
                     document.querySelector('.job-info').innerHTML += `
-                        <div class="alert alert-primary p-3 mb-4 info-job">
+                    <div class="alert alert-info p-3 mb-4 info-job">
                         <div class="container">
                             <div class="row">
                                 <div class="col-4">
@@ -51,161 +51,160 @@ if (params.has('job') && params.has('code')) {
                             </div>
                         </div>
                     </div>
-                    <h2>Agency</h2>
                     <div class="container">
                         <div class="row">
-                            <div class="col-3">
-                                <img src="/assets/img/icons/1F1FA-1F1F8.png" class="sm">
+                            <div class="col-12">
+                                <h2>Agency</h2>
                             </div>
-                            <div class="col-9 pt-4">
-                                <p>${job.DepartmentName}<br>
-                                    ${job.OrganizationName}</p>
-                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-1">
+                                    <img src="/assets/img/icons/1F1FA-1F1F8.png" class="sm" alt="U.S. flag emoji">
+                                </div>
+                                <div class="col-11">
+                                    <p>${job.DepartmentName}<br>
+                                        ${job.OrganizationName}</p>
+                                </div>
                         </div>
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-6">
-                            </div>
-                        </div>
-                    </div>
-                    <h2>Details</h2>
-                    <div class="row">
-                        <div class="col-12">
+                            <div class="col-12">
+                            <h2>Details</h2>
                             <div class="accordion mb-5">
-                                <div class="accordion-item description">
-                                    <div class="row">
-                                        <h3 class="accordion-header">
-                                            <button aria-controls="description" aria-expanded="true" class="accordion-button collapsed"
-                                                data-bs-target="#desc" data-bs-toggle="collapse" type="button">Description</button>
-                                        </h3>
-                                    </div>
-                                    <div class="accordion-body collapse" id="desc">
+                                    <div class="accordion-item description">
                                         <div class="row">
-                                            <p>${job.UserArea.Details.JobSummary}</p>
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="description" aria-expanded="true" class="accordion-button collapsed"
+                                                    data-bs-target="#desc" data-bs-toggle="collapse" type="button">Description</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="desc">
+                                            <div class="row">
+                                                <p>${job.UserArea.Details.JobSummary}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item duties">
-                                    <div class="row">
-                                        <h3 class="accordion-header">
-                                            <button aria-controls="duties" aria-expanded="true" class="accordion-button collapsed"
-                                                data-bs-target="#duties" data-bs-toggle="collapse" type="button">Duties</button>
-                                        </h3>
-                                    </div>
-                                    <div class="accordion-body collapse" id="duties">
+                                    <div class="accordion-item duties">
                                         <div class="row">
-                                            <p>${job.UserArea.Details.MajorDuties}</p>
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="duties" aria-expanded="true" class="accordion-button collapsed"
+                                                    data-bs-target="#duties" data-bs-toggle="collapse" type="button">Duties</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="duties">
+                                            <div class="row">
+                                                <p>${job.UserArea.Details.MajorDuties}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item requirements">
-                                    <div class="row">
-                                        <h3 class="accordion-header">
-                                            <button aria-controls="requirements" aria-expanded="true" class="accordion-button collapsed"
-                                                data-bs-target="#reqs" data-bs-toggle="collapse" type="button">Requirements</button>
-                                        </h3>
-                                    </div>
-                                    <div class="accordion-body collapse" id="reqs">
+                                    <div class="accordion-item requirements">
                                         <div class="row">
-                                            <ul class="requirements"></ul>
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="requirements" aria-expanded="true" class="accordion-button collapsed"
+                                                    data-bs-target="#reqs" data-bs-toggle="collapse" type="button">Requirements</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="reqs">
+                                            <div class="row">
+                                                <ul class="requirements"></ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item education">
-                                    <div class="row">
-                                        <h3 class="accordion-header">
-                                            <button aria-controls="education" aria-expanded="true" class="accordion-button collapsed"
-                                                data-bs-target="#ed" data-bs-toggle="collapse" type="button">Education</button>
-                                        </h3>
-                                    </div>
-                                    <div class="accordion-body collapse" id="ed">
+                                    <div class="accordion-item education">
                                         <div class="row">
-                                            <p>${job.UserArea.Details.Education}</p>
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="education" aria-expanded="true" class="accordion-button collapsed"
+                                                    data-bs-target="#ed" data-bs-toggle="collapse" type="button">Education</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="ed">
+                                            <div class="row">
+                                                <p>${job.UserArea.Details.Education}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item qualifications">
-                                    <div class="row">
-                                        <h3 class="accordion-header">
-                                            <button aria-controls="qualifications" aria-expanded="true" class="accordion-button collapsed"
-                                                data-bs-target="#quals" data-bs-toggle="collapse" type="button">Qualifications</button>
-                                        </h3>
-                                    </div>
-                                    <div class="accordion-body collapse" id="quals">
+                                    <div class="accordion-item qualifications">
                                         <div class="row">
-                                            <p>${job.QualificationSummary}</p>
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="qualifications" aria-expanded="true" class="accordion-button collapsed"
+                                                    data-bs-target="#quals" data-bs-toggle="collapse" type="button">Qualifications</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="quals">
+                                            <div class="row">
+                                                <p>${job.QualificationSummary}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item documents">
-                                    <div class="row">
-                                        <h3 class="accordion-header">
-                                            <button aria-controls="documents" aria-expanded="true" class="accordion-button collapsed"
-                                                data-bs-target="#docs" data-bs-toggle="collapse" type="button">Documents</button>
-                                        </h3>
-                                    </div>
-                                    <div class="accordion-body collapse" id="docs">
+                                    <div class="accordion-item documents">
                                         <div class="row">
-                                            <p>${job.UserArea.Details.RequiredDocuments}</p>
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="documents" aria-expanded="true" class="accordion-button collapsed"
+                                                    data-bs-target="#docs" data-bs-toggle="collapse" type="button">Documents</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="docs">
+                                            <div class="row">
+                                                <p>${job.UserArea.Details.RequiredDocuments}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item openings">
-                                    <div class="row">
-                                        <h3 class="accordion-header">
-                                            <button aria-controls="openings" aria-expanded="true" class="accordion-button collapsed"
-                                                data-bs-target="#openings" data-bs-toggle="collapse" type="button">Openings</button>
-                                        </h3>
-                                    </div>
-                                    <div class="accordion-body collapse" id="openings">
+                                    <div class="accordion-item openings">
                                         <div class="row">
-                                            <p>${job.UserArea.Details.TotalOpenings}</p>
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="openings" aria-expanded="true" class="accordion-button collapsed"
+                                                    data-bs-target="#openings" data-bs-toggle="collapse" type="button">Openings</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="openings">
+                                            <div class="row">
+                                                <p>${job.UserArea.Details.TotalOpenings}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item benefits">
-                                    <div class="row">
-                                        <h3 class="accordion-header">
-                                            <button aria-controls="benefits" aria-expanded="true" class="accordion-button collapsed"
-                                                data-bs-target="#benefits" data-bs-toggle="collapse" type="button">Benefits</button>
-                                        </h3>
-                                    </div>
-                                    <div class="accordion-body collapse" id="benefits">
+                                    <div class="accordion-item benefits">
                                         <div class="row">
-                                            <p>${job.UserArea.Details.Benefits}</p>
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="benefits" aria-expanded="true" class="accordion-button collapsed"
+                                                    data-bs-target="#benefits" data-bs-toggle="collapse" type="button">Benefits</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="benefits">
+                                            <div class="row">
+                                                <p>${job.UserArea.Details.Benefits}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item other">
-                                    <div class="row">
-                                        <h3 class="accordion-header">
-                                            <button aria-controls="other" aria-expanded="true" class="accordion-button collapsed"
-                                                data-bs-target="#other" data-bs-toggle="collapse" type="button">Other</button>
-                                        </h3>
-                                    </div>
-                                    <div class="accordion-body collapse" id="other">
+                                    <div class="accordion-item other">
                                         <div class="row">
-                                            <p>${job.UserArea.Details.OtherInformation}</p>
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="other" aria-expanded="true" class="accordion-button collapsed"
+                                                    data-bs-target="#other" data-bs-toggle="collapse" type="button">Other</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="other">
+                                            <div class="row">
+                                                <p>${job.UserArea.Details.OtherInformation}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item locations">
-                                    <div class="row">
-                                        <h3 class="accordion-header">
-                                            <button aria-controls="locations" aria-expanded="true" class="accordion-button collapsed"
-                                                data-bs-target="#locations" data-bs-toggle="collapse" type="button">Locations</button>
-                                        </h3>
-                                    </div>
-                                    <div class="accordion-body collapse" id="locations">
+                                    <div class="accordion-item locations">
                                         <div class="row">
-                                            <ul class="locations"></ul>
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="locations" aria-expanded="true" class="accordion-button collapsed"
+                                                    data-bs-target="#locations" data-bs-toggle="collapse" type="button">Locations</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="locations">
+                                            <div class="row">
+                                                <ul class="locations"></ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                     <!--
                                         <h3>How to apply</h2>
@@ -213,9 +212,13 @@ if (params.has('job') && params.has('code')) {
                                         <h3>What to expect</h2>
                                         <p>${job.UserArea.Details.WhatToExpectNext}</p>
                                         -->
-                    <h2>Contact</h2>
                     <div class="container contact">
                         <div class="row">
+                            <div class="col-12">
+                                <h2>Contact</h2>
+                            </div>
+                        </div>
+                    <div class="row">
                             ${(job.UserArea.Details.AgencyContactWebsite ?
                             `<div class="col-4">
                                 <img src="/assets/img/icons/1F5A5.png" class="xs float-left mr-5">
@@ -235,7 +238,7 @@ if (params.has('job') && params.has('code')) {
                                 </p>
                             </div>`: '')}</div></div>
                     <h2 class="mb-4 mt-4">Apply</h2>
-                    <div class="alert alert-primary info-job mb-5 mt-4 text-center">
+                    <div class="alert alert-info info-job mb-5 mt-4 text-center">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-4 col-sm-12">

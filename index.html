@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head></head>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>USA.GovFresh</title>
+    </head>
 
     <body>
+        <div class="jump-to-top"></div>
         <script src="/includes/include.js"></script>
         <script>
-            include("nav.html", ".nav-include");
             include("head.html", "head");
+            include("nav.html", ".nav-include");
             include("footer.html", ".footer-include");
+            include("jump.html", ".jump-to-top");
         </script>
-        <div class="nav-include"></div>
+        <div class="nav-include" id="nav"></div>
         <main>
             <div class="jumbotron jumbotron-1">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h1>Welcome to America.</h1>
+                            <h1>Welcome to the USA.</h1>
                         </div>
                     </div>
                 </div>
@@ -33,9 +40,7 @@
                             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="">
-                                            <img src="/assets/img/icons/1F3DB.png" class="md line" alt="U.S. government executive branch">
-                                        </div>
+                                            <img src="/assets/img/icons/1F3DB.png" class="md line rounded" alt="U.S. government executive branch">
                                         <h3 class="h4">
                                             <a class="stretched-link" href="/government/executive/">Executive</a>
                                         </h3>
@@ -46,9 +51,7 @@
                             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="">
-                                            <img src="/assets/img/icons/1F4DC.png" class="md line" alt="U.S. government legislative branch">
-                                        </div>
+                                            <img src="/assets/img/icons/1F4DC.png" class="md line rounded" alt="U.S. government legislative branch">
                                         <h3 class="h4">
                                             <a class="stretched-link" href="/government/legislative/">Legislative</a>
                                         </h3>
@@ -59,15 +62,63 @@
                             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="">
-                                            <img src="/assets/img/icons/1F9D1-200D-2696-FE0F.png" class="md line" alt="U.S. government judicial branch">
-                                        </div>
+                                            <img src="/assets/img/icons/1F9D1-200D-2696-FE0F.png" class="md line rounded" alt="U.S. government judicial branch">
                                         <h3 class="h4">
                                             Judicial
                                         </h3>
                                         <p class="description">U.S. government judicial branch
                                             <em>(coming soon)</em>
                                         </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Visit</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-deck clean">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="">
+                                            <img src="/assets/img/icons/1F3DE.png" class="md line rounded" alt="National parks emoji">
+                                        </div>
+                                        <h3 class="h5">
+                                            <a class="stretched-link" href="/parks/">Parks</a>
+                                        </h3>
+                                        <p class="description small">U.S national parks</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Space</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-deck clean">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                                <div class="card">
+                                    <div class="card-body">
+                                            <img src="/assets/img/icons/1F30C.png" class="md line rounded" alt="Milky Way emoji">
+                                        <h3 class="h5">
+                                            <a class="stretched-link" href="/space/potd">Photo of the day</a>
+                                        </h3>
+                                        <p class="description small">NASA's astronomy picture of the day</p>
                                     </div>
                                 </div>
                             </div>
@@ -87,9 +138,7 @@
                             <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex align-items-stretch">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="">
-                                            <img src="/assets/img/icons/E307.png" class="sm line" alt="Drugs emoji">
-                                        </div>
+                                            <img src="/assets/img/icons/E307.png" class="sm line rounded" alt="Drugs emoji">
                                         <h3 class="h5">
                                             <a class="stretched-link" href="/drugs/">Drugs</a>
                                         </h3>
@@ -100,15 +149,74 @@
                             <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex align-items-stretch">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="">
-                                            <img src="/assets/img/icons/1F9A0.png" class="sm line" alt="COVID emoji">
-                                        </div>
+                                            <img src="/assets/img/icons/1F9A0.png" class="sm line rounded" alt="Microbe emoji">
+                                        <h3 class="h5">
+                                            <a class="stretched-link" href="/diseases/">Diseases</a>
+                                        </h3>
+                                        <p class="description small">Cases of notifiable diseases</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 d-flex align-items-stretch">
+                                <div class="card">
+                                    <div class="card-body">
+                                            <img src="/assets/img/icons/E0AC.png" class="sm line rounded" alt="Person with medical mask emoji">
                                         <h3 class="h5">
                                             <a class="stretched-link" href="/covid/">
                                                 COVID-19</a>
                                         </h3>
-                                        <p class="description small">State-by-state COVID status
+                                        <p class="description small">State-by-state COVID info
                                         </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Cybersecurity</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-deck clean">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img src="/assets/img/icons/1F4F0.png" class="md line rounded" alt="Newspaper emoji">
+                                        <h3 class="h4">
+                                            <a class="stretched-link" href="/cybersecurity/news.html">Cybersecurity news</a>
+                                        </h3>
+                                        <p class="description">Latest updates from CISA</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Jobs</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-deck clean">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="">
+                                            <img src="/assets/img/icons/1F3E2.png" class="md line rounded" alt="Office building emoji">
+                                        </div>
+                                        <h3 class="h5">
+                                            <a class="stretched-link" href="/jobs/">Jobs</a>
+                                        </h3>
+                                        <p class="description small">Federal government job openings</p>
                                     </div>
                                 </div>
                             </div>

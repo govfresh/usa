@@ -1,106 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <title>U.S. government - USA.GovFresh</title>
-</head>
+    <head>
+        <title>U.S. government - USA.GovFresh</title>
+    </head>
 
-<body>
-    <script src="/includes/include.js"></script>
-    <script>
-        include("nav.html", ".nav-include");
-        include("head.html", "head");
-        include("footer.html", ".footer-include");
-
-    </script>
-    <div class="nav-include"></div>
-    <main>
-        <div class="jumbotron">
+    <body>
+        <div class="jump-to-top"></div>
+        <script src="/includes/include.js"></script>
+        <script>
+            include("nav.html", ".nav-include");
+            include("head.html", "head");
+            include("footer.html", ".footer-include");
+            include("jump.html", ".jump-to-top");
+        </script>
+        <div class="nav-include" id="nav"></div>
+        <main>
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h1>U.S. government</h1>
+                            <p class="lead">Branches of the United States federal government.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1>U.S. government</h1>
-                        <p class="lead">Branches of the United States federal government.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card-deck clean">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="">
-                                        <img src="/assets/img/icons/1F3DB.png" class="md line"
-                                            alt="U.S. government executive branch">
+                        <div class="card-deck clean">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img src="/assets/img/icons/1F3DB.png" class="md line rounded" alt="U.S. government executive branch">
+                                        <h3 class="h4">
+                                            <a class="stretched-link" href="/government/executive/">Executive</a>
+                                        </h3>
+                                        <p class="description">U.S. government executive branch</p>
                                     </div>
-                                    <h3 class="h4">
-                                        <a class="stretched-link" href="/government/executive/">Executive</a>
-                                    </h3>
-                                    <p class="description">U.S. government executive branch</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="">
-                                        <img src="/assets/img/icons/1F4DC.png" class="md line"
-                                            alt="U.S. government legislative branch">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img src="/assets/img/icons/1F4DC.png" class="md line rounded" alt="U.S. government legislative branch">
+                                        <h3 class="h4">
+                                            <a class="stretched-link" href="/government/legislative/">Legislative</a>
+                                        </h3>
+                                        <p class="description">U.S. government legislative branch</p>
                                     </div>
-                                    <h3 class="h4">
-                                        <a class="stretched-link" href="/government/legislative/">Legislative</a>
-                                    </h3>
-                                    <p class="description">U.S. government legislative branch</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="">
-                                        <img src="/assets/img/icons/1F9D1-200D-2696-FE0F.png" class="md line"
-                                            alt="U.S. government judicial branch">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img src="/assets/img/icons/1F9D1-200D-2696-FE0F.png" class="md line rounded" alt="U.S. government judicial branch">
+                                        <h3 class="h4">
+                                            Judicial
+                                        </h3>
+                                        <p class="description">U.S. government judicial branch
+                                            <em>(coming soon)</em>
+                                        </p>
                                     </div>
-                                    <h3 class="h4">
-                                        Judicial
-                                    </h3>
-                                    <p class="description">U.S. government judicial branch <em>(coming soon)</em>
-                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-    <div class="footer-include"></div>
-    <div class="js-include"></div>
-    <div class="scripts">
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
+        </main>
+        <div class="footer-include"></div>
+        <div class="js-include"></div>
+        <div class="scripts">
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag() {
+                    dataLayer.push(arguments);
+                }
+                gtag("js", new Date());
 
-            gtag("config", "G-NCRSGQDG05");
-        </script>
-        <script crossorigin="anonymous"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script crossorigin="anonymous"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <script crossorigin="anonymous"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    </div>
-</body>
+                gtag("config", "G-NCRSGQDG05");
+            </script>
+            <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script crossorigin="anonymous" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+            <script crossorigin="anonymous" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        </div>
+    </body>
 
 </html>

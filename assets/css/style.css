@@ -375,24 +375,29 @@ h1 {
 /* About */
 
 .about {
-    background-color: var(--color-8);
-    border-bottom: var(--size-2) solid var(--color-7);
     color: var(--color-2) !important;
 }
 
-.about-2 {
+/* Official */
+
+.official, .official-2 {
+    background: var(--color-8);
+    border-bottom: var(--color-7) var(--size-2) solid;
+}
+
+.official-2 {
     border-bottom: none;
 }
 
-.about a, .about a:visited {
+.official a, .official a:visited {
     text-decoration: underline;
 }
 
-.about a:hover {
+.official a:hover {
     text-decoration: none;
 }
 
-.about p {
+.official p {
     font-size: var(--size-6);
     margin: var(--size-1);
     padding: var(--size-6);
@@ -485,11 +490,24 @@ h1 {
     padding-bottom: var(--size-6);
 }
 
+/* Videos */
+
+.video-overlay {
+    padding: var(--size-11);
+    text-align: center;
+    vertical-align: 50%;
+}
+
+.video-overlay i {
+    background: var(--color-1);
+    border-radius: var(--size-4);
+    color: var(--color-4);
+    padding: var(--size-5) var(--size-8);
+}
+
 /* Accordions */
 
-.accordion {
-    margin-top: var(--size-9);
-}
+.accordion {}
 
 .accordion .card {
     border: var(--size-1) var(--color-1) solid !important;
@@ -660,6 +678,10 @@ button.btn-link {
     border-color: var(--color-5);
 }
 
+.card.button:hover {
+    background: var(--color-10);
+}
+
 .card.button h2 {
     margin-bottom: 0;
 }
@@ -671,29 +693,20 @@ button.btn-link {
 
 .btn-primary, a.btn-primary, a.btn-primary:active, a.btn-primary:hover, a.btn-primary:visited {
     background-color: var(--color-1);
+    border: var(--size-2) solid var(--color-4);
+    border-radius: var(--size-4);
     color: var(--color-4);
     font-family: var(--font-1);
     font-size: var(--size-7);
     margin-bottom: var(--size-4);
     margin-top: var(--size-4);
     text-decoration: none;
-    border-left: var(--size-3) solid var(--color-5);
-    border-bottom: var(--size-3) solid var(--color-5);
-    border-right: var(--size-3) solid var(--color-5);
-    border-top: var(--size-3) solid var(--color-5);
-    border-radius: var(--size-6) var(--size-1) var(--size-6) var(--size-1);
     transition: 1s ease-in-out;
 }
 
 a.btn-primary:hover, .categories a.nav-link:hover, .categories a.nav-link:hover {
     background-color: var(--color-5);
-    background: var(--color-5);
-    border-left: var(--size-3) solid var(--color-5);
-    border-bottom: var(--size-3) solid var(--color-5);
-    border-right: var(--size-3) solid var(--color-5);
-    border-top: var(--size-3) solid var(--color-5);
-    border-radius: var(--size-6) var(--size-1) var(--size-6) var(--size-1);
-    color: var(--color-4);
+    border: var(--size-2) solid var(--color-5);
 }
 
 input[type="range"] {
@@ -966,7 +979,7 @@ img.rounded-circle {
 }
 
 img.line {
-    border: var(--size-2) solid var(--color-3);
+    border: var(--size-2) solid var(--color-2);
     margin-bottom: var(--size-8);
 }
 

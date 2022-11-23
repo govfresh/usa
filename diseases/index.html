@@ -9,33 +9,34 @@
 </head>
 
 <body>
-    <script src="/includes/include.js"></script>
-    <script>
-        include("head.html", "head");
-        include("nav.html", ".nav-include");
-        include("footer.html", ".footer-include");
-
-        include("loading.html", ".loading-include");
-    </script>
-    <div class="nav-include" id="nav"></div>
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1>Notifiable diseases</h1>
-                    <p class="lead"></p>
+        <div class="jump-to-top"></div>
+        <script src="/includes/include.js"></script>
+        <script>
+            include("nav.html", ".nav-include");
+            include("head.html", "head");
+            include("footer.html", ".footer-include");
+            include("jump.html", ".jump-to-top");
+            include("loading.html", ".loading1")
+        </script>
+        <div class="nav-include" id="nav"></div>
+        <main>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1>Notifiable diseases</h1>
+                        <p class="lead"></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <p class="lead">Hover over a state to view number of cases.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="lead">Hover over a state to view number of cases.</p>
+                </div>
             </div>
         </div>
-    </div>
-    <main>
         <div class="map">
             <div class="container">
                 <div class="row">

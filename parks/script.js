@@ -14,10 +14,10 @@ if (urlParams.has('park')) {
 
         data.images.forEach(image => {
             document.querySelector('#photos .card-deck').innerHTML += `
-            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
                 <div class="card">
                     <div class="card-body">
-                            <img class="card-img-top lg line" src="${image.url}" alt="${image.altText}">
+                            <img class=" xxl line" src="${image.url}" alt="${image.altText}">
                         <h3 class="h5">
                             ${image.title}
                         </h3>
@@ -202,11 +202,11 @@ if (urlParams.has('park')) {
                 articles.forEach(article => {
                     document.querySelector('.articles ul').innerHTML += `
                     <li class="media mb-4">
-                    <a href="${article.url}"><img class="mr-3 line" src="${article.listingImage.url}" alt="${article.listingImage.altText}"></a>
+                    <img class="mr-3 float-left img-thumbnail" src="${article.listingImage.url}" alt="${article.listingImage.altText}">
                         <div class="media-body">
-                            <h5 class="mt-0 mb-1">
+                            <h3 class="mt-0 mb-1">
                                 <a href="${article.url}">${article.title}</a>
-                            </h5>
+                            </h3>
                             <p class="small">${article.listingDescription}</p>
                         </div>
                     </li>`;
@@ -235,9 +235,12 @@ if (urlParams.has('park')) {
                             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
                                 <div class="card">
                                     <div class="card-body">
-                                            <img class="card-img-top lg line" src="${video.splashImage.url}" alt="Video thumbnail for ${video.title}">
+                                            <img class="xxl line rounded" src="${video.splashImage.url}" alt="Video thumbnail for ${video.title}">
+                                            <div class="card-img-overlay video-overlay">
+                                            <i class="fa-solid fa-circle-play fa-2x"></i>
+                                            </div>
                                         <h3 class="h5">
-                                            <a href="${video.permalinkUrl}" class="stretched-link"><i class="fa-solid fa-circle-play"></i> ${video.title}</a>
+                                            <a href="${video.permalinkUrl}" class="stretched-link"> ${video.title}</a>
                                         </h3>
                                     </div>
                                 </div>

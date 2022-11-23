@@ -1,141 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo of the day - USA.GovFresh</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Photo of the day - USA.GovFresh</title>
 
-    <!-- Social media -->
-    <meta content="/index" property="og:url">
-    <meta content="website" property="og:type">
-    <meta content="Photo of the day - USA.GovFresh" property="og:title">
-    <meta content="NASA space picture or video of the day." property="og:description">
-    <meta content="/assets/img/icons/E142.png" property="twitter:image">
-    <meta content="/assets/img/icons/E142.png" property="og:image">
-    <style>
-        * {
-            --color-1: #6192e0;
-            --color-2: #dfdfdf;
-            --color-4: #000;
-            --color-8: #282828;
-            --color-9: #1f303e;
-            --color-11: #1f303e;
-        }
+        <!-- Social media -->
+        <meta content="/index" property="og:url">
+        <meta content="website" property="og:type">
+        <meta content="Photo of the day - USA.GovFresh" property="og:title">
+        <meta content="NASA space picture or video of the day." property="og:description">
+        <meta content="/assets/img/icons/E142.png" property="twitter:image">
+        <meta content="/assets/img/icons/E142.png" property="og:image">
+        <style>
+            * {
+                --color-1: #6192e0;
+                --color-2: #dfdfdf;
+                --color-4: #000;
+                --color-8: #282828;
+                --color-9: #1f303e;
+                --color-11: #1f303e;
+            }
 
-        .card {
-            background-color: var(--color-9) !important;
-        }
+            .card {
+                background-color: var(--color-9) !important;
+            }
 
-        a.nav-link {
-            color: var(--color-2) !important;
-        }
+            a.nav-link {
+                color: var(--color-2) !important;
+            }
 
-        .logo a,
-        .logo a:visited {
-            color: #ffffff !important;
-        }
+            .logo a,
+            .logo a:visited {
+                color: #ffffff !important;
+            }
 
-        nav.navbar {
-            background-color: var(--color-1) !important;
-        }
+            nav.navbar {
+                background-color: var(--color-1) !important;
+            }
 
-        span.navbar-toggler-icon {
-            filter: brightness(0);
-        }
-    </style>
-</head>
+            span.navbar-toggler-icon {
+                filter: brightness(0);
+            }
+        </style>
+    </head>
 
-<body class="dark-mode">
-    <script src="/includes/include.js"></script>
-    <script>
-        include("head.html", "head");
-        include("nav.html", ".nav-include");
-        include("footer.html", ".footer-include");
-    </script>
-    <div class="nav-include"></div>
-    <ol class="breadcrumb">
-        <li aria-current="page" class="breadcrumb-item">
-            <a href="/space/">Space</a>
-        </li>
-    </ol>
-    <main>
-        <div class="jumbotron">
+    <body class="dark-mode">
+        <div class="jump-to-top"></div>
+        <script src="/includes/include.js"></script>
+        <script>
+            include("head.html", "head");
+            include("nav.html", ".nav-include");
+            include("footer.html", ".footer-include");
+            include("jump.html", ".jump-to-top");
+        </script>
+        <div class="nav-include" id="nav"></div>
+        <ol class="breadcrumb">
+            <li aria-current="page" class="breadcrumb-item">
+                <a href="/space/">Space</a>
+            </li>
+        </ol>
+        <main>
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h1>Photo of the day</h1>
+                            <p class="lead"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1>Photo of the day</h1>
-                        <p class="lead"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <img class="apod card-img-top">
-                        <script src="https://player.vimeo.com/api/player.js"></script>
-                        <!--<div id="video"></div>-->
-                        <iframe frameborder="0" class="apod card-img-top" allow="autoplay; fullscreen"
-                            allowfullscreen></iframe>
-                        <div class="card-body">
-                            <h5 class="card-title"></h5>
-                            <br>
-                            <p class="card-text"></p>
+                        <div class="card">
+                            <img class="apod card-img-top">
+                            <script src="https://player.vimeo.com/api/player.js"></script>
+                            <!--<div id="video"></div>-->
+                            <iframe frameborder="0" class="apod card-img-top" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <br>
+                                <p class="card-text"></p>
+                            </div>
                         </div>
+                        <p class="source">Data:
+                            <a href="https://github.com/nasa/apod-api">NASA</a>
+                        </p>
                     </div>
-                    <p class="source">Data: <a href="https://github.com/nasa/apod-api">NASA</a></p>
                 </div>
             </div>
-        </div>
-        <script>
-            document.querySelector('p.lead').innerText = new Date().toLocaleString('en-US', { 'weekday': 'long', 'month': 'long', 'day': 'numeric', 'year': 'numeric' });
-            fetch('https://api.nasa.gov/planetary/apod?api_key=hExsrBBSxIrdS8bwKMuQd3oxFjLMEoIb4YkQZNMx&date=2022-11-07').then(res => res.json()).then(data => {
-                console.log(data.url);
-                /* const videoPlayer = new Vimeo.Player('video', { url: data.url, autoplay: 1, loop: 1, autopause: 0 });
+            <script>
+                document.querySelector('p.lead').innerText = new Date().toLocaleString('en-US', {
+                    'weekday': 'long',
+                    'month': 'long',
+                    'day': 'numeric',
+                    'year': 'numeric'
+                });
+                fetch('https://api.nasa.gov/planetary/apod?api_key=hExsrBBSxIrdS8bwKMuQd3oxFjLMEoIb4YkQZNMx&date=2022-11-07').then(res => res.json()).then(data => {
+                    console.log(data.url);
+
+/* const videoPlayer = new Vimeo.Player('video', { url: data.url, autoplay: 1, loop: 1, autopause: 0 });
                  Vimeo.play()
                  videoPlayer.on('play', function () {
                      console.log('Played the video');
                  });*/
-                document.querySelector((data.media_type == 'image' ? 'img' : 'iframe') + '.apod').src = data.hdurl ||
-                    (data.url.includes('youtube') ? data.url + '&autoplay=1&mute=1&loop=1&controls=0&disablekb=1&playlist=' + data.url.substring(data.url.indexOf('embed/') + 6, data.url.indexOf('?')) : data.url + '?autoplay=1&loop=1&autopause=0');
-                if (data.media_type == 'video')
-                    document.querySelector('.card').removeChild(document.querySelector('img.apod'));
-                else {
-                    document.querySelector('img.apod').alt = data.title;
-                    document.querySelector('.card').removeChild(document.querySelector('iframe.apod'));
+                    document.querySelector((
+                        data.media_type == 'image'
+                            ? 'img'
+                            : 'iframe'
+                    ) + '.apod').src = data.hdurl || (
+                        data.url.includes('youtube')
+                            ? data.url + '&autoplay=1&mute=1&loop=1&controls=0&disablekb=1&playlist=' + data.url.substring(data.url.indexOf('embed/') + 6, data.url.indexOf('?'))
+                            : data.url + '?autoplay=1&loop=1&autopause=0'
+                    );
+                    if (data.media_type == 'video') 
+                        document.querySelector('.card').removeChild(document.querySelector('img.apod'));
+                     else {
+                        document.querySelector('img.apod').alt = data.title;
+                        document.querySelector('.card').removeChild(document.querySelector('iframe.apod'));
+                    }
+                    document.querySelector('h5.card-title').innerText = data.title;
+                    document.querySelector('p.card-text').innerText = data.explanation;
+                });
+            </script>
+        </main>
+        <div class="footer-include"></div>
+        <div class="js-include"></div>
+        <div class="scripts">
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag() {
+                    dataLayer.push(arguments);
                 }
-                document.querySelector('h5.card-title').innerText = data.title;
-                document.querySelector('p.card-text').innerText = data.explanation;
-            });
-        </script>
-    </main>
-    <div class="footer-include"></div>
-    <div class="js-include"></div>
-    <div class="scripts">
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
+                gtag("js", new Date());
 
-            gtag("config", "G-NCRSGQDG05");
-        </script>
-        <script crossorigin="anonymous"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script crossorigin="anonymous"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <script crossorigin="anonymous"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    </div>
-</body>
+                gtag("config", "G-NCRSGQDG05");
+            </script>
+            <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script crossorigin="anonymous" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+            <script crossorigin="anonymous" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        </div>
+    </body>
 
 </html>

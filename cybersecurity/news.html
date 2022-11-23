@@ -1,93 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <title>Cybersecurity news - USA.govfresh</title>
-</head>
+    <head>
+        <title>Cybersecurity news - USA.govfresh</title>
+    </head>
 
-<body>
-    <script src="/includes/include.js"></script>
-    <script>
-        include("head.html", "head");
-        include("nav.html", ".nav-include");
-        include("loading.html", ".loading-include");
-        include("footer.html", ".footer-include");
-
-    </script>
-    <div class="nav-include"></div>
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1>Cybersecurity news</h1>
-                    <p class="lead">Updates from the Cybersecurity Infrastructure and Security Agency.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="nav-tabs">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <ul class="nav nav-tabs select-tab">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#all">All</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#alerts">Alerts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#bulletins">Bulletins</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#analysis-reports">Reports</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#tips">Tips</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#current-activity">Activity</a>
-                        </li>
-                    </ul>
-                    <div class="loading-include"></div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row post">
-                <div class="col-sm-12">
-                    <div class="card-deck posts">
-                        <div class="loading-include"></div>
+    <body>
+        <div class="jump-to-top"></div>
+        <script src="/includes/include.js"></script>
+        <script>
+            include("nav.html", ".nav-include");
+            include("head.html", "head");
+            include("footer.html", ".footer-include");
+            include("jump.html", ".jump-to-top");
+            include("loading.html", ".loading1")
+        </script>
+        <div class="nav-include" id="nav"></div>
+        <main>
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h1>Cybersecurity news</h1>
+                            <p class="lead">Updates from the Cybersecurity Infrastructure and Security Agency.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="footer-include"></div>
-    <script src="script.js"></script>
-    <div class="js-include"></div>
-    <div class="scripts">
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
+            <div class="nav-tabs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs select-tab">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#all">All</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#alerts">Alerts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#bulletins">Bulletins</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#analysis-reports">Reports</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tips">Tips</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#current-activity">Activity</a>
+                                </li>
+                            </ul>
+                            <div class="loading-include"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row post">
+                        <div class="col-sm-12">
+                            <div class="card-deck posts">
+                                <div class="loading-include"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class="footer-include"></div>
+        <script src="script.js"></script>
+        <div class="js-include"></div>
+        <div class="scripts">
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag() {
+                    dataLayer.push(arguments);
+                }
+                gtag("js", new Date());
 
-            gtag("config", "G-NCRSGQDG05");
-        </script>
-        <script crossorigin="anonymous"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script crossorigin="anonymous"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <script crossorigin="anonymous"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    </div>
-</body>
+                gtag("config", "G-NCRSGQDG05");
+            </script>
+            <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script crossorigin="anonymous" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+            <script crossorigin="anonymous" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        </div>
+    </body>
 
 </html>
