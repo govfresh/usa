@@ -322,6 +322,7 @@ h1 {
 
 sup {
     font-family: var(--font-7);
+    font-size: var(--size-6);
 }
 
 /* Styles with bold */
