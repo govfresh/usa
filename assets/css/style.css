@@ -404,7 +404,7 @@ sup {
 .official p {
     font-size: var(--size-6);
     margin: var(--size-1);
-    padding: var(--size-6);
+    padding: var(--size-6) var(--size-4);
 }
 
 /* Powered by */
