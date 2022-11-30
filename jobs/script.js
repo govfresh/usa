@@ -14,11 +14,12 @@ if (params.has('job') && params.has('code')) {
         req.setRequestHeader('User-Agent', 'admin@govfresh.com');
         req.setRequestHeader('Authorization-Key', 'aJK6I8oFNizc/BUOqsEc2Uzv7I1On4wZRHa3iPYijEw=');
         req.onload = function () {
+            let found;
             const jobs = JSON.parse(this.response).SearchResult.SearchResultItems;
             jobs.forEach(job => {
                 if (job.MatchedObjectId == params.get('job')) {
+                    found = true;
                     job = job.MatchedObjectDescriptor;
-                    console.log(job)
                     document.querySelector('.breadcrumb-insert').innerHTML += `
                     <ol class="breadcrumb">
                         <li aria-current="page" class="breadcrumb-item">
@@ -218,7 +219,7 @@ if (params.has('job') && params.has('code')) {
                                 <h2>Contact</h2>
                             </div>
                         </div>
-                    <div class="row">
+                    <div class="row contact">
                             ${(job.UserArea.Details.AgencyContactWebsite ?
                             `<div class="col-4">
                                 <img src="/assets/img/icons/1F5A5.png" class="xs float-left mr-5">
@@ -267,7 +268,7 @@ if (params.has('job') && params.has('code')) {
                                 ext = number.slice(number.indexOf('x'));
                                 number = number.substring(0, number.indexOf('x'));
                             }
-                            document.querySelector('.container.contact').innerHTML += `
+                            document.querySelector('.row.contact').innerHTML += `
                         <div class="col-4">
                         <img src="/assets/img/icons/1F4F1.png" class="xs float-left">
                             <h3>Phone</h3>
@@ -277,7 +278,7 @@ if (params.has('job') && params.has('code')) {
                         </p>
                         </div>`;
                         }
-                    } catch (e) { }
+                    } catch (e) { console.error(e); }
                     document.querySelector('.job-info').innerHTML += '<h2>Categories</h2><p class="categories"></p';
                     job.UserArea.Details.KeyRequirements.forEach(requirement => { document.querySelector('.requirements ul').innerHTML += '<li>' + requirement + '</li>'; });
                     job.JobCategory.forEach(category => {
@@ -295,6 +296,12 @@ if (params.has('job') && params.has('code')) {
                 if (!/\S[A-z]*/gm.test(element.innerText))
                     element.parentElement.parentElement.removeChild(element.parentElement);
             });
+            if (!found) {
+                params.delete('code');
+                params.delete('job');
+                console.log(params.toString());
+                document.querySelector('.job-info').innerHTML += '<h2>That job couldn\'t be found.</h2><p><a href="?' + params + '">Go back to search?</a></p>';
+            }
         };
         req.send();
     };
@@ -316,7 +323,7 @@ if (params.has('job') && params.has('code')) {
                     <div class="card">
                         <div class="card-body">
                             <h2 class="h5">
-                                <a href="?job=${id}&code=${job.JobCategory[0].Code}">${job.PositionTitle}</a>
+                                <a href="?job=${id}&code=${job.JobCategory[0].Code}&${params}">${job.PositionTitle}</a>
                             </h2>
                             <p>${job.OrganizationName}</p>
                             <p class="small">

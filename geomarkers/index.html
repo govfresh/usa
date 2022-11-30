@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
+        <title>GeoMarkers - USA.GovFresh</title>
+        <style>
+            html,
+            body,
+            #map {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+
+            #map {
+                min-height: 90vh;
+            }
+        </style>
+        <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css"/>
+        <script src="https://js.arcgis.com/4.25/"></script>
+        <script src="script.js"></script>
+    </head>
+
+    <body>
+        <script src="/includes/include.js"></script>
+        <script>
+            include("nav-geomarkers.html", ".nav-include");
+            include("head.html", "head");
+            include("footer-geomarkers.html", ".footer-include");
+        </script>
+        <div class="nav-include" id="nav"></div>
+        <main>
+            <div class="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class="loading-include"></div>
+        <div class="footer-include"></div>
+    </body>
+
+</html>

@@ -320,6 +320,10 @@ h1 {
     color: var(--color-1);
 }
 
+sup {
+    font-family: var(--font-7);
+}
+
 /* Styles with bold */
 
 .breadcrumb, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
@@ -401,6 +405,13 @@ h1 {
     font-size: var(--size-6);
     margin: var(--size-1);
     padding: var(--size-6);
+}
+
+/* Powered by */
+
+.powered-by {
+    background: var(--color-4);
+    margin-top: var(--size-8);
 }
 
 /* Brand */

@@ -279,7 +279,7 @@ if (urlParams.has('park')) {
 else {
     document.querySelector('.tags').innerHTML = '';
     document.querySelector('.park-data').innerHTML = '';
-    document.body.removeChild(document.querySelector('.breadcrumb'));
+    document.querySelector('main').removeChild(document.querySelector('.breadcrumb'));
 
     if (urlParams.has('activity')) {
         document.querySelector('.jumbotron h1').innerText += ' with ' + urlParams.get('activity');
