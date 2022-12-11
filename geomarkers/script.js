@@ -32,6 +32,9 @@ require([
                                 <p>{desc}.</p>
                                 <p class="source">Data:
                                     <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox={id}">USGS</a>
+                                </p>
+                                <p>
+                                    <a href=https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true
                                 </p>`
                 },
                 renderer
@@ -51,6 +54,7 @@ require([
             })])),
             renderer
         }));
+        document.getElementById('map').innerHTML = '';
         const view = new MapView({
             container: 'map',
             center: [
@@ -69,7 +73,7 @@ require([
     }
 
     fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/all.json').then(res => res.json()).then(async regions => {
-        regions = regions.slice(10, 15);
+        regions = ['ca.json']
         for (const region of regions) try {
             await fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/' + region.name).then(res => res.json()).then(data => {
                 for (const marker of data.markers) {
@@ -90,9 +94,11 @@ require([
                         }
                     });
                 }
+                document.querySelector('.loading-markers > span').style.width = Math.round(markers.length / 778063 * 100) + '%';
             });
         } catch (e) { }
     }).then(() => {
+        console.log(markers.length);
         if (navigator.geolocation)
             navigator.geolocation.getCurrentPosition(pos => {
                 loadMap(pos.coords.latitude, pos.coords.longitude, 11);

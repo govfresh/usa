@@ -6,17 +6,31 @@
         <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
         <title>GeoMarkers - USA.GovFresh</title>
         <style>
-            html,
-            body,
-            #map {
+            html, body, #map, {
                 padding: 0;
                 margin: 0;
                 height: 100%;
                 width: 100%;
             }
 
+            .loading-markers {
+                height: 2rem;
+                padding: 0;
+                display: block;
+                margin: 6rem auto 0;
+                width: 10%;
+                border: 2px solid black;
+            }
+
+            .bar {
+                display: block;
+                height: calc(2rem - 4px);
+                margin: 0;
+                background-color: var(--color-1);
+            }
+
             #map {
-                min-height: 90vh;
+                height: 90vh;
             }
         </style>
 
@@ -54,7 +68,7 @@
     <body>
         <script src="/includes/include.js"></script>
         <script>
-            include("nav-geomarkers.html", ".nav-include");
+            include("nav-geomarks.html", ".nav-include");
             include("head.html", "head");
             include("footer-geomarkers.html", ".footer-include");
         </script>
@@ -63,7 +77,11 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div id="map"></div>
+                        <div id="map">
+                            <div class="loading-markers">
+                                <span class="bar"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
