@@ -73,7 +73,7 @@ require([
     }
 
     fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/all.json').then(res => res.json()).then(async regions => {
-        regions = ['ca.json']
+        regions = [{ name: 'ca.json' }]
         for (const region of regions) try {
             await fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/' + region.name).then(res => res.json()).then(data => {
                 for (const marker of data.markers) {
@@ -98,7 +98,6 @@ require([
             });
         } catch (e) { }
     }).then(() => {
-        console.log(markers.length);
         if (navigator.geolocation)
             navigator.geolocation.getCurrentPosition(pos => {
                 loadMap(pos.coords.latitude, pos.coords.longitude, 11);
