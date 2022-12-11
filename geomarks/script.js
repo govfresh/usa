@@ -22,7 +22,7 @@ require([
             visualVariables: [{
                 type: "opacity",
                 field: "found",
-                stops: [{ value: 0, opacity: 0.5 },
+                stops: [{ value: 0, opacity: 0.25 },
                 { value: 1, opacity: 1 }]
             }]
         };

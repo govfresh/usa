@@ -378,7 +378,12 @@ sup {
 }
 
 .navbar-app {
-    border-top: var(--size-2) solid var(--color-7);
+    border-top: var(--size-2) solid var(--color-6);
+}
+
+.navbar-app a.nav-link {
+    border-right: var(--size-2) solid var(--color-6) !important;
+    padding: var(--size-3) var(--size-6) !important;
 }
 
 /* About */
