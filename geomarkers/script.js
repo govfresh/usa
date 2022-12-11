@@ -1,9 +1,11 @@
+let loadMap;
+
 require([
-    'esri/Map', 'esri/layers/GeoJSONLayer', 'esri/views/MapView'
-], (Map, GeoJSONLayer, MapView) => {
+    'esri/Map', 'esri/layers/GeoJSONLayer', 'esri/views/MapView', 'esri/widgets/Compass'
+], (Map, GeoJSONLayer, MapView, Compass) => {
     const markers = new Array();
 
-    function loadMap(lat, long, zoom) {
+    loadMap = function (lat, long, zoom) {
         const nearbyMarkers = new Array();
         for (const marker of markers)
             if (Math.abs(marker.properties.lat - lat) <= 0.0723659 && Math.abs(marker.properties.long - long) <= 0.0918336)
@@ -16,7 +18,13 @@ require([
                 outline: {
                     color: 'white',
                 }
-            }
+            },
+            visualVariables: [{
+                type: "opacity",
+                field: "found",
+                stops: [{ value: 0, opacity: 0.5 },
+                { value: 1, opacity: 1 }]
+            }]
         };
         const map = new Map({
             basemap: 'streets-navigation-vector', layers: [new GeoJSONLayer({
@@ -34,7 +42,7 @@ require([
                                     <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox={id}">USGS</a>
                                 </p>
                                 <p>
-                                    <a href=https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true
+                                    <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true">Recovery form</a>
                                 </p>`
                 },
                 renderer
@@ -63,6 +71,7 @@ require([
             zoom: zoom,
             map: map
         });
+        view.ui.add(new Compass({ view: view }), 'top-right');
         view.on('immediate-click', e => {
             view.hitTest(e)
                 .then((hit) => {
@@ -86,7 +95,8 @@ require([
                             setting: marker.setting.charAt(0) + marker.setting.toLowerCase().slice(1),
                             desc: marker.description,
                             lat: marker.lat,
-                            long: marker.long
+                            long: marker.long,
+                            found: marker.description.toLowerCase().includes('not found') ? 0 : 1
                         },
                         geometry: {
                             type: 'Point',
@@ -99,10 +109,9 @@ require([
         } catch (e) { }
     }).then(() => {
         if (navigator.geolocation)
-            navigator.geolocation.getCurrentPosition(pos => {
-                loadMap(pos.coords.latitude, pos.coords.longitude, 11);
-            });
+            navigator.geolocation.getCurrentPosition(pos => loadMap(pos.coords.latitude, pos.coords.longitude, 11));
         else
             loadMap(38, -97, 3)
     });
+
 });

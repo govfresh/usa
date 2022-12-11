@@ -5,6 +5,12 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="https://usa.govfresh.com">USA.GovFresh</a>
+            <a class="nav-item nav-link info" href="javascript:void(0)">
+                <i class="fa-solid fa-circle-info"></i>
+            </a>
+            <a class="nav-item nav-link recenter" href="javascript:void(0)" onclick="navigator.geolocation.getCurrentPosition(pos=>{loadMap(pos.coords.latitude,pos.coords.longitude,11)})">
+                <i class="fa-solid fa-location-arrow"></i>
+            </a>
         </div>
     </div>
 </nav>

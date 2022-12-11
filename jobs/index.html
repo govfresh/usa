@@ -221,6 +221,7 @@
                                     params.set(input.param, value);
                                 
 
+
                             });
 
                             document.querySelectorAll('form').forEach(form => {
@@ -235,9 +236,11 @@
                                 
 
 
+
                                 if (value) 
                                     params.set(form.param, value);
                                 
+
 
                             });
 
@@ -252,10 +255,10 @@
                         <div class="sort">
                             <label for="filter-by">Sort by:</label>
                             <select name="filter-by" class="filter-by" onchange="
-                                                                                                        const params = new URLSearchParams(location.search);
-                                                                                                        params.delete('SortField');
-                                                                                                        params.append('SortField',this.value);
-                                                                                                        location.search = params;">
+                                                                                                                                            const params = new URLSearchParams(location.search);
+                                                                                                                                            params.delete('SortField');
+                                                                                                                                            params.append('SortField',this.value);
+                                                                                                                                            location.search = params;">
                                 <option value="jobtitle">title</option>
                                 <option value="opendate">start date</option>
                                 <option value="closedate">end date</option>
@@ -264,10 +267,10 @@
                                 <option value="location">location name</option>
                             </select>
                             <button class="sort-order" onclick="
-                                                                                            const button = document.querySelector('button.sort-order');
-                                                                                            button.classList.toggle('asc');
-                                                                                            params.set('SortDirection',button.classList.contains('asc')?'Asc':'desc');
-                                                                                            location.search = params;"></button>
+                                                                                                                            const button = document.querySelector('button.sort-order');
+                                                                                                                            button.classList.toggle('asc');
+                                                                                                                            params.set('SortDirection',button.classList.contains('asc')?'Asc':'desc');
+                                                                                                                            location.search = params;"></button>
                         </div>
                         <div class="job-list"></div>
                         <div class="job-info"></div>
@@ -293,9 +296,6 @@
 
                 gtag("config", "G-NCRSGQDG05");
             </script>
-            <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-            <script crossorigin="anonymous" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-            <script crossorigin="anonymous" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
         </div>
     </body>
 
