@@ -386,6 +386,30 @@ sup {
     padding: var(--size-3) var(--size-6) !important;
 }
 
+.esri-widget {
+    background-color: var(--color-10) !important;
+    color: var(--color-2) !important;
+    font-family: var(--font-1) !important;
+    text-transform: lowercase;
+}
+
+.esri-popup--shadow {
+    border-top: var(--size-2) solid var(--color-1);
+    box-shadow: none !important;
+}
+
+.esri-widget__heading {
+    color: var(--color-1) !important;
+}
+
+.esri-feature-content p {
+    font-size: var(--size-6) !important;
+}
+
+.esri-feature-content a, .esri-feature-content a:visited {
+    color: var(--color-1) !important;
+}
+
 /* About */
 
 .about {
