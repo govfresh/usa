@@ -34,16 +34,16 @@ require([
                 })])),
                 popupTemplate: {
                     title: '{id}',
-                    content: `
-                                <p>Located at <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}.</a></p>
-                                <p>{setting}.</p>
-                                <p>{desc}.</p>
-                                <p class="source">Data:
-                                    <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox={id}">USGS</a>
-                                </p>
-                                <p>
-                                    <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true">Recovery form</a>
-                                </p>`
+                    content:
+                        `<p>Location: <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}</a></p>
+                        <p>{setting}.</p>
+                        <p style="text-transform: capitalize">{desc}.</p>
+                        <p>
+                            <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true" class="btn btn-primary">Submit recovery</a>
+                        </p>
+                        <p class="source">Data:
+                            <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox={id}">USGS</a>
+                        </p>`
                 },
                 renderer
             })]
@@ -69,16 +69,17 @@ require([
                 long, lat
             ],
             zoom: zoom,
-            map: map
+            map: map,
         });
+        view.popup.dockOptions = { position: 'top-right' }
         view.ui.add(new Compass({ view: view }), 'top-right');
         view.on('immediate-click', e => {
             view.hitTest(e)
                 .then((hit) => {
                     if (hit.results.length <= 1)
-                        loadMap(e.mapPoint.latitude, e.mapPoint.longitude, 11)
+                        loadMap(e.mapPoint.latitude, e.mapPoint.longitude, view.zoom)
                 });
-        })
+        });
     }
 
     fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/all.json').then(res => res.json()).then(async regions => {
@@ -93,7 +94,7 @@ require([
                         properties: {
                             id: marker.id,
                             setting: marker.setting.charAt(0) + marker.setting.toLowerCase().slice(1),
-                            desc: marker.description,
+                            desc: marker.description.toLowerCase(),
                             lat: marker.lat,
                             long: marker.long,
                             found: marker.description.toLowerCase().includes('not found') ? 0 : 1
