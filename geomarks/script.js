@@ -84,7 +84,7 @@ require([
     }
 
     fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/all.json').then(res => res.json()).then(async regions => {
-        regions = [{ file: 'ca0.json' }]
+        regions = [{ file: 'ca0.json' }, { file: 'ca1.json' }, { file: 'ca2.json' }, { file: 'ca3.json' }, { file: 'ca4.json' }, { file: 'ca5.json' },]
         for (const region of regions) try {
             await fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/' + region.file).then(res => res.json()).then(data => {
                 for (const marker of data.markers) {
