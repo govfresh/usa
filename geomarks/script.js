@@ -36,8 +36,9 @@ require([
                     title: '{id}',
                     content:
                         `<p>Location: <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}</a></p>
-                        <p>{setting}.</p>
+                        <p style="text-transform: capitalize">{setting}.</p>
                         <p style="text-transform: capitalize">{desc}.</p>
+                        <p style="text-transform: capitalize">{history}</p>
                         <p>
                             <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true" class="btn btn-primary">Submit recovery</a>
                         </p>
@@ -83,21 +84,26 @@ require([
     }
 
     fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/all.json').then(res => res.json()).then(async regions => {
-        regions = [{ name: 'ca.json' }]
+        regions = [{ file: 'ca0.json' }]
         for (const region of regions) try {
-            await fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/' + region.name).then(res => res.json()).then(data => {
+            await fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/' + region.file).then(res => res.json()).then(data => {
                 for (const marker of data.markers) {
+                    let history = '';
+                    marker.history.forEach(recovery => {
+                        history += recovery.date.substring(0, 4) + ' - ' + recovery.condition.toLowerCase().replace('see', 'see description') + '<br>';
+                    });
                     if (!marker.setting)
                         marker.setting = 'UNDEFINED SETTING';
                     markers.push({
                         type: 'Feature',
                         properties: {
                             id: marker.id,
-                            setting: marker.setting.charAt(0) + marker.setting.toLowerCase().slice(1),
+                            setting: marker.setting.toLowerCase(),
                             desc: marker.description.toLowerCase(),
                             lat: marker.lat,
                             long: marker.long,
-                            found: marker.description.toLowerCase().includes('not found') ? 0 : 1
+                            found: marker.description.toLowerCase().match(/(not found|not recovered|destroyed|no evidence of the mark)/gm) ? 0 : 1,
+                            history
                         },
                         geometry: {
                             type: 'Point',
