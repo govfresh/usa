@@ -535,6 +535,7 @@ sup {
     padding-left: .25em;
     padding-right: .25em;
     border-radius: 7%;
+    text-decoration: none;
 }
 
 /* Post */

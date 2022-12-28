@@ -1,8 +1,8 @@
 let loadMap;
 
 require([
-    'esri/Map', 'esri/layers/GeoJSONLayer', 'esri/views/MapView', 'esri/widgets/Compass'
-], (Map, GeoJSONLayer, MapView, Compass) => {
+    'esri/Map', 'esri/layers/GeoJSONLayer', 'esri/views/MapView', 'esri/widgets/Compass', 'esri/widgets/Search'
+], (Map, GeoJSONLayer, MapView, Compass, Search) => {
     const markers = new Array();
 
     loadMap = function (lat, long, zoom) {
@@ -35,7 +35,10 @@ require([
                 popupTemplate: {
                     title: '{id}',
                     content:
-                        `<p>Location: <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}</a></p>
+                        `<p>
+                            <a href="https://usa.govfresh.com/geomarks?location={lat},{long}">Share</a>
+                        </p>
+                        <p>Location: <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}</a></p>
                         <p style="text-transform: capitalize">{setting}.</p>
                         <p style="text-transform: capitalize">{desc}.</p>
                         <p style="text-transform: capitalize">{history}</p>
@@ -72,7 +75,14 @@ require([
             zoom: zoom,
             map: map,
         });
-        view.popup.dockOptions = { position: 'top-right' }
+        view.popup.dockOptions = { position: 'top-right' };
+        const search = new Search({
+            view: view
+        });
+        search.on('search-complete', e => loadMap(e.results[0].results[0].extent.center.latitude, e.results[0].results[0].extent.center.longitude, 11));
+        view.ui.add(search, {
+            position: "bottom-right",
+        });
         view.ui.add(new Compass({ view: view }), 'top-right');
         view.on('immediate-click', e => {
             view.hitTest(e)
@@ -102,7 +112,7 @@ require([
                             desc: marker.description.toLowerCase(),
                             lat: marker.lat,
                             long: marker.long,
-                            found: marker.description.toLowerCase().match(/(not found|not recovered|destroyed|no evidence of the mark)/gm) ? 0 : 1,
+                            found: marker.description.toLowerCase().match(/(not found|not recovered|destroyed|no evidence of the mark|station lost)/gm) ? 0 : 1,
                             history
                         },
                         geometry: {
@@ -115,7 +125,12 @@ require([
             });
         } catch (e) { }
     }).then(() => {
-        if (navigator.geolocation)
+        const params = new URLSearchParams(location.search);
+        if (params.has('location')) {
+            const location = params.get('location').split(',');
+            loadMap(location[0], location[1], 11);
+        }
+        else if (navigator.geolocation)
             navigator.geolocation.getCurrentPosition(pos => loadMap(pos.coords.latitude, pos.coords.longitude, 11));
         else
             loadMap(38, -97, 3)
