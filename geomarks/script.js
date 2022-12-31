@@ -112,7 +112,7 @@ require([
                             desc: marker.description.toLowerCase(),
                             lat: marker.lat,
                             long: marker.long,
-                            found: marker.description.toLowerCase().match(/(not found|not recovered|destroyed|no evidence of the mark|station lost)/gm) ? 0 : 1,
+                            found: marker.description.toLowerCase().match(/(not found|not recovered|destroyed|no evidence of the mark|inaccessible|below the street|underground|under.* the street|station lost)/gm) ? 0 : 1,
                             history
                         },
                         geometry: {
@@ -121,7 +121,7 @@ require([
                         }
                     });
                 }
-                document.querySelector('.loading-markers > span').style.width = Math.round(markers.length / 778063 * 100) + '%';
+                // document.querySelector('.loading-markers > span').style.width = Math.round(markers.length / data.markers.length * 100) + '%';
             });
         } catch (e) { }
     }).then(() => {

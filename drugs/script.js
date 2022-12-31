@@ -38,7 +38,7 @@ if (params.has('drug')) {
     };
     req.send();
 } else {
-    document.body.removeChild(document.querySelector('.breadcrumb'));
+    document.querySelector('main').removeChild(document.querySelector('.breadcrumb'));
     document.querySelector('form').onsubmit = function () {
         const form = this;
 
