@@ -46,7 +46,7 @@ require([
                             <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true" class="btn btn-primary">Submit recovery</a>
                         </p>
                         <p class="source">Data:
-                            <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox={id}">USGS</a>
+                            <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox={id}">U.S. National Geodetic Survey</a>
                         </p>`
                 },
                 renderer
