@@ -106,8 +106,15 @@
                     'day': 'numeric',
                     'year': 'numeric'
                 });
-                fetch('https://api.nasa.gov/planetary/apod?api_key=hExsrBBSxIrdS8bwKMuQd3oxFjLMEoIb4YkQZNMx&date=' + new Date().toISOString().substring(0, 10)).then(res => res.json()).then(data => {
-                    console.log(data.url);
+                const date = new Date(new Date().toLocaleString('en-US', {timeZone: 'America/New_York'}));
+                fetch('https://api.nasa.gov/planetary/apod?api_key=hExsrBBSxIrdS8bwKMuQd3oxFjLMEoIb4YkQZNMx&date=' + date.getFullYear() + '-' + (
+                    '00' + (
+                        date.getMonth() + 1
+                    )
+                ).slice(-2) + '-' + (
+                    '00' + date.getDate()
+                ).slice(-2)).then(res => res.json()).then(data => {
+                    console.log(data);
 
                     document.querySelector((
                         data.media_type == 'image'

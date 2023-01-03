@@ -1419,3 +1419,22 @@ div.dark-toggle {
     background-color: transparent;
     margin-bottom: var(--size-1);
 }
+
+.pagination-item {
+    border: var(--color-1) 1px solid;
+    color: var(--color-1);
+    padding: 0 0.5em;
+    text-decoration: none;
+    text-align: center;
+    background-color: var(--color-11);
+    border-radius: 2px;
+}
+
+.pagination-item[disabled="true"] {
+    cursor: not-allowed;
+    color: #555;
+}
+
+.pagination-item a {
+    text-decoration: none;
+}

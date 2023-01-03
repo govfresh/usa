@@ -307,14 +307,34 @@ if (params.has('job') && params.has('code')) {
     };
     req.send();
 } else {
-    req.open('GET', 'https://data.usajobs.gov/api/search?' + params);
+    req.open('GET', 'https://data.usajobs.gov/api/search?ResultsPerPage=100&' + params);
     req.setRequestHeader('User-Agent', 'admin@govfresh.com');
     req.setRequestHeader('Authorization-Key', 'aJK6I8oFNizc/BUOqsEc2Uzv7I1On4wZRHa3iPYijEw=');
     req.onload = function () {
-        const jobs = JSON.parse(this.response).SearchResult.SearchResultItems;
-        const cardDeck = document.querySelector('.job-list');
+        const jobs = JSON.parse(this.response).SearchResult;
 
-        jobs.forEach(job => {
+        const cardDeck = document.querySelector('.job-list'), pagination = document.querySelector('.pagination');
+        const pages = Math.ceil(jobs.SearchResultCountAll / 100), page = parseInt(params.get('Page')) || 1;
+        params.delete('Page');
+        if (page > pages)
+            location.search = params;
+        pagination.innerHTML += `<a class="pagination-item" ${page == 1 ? 'disabled="true"' : 'href="?Page=' + (page - 1) + '&' + params.toString()}">Previous</a>`;
+        for (let i = 0; i < Math.min(3, pages); i++)
+            pagination.innerHTML += `<span class="pagination-item"><a href="?Page=${i + 1}&${params.toString()}">${i + 1}</a></span>`;
+        if (page > 6)
+            pagination.innerHTML += '<span class="pagination-item">...</span>';
+        if (page > 2 && page < pages - 1)
+            for (let i = -2; i < 3; i++)
+                if (page + i > 3 && page + i < pages - 2)
+                    pagination.innerHTML += `<span class="pagination-item"><a href="?Page=${page + i}&${params.toString()}">${page + i}</a></span>`;
+        if (page < pages - 5)
+            pagination.innerHTML += '<span class="pagination-item">...</span>';
+        for (let i = 3; i > 0; i--)
+            if (pages - i > 2)
+                pagination.innerHTML += `<span class="pagination-item"><a href="?Page=${pages - i + 1}&${params.toString()}">${pages - i + 1}</a></span>`;
+        pagination.innerHTML += `<a class="pagination-item" ${page == pages ? 'disabled="true"' : 'href="?Page=' + (page + 1) + '&' + params.toString()}">Next</a>`;
+
+        jobs.SearchResultItems.forEach(job => {
             const id = job.MatchedObjectId;
             job = job.MatchedObjectDescriptor;
 

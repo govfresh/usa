@@ -97,6 +97,7 @@ require([
         regions = [{ file: 'ca0.json' }, { file: 'ca1.json' }, { file: 'ca2.json' }, { file: 'ca3.json' }, { file: 'ca4.json' }, { file: 'ca5.json' },]
         for (const region of regions) try {
             await fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/' + region.file).then(res => res.json()).then(data => {
+                console.log(data.markers.length);
                 for (const marker of data.markers) {
                     let history = '';
                     marker.history.forEach(recovery => {

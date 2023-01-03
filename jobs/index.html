@@ -34,25 +34,43 @@
                         <div class="col-sm-3">
                             <p>
                                 <label for="keywords">Keywords (; separated)</label>
-                                <input name="keywords" placeholder="Keywords" param="Keyword">
+                                <input
+                                    name="keywords"
+                                    placeholder="Keywords"
+                                    param="Keyword">
                             </p>
                             <p>
                                 <label for="title">Title</label>
-                                <input name="title" placeholder="Job title" param="PositionTitle">
+                                <input
+                                    name="title"
+                                    placeholder="Job title"
+                                    param="PositionTitle">
                             </p>
                             <p>
                                 <label for="orgs">Organizations (; separated)
                                     <a href="organizations.html" target="blank">list</a>
                                 </label>
-                                <input placeholder="Organization codes" name="orgs" param="Organization">
+                                <input
+                                    placeholder="Organization codes"
+                                    name="orgs"
+                                    param="Organization">
                             </p>
                             <p>
                                 <label for="location">Location</label>
-                                <input name="location" placeholder="Job location" param="LocationName">
+                                <input
+                                    name="location"
+                                    placeholder="Job location"
+                                    param="LocationName">
                                 <label for="radius">Radius:
                                     <span class="radius">1500</span>
                                     miles</label>
-                                <input type="range" name="radius" max="3000" style="width: 100%;" onchange="document.querySelector('.radius').innerText = this.value;" param="Radius">
+                                <input
+                                    type="range"
+                                    name="radius"
+                                    max="3000"
+                                    style="width: 100%;"
+                                    onchange="document.querySelector('.radius').innerText = this.value;"
+                                    param="Radius">
                             </p>
                         </div>
                         <div class="col-sm-3">
@@ -119,11 +137,17 @@
                                 </div>
                             </form>
                             <div>
-                                <input type="checkbox" name="relocation" param="RelocationIndicator">
+                                <input
+                                    type="checkbox"
+                                    name="relocation"
+                                    param="RelocationIndicator">
                                 <label for="relocation">Relocation okay?</label>
                             </div>
                             <div>
-                                <input type="checkbox" name="remote" param="RemoteIndicator">
+                                <input
+                                    type="checkbox"
+                                    name="remote"
+                                    param="RemoteIndicator">
                                 <label for="remote">Remote work</label>
                             </div>
                         </div>
@@ -176,13 +200,16 @@
                             const params = new URLSearchParams(location.search);
                             params.forEach((value, key) => {
                                 const input = document.querySelector('input[param="' + key + '"]');
-                                if (input) 
+                                if (input) {
                                     if (input.type == 'checkbox') 
                                         input.checked = value;
+                                     else if (input.onchange) 
+                                        input.onchange();
                                     
-                                 else if (input.onchange) 
-                                    input.onchange();
-                                 else {
+
+
+
+                                } else {
                                     const form = document.querySelector('form[param="' + key + '"]');
                                     if (form) {
                                         const checkboxes = form.querySelectorAll('input[type="checkbox"]');
@@ -222,6 +249,7 @@
                                 
 
 
+
                             });
 
                             document.querySelectorAll('form').forEach(form => {
@@ -242,6 +270,7 @@
                                 
 
 
+
                             });
 
                             location.search = params;
@@ -254,11 +283,10 @@
                     <div class="col-sm-12">
                         <div class="sort">
                             <label for="filter-by">Sort by:</label>
-                            <select name="filter-by" class="filter-by" onchange="
-                                                                                                                                            const params = new URLSearchParams(location.search);
-                                                                                                                                            params.delete('SortField');
-                                                                                                                                            params.append('SortField',this.value);
-                                                                                                                                            location.search = params;">
+                            <select
+                                name="filter-by"
+                                class="filter-by"
+                                onchange="const params = new URLSearchParams(location.search); params.delete('SortField'); params.append('SortField',this.value); location.search = params;">
                                 <option value="jobtitle">title</option>
                                 <option value="opendate">start date</option>
                                 <option value="closedate">end date</option>
@@ -266,14 +294,11 @@
                                 <option value="salarymin">minimum salary</option>
                                 <option value="location">location name</option>
                             </select>
-                            <button class="sort-order" onclick="
-                                                                                                                            const button = document.querySelector('button.sort-order');
-                                                                                                                            button.classList.toggle('asc');
-                                                                                                                            params.set('SortDirection',button.classList.contains('asc')?'Asc':'desc');
-                                                                                                                            location.search = params;"></button>
+                            <button class="sort-order" onclick="const button = document.querySelector('button.sort-order'); button.classList.toggle('asc');params.set('SortDirection',button.classList.contains('asc')?'Asc':'desc');location.search = params;"></button>
                         </div>
                         <div class="job-list"></div>
                         <div class="job-info"></div>
+                        <div class="pagination"></div>
                     </div>
                 </div>
             </div>
@@ -282,8 +307,14 @@
         <div class="footer-include"></div>
         <script src="script.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script crossorigin="anonymous" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script crossorigin="anonymous" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+        <script
+            crossorigin="anonymous"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script
+            crossorigin="anonymous"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
         <div class="scripts">
             <!-- Global site tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
