@@ -6,7 +6,7 @@
         <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
         <title>GeoMarks - USA.GovFresh</title>
         <style>
-            html, body, #map, {
+            html, html *, {
                 padding: 0;
                 margin: 0;
                 height: 100%;
@@ -14,31 +14,39 @@
             }
 
             .loading-markers {
-                height: 2rem;
+                height: 2rem !important;
                 padding: 0;
                 display: block;
-                margin: 6rem auto 0;
-                width: 10%;
+                margin: 50% auto;
+                width: 25%;
                 border: 2px solid black;
             }
 
             .bar {
+                width: 0;
                 display: block;
                 height: calc(2rem - 4px);
                 margin: 0;
                 background-color: var(--color-1);
             }
 
-            #map {
-                height: 90vh;
+            nav {
+                height: 4em;
             }
 
-            nav {
-                height: 10vh;
+            main {
+                height: calc(100% - 4em);
             }
 
             .col-sm-12 {
                 padding: 0 !important;
+            }
+
+            html,
+            body,
+            main div:not(#map div) {
+                height: 100%;
+                height: -webkit-fill-available;
             }
         </style>
 
@@ -133,12 +141,14 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom navbar-app">
                 <div class="navbar-nav d-flex flex-row me-1">
                     <a
+                        title="Relocate"
                         class="nav-item nav-link recenter"
                         href="javascript:void(0)"
-                        onclick="navigator.geolocation.getCurrentPosition(pos=>loadMap(pos.coords.latitude,pos.coords.longitude,11))">
+                        onclick="navigator.geolocation.getCurrentPosition(pos=>loadMap(pos.coords.latitude,pos.coords.longitude,view.zoom||11))">
                         <i class="fa-solid fa-location-arrow fa-2x"></i>
                     </a>
                     <a
+                        title="Info"
                         class="nav-item nav-link info"
                         href="javascript:void(0)"
                         onclick="document.querySelector('.overlay').style.display = 'block'">
@@ -151,11 +161,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div id="map">
-                            <div class="loading-markers">
-                                <span class="bar"></span>
-                            </div>
+                        <div class="loading-markers">
+                            <span class="bar"></span>
                         </div>
+                        <div id="map"></div>
                     </div>
                 </div>
             </div>
