@@ -31,11 +31,12 @@ require([
                                         type: 'Feature',
                                         properties: {
                                             id: marker.id,
-                                            setting: marker.setting.toLowerCase(),
+                                            setting: (marker.setting.includes('SET IN') ? '' : 'set in ') + marker.setting.toLowerCase(),
                                             desc: marker.description.toLowerCase(),
+                                            type: marker.marker.toLowerCase(),
                                             lat: marker.lat,
                                             long: marker.long,
-                                            found: marker.description.toLowerCase().match(/(not found|not recovered|destroyed|no evidence of the mark|inaccessible|below the street|underground|under.* the street|station lost)/gm) ? 0 : 1,
+                                            found: marker.description.toLowerCase().match(/(not found|not recovered|destroyed|no evidence of the mark|inaccessible|below the street|underground|under.* the (street|ground)|station lost|considered as lost|verified lost)/gm) ? 0 : (history.includes('not found') ? 0 : 1),
                                             history
                                         },
                                         geometry: {
@@ -84,8 +85,8 @@ require([
                             <a href="https://usa.govfresh.com/geomarks?location={lat},{long}">Share</a>
                         </p>
                         <p>Location: <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}</a></p>
-                        <p style="text-transform: capitalize">{setting}.</p>
-                        <p style="text-transform: capitalize">{desc}.</p>
+                        <p style="text-transform: capitalize">{type} {setting}.</p>
+                        <p style="text-transform: capitalize">{desc}</p>
                         <p style="text-transform: capitalize">{history}</p>
                         <p>
                             <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true" class="btn btn-primary">Submit recovery</a>
