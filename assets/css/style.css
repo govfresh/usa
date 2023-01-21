@@ -414,16 +414,6 @@ sup {
     color: var(--color-1);
 }
 
-.overlay {
-    position: absolute;
-    z-index: 2;
-    background-color: white;
-    padding: var(--size-6);
-    display: none;
-    width: 100%;
-    height: 100%;
-}
-
 /* About */
 
 .about {
@@ -566,8 +556,6 @@ sup {
 }
 
 /* Accordions */
-
-.accordion {}
 
 .accordion .card {
     border: var(--size-1) var(--color-1) solid !important;
@@ -762,15 +750,12 @@ button.btn-link {
     margin-top: var(--size-4);
     text-decoration: none;
     transition: 1s ease-in-out;
+    transition-property: background, border;
 }
 
 a.btn-primary:hover, .categories a.nav-link:hover, .categories a.nav-link:hover {
     background-color: var(--color-5);
     border: var(--size-2) solid var(--color-5);
-}
-
-input[type="range"] {
-    accent-color: var(--color-1);
 }
 
 /* Selection */
@@ -1271,7 +1256,7 @@ main a:hover {
     margin-bottom: 0;
 }
 
-input[type=range] {
+input {
     accent-color: var(--color-1);
 }
 

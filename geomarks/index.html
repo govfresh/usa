@@ -34,8 +34,50 @@
                 background-color: var(--color-1);
             }
 
+            .overlay {
+                position: absolute;
+                z-index: 2;
+                background-color: white;
+                padding: var(--size-6);
+                display: none;
+                width: 100%;
+                height: 100%;
+            }
+
+            textarea#block {
+                height: 8rem;
+            }
+
             nav {
                 height: 4em;
+            }
+
+            .copied {
+                position: absolute;
+                left: 11.5em;
+                top: -2em;
+                background: var(--color-1);
+                padding: 0.5em;
+                border-radius: 0.25em;
+                opacity: 0;
+            }
+
+            .copied.animated {
+                animation: fadeout 3s linear;
+            }
+
+            @keyframes fadeout {
+                5% {
+                    opacity: 1;
+                }
+
+                70% {
+                    opacity: 1;
+                }
+
+                100% {
+                    opacity: 0;
+                }
             }
 
             main {
@@ -131,7 +173,7 @@
         <script>
             include("head.html", "head");
         </script>
-        <div class="overlay">
+        <div class="overlay info">
             <span style="float: right; font-size: 2rem; cursor: pointer;" onclick="document.querySelector('.overlay').style.display = 'none'">✕</span>
             <h1>About</h1>
 
@@ -140,6 +182,43 @@
             <h2>Data</h2>
 
             <p>Survey mark data provided by the U.S. National Geodetic Survey.</p>
+        </div>
+        <div class="overlay options">
+            <span style="float: right; font-size: 2rem; cursor: pointer;" onclick="document.querySelector('.overlay.options').style.display = 'none'">✕</span>
+            <form>
+                <label for="radius">Radius:
+                    <span class="radius">5</span>
+                    miles
+                </label>
+                <br>
+                <input
+                    value="5"
+                    min="1"
+                    max="50"
+                    type="range"
+                    name="radius"
+                    id="radius"
+                    oninput="document.querySelector('span.radius').innerText = this.value">
+                <br>
+                <label for="block">Words to block (RegEx)</label>
+                <br>
+                <textarea
+                    name="block"
+                    id="block"
+                    cols="30"></textarea>
+                <br>
+                <input
+                    checked
+                    type="checkbox"
+                    name="relocate"
+                    id="relocate">
+                <label for="relocate">Relocate on click</label>
+                <br>
+                <input
+                    class="btn btn-primary"
+                    type="submit"
+                    value="Apply changes">
+            </form>
         </div>
         <div id="nav">
             <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom navbar-app">
@@ -155,8 +234,23 @@
                         title="Info"
                         class="nav-item nav-link info"
                         href="javascript:void(0)"
-                        onclick="document.querySelector('.overlay').style.display = 'block'">
+                        onclick="document.querySelector('.overlay.info').style.display = 'block'">
                         <i class="fa-solid fa-circle-info fa-2x"></i>
+                    </a>
+                    <a
+                        title="Options"
+                        class="nav-item nav-link options"
+                        href="javascript:void(0)"
+                        onclick="document.querySelector('.options.options').style.display = 'block'">
+                        <i class="fa-solid fa-gear fa-2x"></i>
+                    </a>
+                    <a
+                        title="Share"
+                        class="nav-item nav-link share"
+                        href="javascript:void(0)"
+                        onclick="document.querySelector('.copied').classList.remove('animated'); void document.querySelector('.copied').offsetWidth; navigator.clipboard.writeText('https://usa.govfresh.com/geomarks?lat='+view.center.latitude+'&long='+view.center.longitude); document.querySelector('.copied').classList.add('animated');">
+                        <i class="fa-solid fa-share fa-2x"></i>
+                        <span class="copied">Copied!</span>
                     </a>
                 </div>
             </nav>

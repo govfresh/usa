@@ -1,16 +1,34 @@
-let loadMap, view;
+let loadMap, view, relocate = true, radius = 5;
+let blockedPhrases = ['not found', 'not recovered', 'destroyed', 'no evidence of the mark', 'inaccessible', 'below the street', 'underground', 'under.* the (street', 'ground)', 'station lost', 'considered as lost', 'verified lost'];
+document.querySelector('textarea#block').value = blockedPhrases.join('\n');
+document.querySelector('input#radius').value = radius;
+document.querySelector('input#relocate').checked = relocate;
+
+document.querySelector('.options form').onsubmit = () => {
+    blockedPhrases = document.querySelector('textarea#block').value.length > 0 ? document.querySelector('textarea#block').value.split('\n') : [];
+    radius = parseInt(document.querySelector('input#radius').value);
+    relocate = document.querySelector('input#relocate').checked;
+    if (view)
+        loadMap(view.center.latitude, view.center.longitude, view.zoom, true);
+    document.querySelector('.overlay.options').style.display = 'none'
+    return false;
+};
 
 require([
     'esri/Map', 'esri/layers/GeoJSONLayer', 'esri/views/MapView', 'esri/widgets/Compass', 'esri/widgets/Search'
 ], (Map, GeoJSONLayer, MapView, Compass, Search) => {
-    const markers = new Array(), states = new Array();
+    let markers = new Array(), states = new Array();
 
-    loadMap = function (lat, long, zoom) {
+    loadMap = function (lat, long, zoom, reload) {
         const bar = document.querySelector('.bar');
         fetch('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + long + '&format=json').then(res => res.json()).then(location =>
             fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/all.json').then(res => res.json()).then(async regions => {
+                if (reload) {
+                    states = [];
+                    markers = []
+                }
                 for (const region of regions)
-                    if (region.location == location.address.state && !states.includes(location.address.state)) try {
+                    if (region.location == location.address.state && (reload || !states.includes(location.address.state))) try {
                         bar.style.width = '0';
                         document.querySelector('#map').style.display = 'none';
                         document.querySelector('.loading-markers').style.display = 'block';
@@ -36,7 +54,7 @@ require([
                                             type: marker.marker.toLowerCase(),
                                             lat: marker.lat,
                                             long: marker.long,
-                                            found: marker.description.toLowerCase().match(/(not found|not recovered|destroyed|no evidence of the mark|inaccessible|below the street|underground|under.* the (street|ground)|station lost|considered as lost|verified lost)/gm) ? 0 : (history.includes('not found') ? 0 : 1),
+                                            found: (marker.description.toLowerCase().match(new RegExp(blockedPhrases.join('|'), 'gm')) && blockedPhrases.length > 0) ? 0 : ((history.includes('not found') && blockedPhrases.length > 0) ? 0 : 1),
                                             history
                                         },
                                         geometry: {
@@ -53,9 +71,16 @@ require([
             }).then(() => {
                 setTimeout(() => {
                     const nearbyMarkers = new Array();
-                    for (const marker of markers)
-                        if (Math.abs(marker.properties.lat - lat) <= 0.0723659 && Math.abs(marker.properties.long - long) <= 0.0918336)
+                    for (const marker of markers) {
+                        const long1 = marker.properties.long * Math.PI / 180,
+                            long2 = long * Math.PI / 180,
+                            lat1 = marker.properties.lat * Math.PI / 180,
+                            lat2 = lat * Math.PI / 180;
+                        if (3963 * 2 * Math.asin(Math.sqrt(Math.pow(Math.sin((lat1 - lat2) / 2), 2)
+                            + Math.cos(lat1) * Math.cos(lat2)
+                            * Math.pow(Math.sin((long1 - long2) / 2), 2))) <= radius)
                             nearbyMarkers.push(marker);
+                    }
                     const renderer = {
                         type: 'simple',
                         symbol: {
@@ -80,20 +105,18 @@ require([
                             })])),
                             popupTemplate: {
                                 title: '{id}',
-                                content:
-                                    `<p>
-                            <a href="https://usa.govfresh.com/geomarks?location={lat},{long}">Share</a>
-                        </p>
-                        <p>Location: <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}</a></p>
-                        <p style="text-transform: capitalize">{type} {setting}.</p>
-                        <p style="text-transform: capitalize">{desc}</p>
-                        <p style="text-transform: capitalize">{history}</p>
-                        <p>
-                            <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true" class="btn btn-primary">Submit recovery</a>
-                        </p>
-                        <p class="source">Data:
-                            <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox={id}">U.S. National Geodetic Survey</a>
-                        </p>`
+                                content: `
+                                    <p>Location: <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}</a></p>
+                                    <p style="text-transform: capitalize">{type} {setting}.</p>
+                                    <p style="text-transform: capitalize">{desc}</p>
+                                    <p style="text-transform: capitalize">{history}</p>
+                                    <p>
+                                        <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true" class="btn btn-primary">Submit recovery</a>
+                                    </p>
+                                    <p class="source">Data:
+                                        <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox={id}">U.S. National Geodetic Survey</a>
+                                    </p>
+                                    <p><a href="https://usa.govfresh.com/geomarks?location={lat},{long}">Share</a></p>`
                             },
                             renderer
                         })]
@@ -131,7 +154,7 @@ require([
                     view.on('immediate-click', e => {
                         view.hitTest(e)
                             .then((hit) => {
-                                if (hit.results.length <= 1)
+                                if (relocate && hit.results.length <= 1)
                                     loadMap(e.mapPoint.latitude, e.mapPoint.longitude, view.zoom)
                             });
                     });
