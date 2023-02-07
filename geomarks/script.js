@@ -1,5 +1,5 @@
 let loadMap, view, relocate = true, radius = 5;
-let blockedPhrases = ['not found', 'not recovered', 'destroyed', 'no evidence of the mark', 'inaccessible', 'below the street', 'underground', 'under.* the (street', 'ground)', 'station lost', 'considered as lost', 'verified lost'];
+let blockedPhrases = ['not found', 'not recovered', 'destroyed', 'no evidence of the mark', 'inaccessible', 'below the street', 'underground', 'under.* the (street|ground)', 'station lost', 'considered as lost', 'verified lost'];
 document.querySelector('textarea#block').value = blockedPhrases.join('\n');
 document.querySelector('input#radius').value = radius;
 document.querySelector('input#relocate').checked = relocate;

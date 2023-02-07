@@ -31,15 +31,16 @@ if (params.has('member')) {
         data.terms.reverse().forEach(term => {
             document.querySelector('ul.terms').innerHTML += `<li>${term.termBeginYear}-${term.termEndYear || 'Present'} (${term.chamber})</li>`
         });
-        req.open('GET', 'https://api.congress.gov/v3/member/' + data.identifiers.bioguideId + '/sponsored-legislation?format=json&limit=250&api_key=hExsrBBSxIrdS8bwKMuQd3oxFjLMEoIb4YkQZNMx');
+        req.open('GET', data.sponsoredLegislation.url + '?format=json&limit=250&api_key=hExsrBBSxIrdS8bwKMuQd3oxFjLMEoIb4YkQZNMx');
         req.onload = function () {
             let leg = JSON.parse(this.response).sponsoredLegislation.filter(piece => { return piece.type != null; });
             document.querySelector('p.source').innerText = '(' + leg.length + ' most recent)';
             for (let i = 0; i < leg.length; i++)
                 leg[i].introducedDate = new Date(leg[i].introducedDate);
             leg.sort((a, b) => { return a.introducedDate.getTime() - b.introducedDate.getTime(); });
-            console.log(leg)
-            const ul = document.querySelector('ul.legislation')
+            const ul = document.querySelector('ul.legislation');
+            if (leg.length == 0)
+                ul.innerHTML += '<li>' + data.directOrderName + ' has not sponsored any legislation yet.</li>';
             leg.reverse().forEach(piece => {
                 ul.innerHTML += `
                     <li>${piece.title} (${piece.introducedDate.toLocaleDateString()})</li>
