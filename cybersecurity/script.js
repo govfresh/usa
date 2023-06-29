@@ -1,6 +1,8 @@
 window.onhashchange = () => {
-    document.querySelector('a.nav-link.active').classList.remove('active');
-    document.querySelector(`a.nav-link[href='${location.hash}']`).classList.add('active');
+    try {
+        document.querySelector('a.nav-link.active').classList.remove('active');
+        document.querySelector(`a.nav-link[href='${location.hash}']`).classList.add('active');
+    } catch (e) { }
     if (location.hash.length > 2) {
         document.querySelector('.row.post .posts').innerHTML = '';
         if (location.hash == '#all') {
@@ -8,14 +10,13 @@ window.onhashchange = () => {
             fetch('https://api.rss2json.com/v1/api.json?api_key=ljjuizqbsfmj2meszzzqf8ymzggnwy7jd5wbx2l4&rss_url=https://www.cisa.gov/uscert/ncas/alerts.xml').then(res => res.json()).then(data => {
                 data.items.forEach((post) => { post.type = 'alert'; posts.push(post) }); fetch('https://api.rss2json.com/v1/api.json?api_key=ljjuizqbsfmj2meszzzqf8ymzggnwy7jd5wbx2l4&rss_url=https://www.cisa.gov/uscert/ncas/bulletins.xml').then(res => res.json()).then(data => {
                     data.items.forEach((post) => { post.type = 'bulletin'; posts.push(post) }); fetch('https://api.rss2json.com/v1/api.json?api_key=ljjuizqbsfmj2meszzzqf8ymzggnwy7jd5wbx2l4&rss_url=https://www.cisa.gov/uscert/ncas/analysis-reports.xml').then((res => res.json())).then(data => {
-                        data.items.forEach((post) => { post.type = 'analysis reports'; posts.push(post) }); fetch('https://api.rss2json.com/v1/api.json?api_key=ljjuizqbsfmj2meszzzqf8ymzggnwy7jd5wbx2l4&rss_url=https://www.cisa.gov/uscert/ncas/tips.xml').then(res => res.json()).then(data => {
-                            data.items.forEach((post) => { post.type = 'tip'; posts.push(post) }); fetch('https://api.rss2json.com/v1/api.json?api_key=ljjuizqbsfmj2meszzzqf8ymzggnwy7jd5wbx2l4&rss_url=https://www.cisa.gov/uscert/ncas/current-activity.xml').then(res => res.json()).then(data => {
-                                data.items.forEach((post) => { post.type = 'current activity'; posts.push(post); });
-                            }).then(() => {
-                                posts.sort((a, b) => {
-                                    return new Date(a.pubDate).getTime() - new Date(b.pubDate).getTime()
-                                }).reverse().forEach(post => {
-                                    document.querySelector('.row.post .posts').innerHTML += `
+                        data.items.forEach((post) => { post.type = 'tip'; posts.push(post) }); fetch('https://api.rss2json.com/v1/api.json?api_key=ljjuizqbsfmj2meszzzqf8ymzggnwy7jd5wbx2l4&rss_url=https://www.cisa.gov/uscert/ncas/current-activity.xml').then(res => res.json()).then(data => {
+                            data.items.forEach((post) => { post.type = 'current activity'; posts.push(post); });
+                        }).then(() => {
+                            posts.sort((a, b) => {
+                                return new Date(a.pubDate).getTime() - new Date(b.pubDate).getTime()
+                            }).reverse().forEach(post => {
+                                document.querySelector('.row.post .posts').innerHTML += `
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">
                                         <div class="card">
                                             <div class="card-body">
@@ -30,12 +31,11 @@ window.onhashchange = () => {
                                             </div>
                                         </div>
                                     </div>`;
-                                });
-                                document.querySelector('.loading-include').removeChild(document.querySelector('.loading-include > *'));
-                            })
-                        })
-                    })
-                })
+                            });
+                            document.querySelector('.loading-include').removeChild(document.querySelector('.loading-include > *'));
+                        });
+                    });
+                });
             });
         }
         else
@@ -53,6 +53,7 @@ function getFeed(feed) {
     const req = new XMLHttpRequest();
     req.open('GET', `https://api.rss2json.com/v1/api.json?api_key=ljjuizqbsfmj2meszzzqf8ymzggnwy7jd5wbx2l4&rss_url=https://www.cisa.gov/uscert/ncas/${feed}.xml`, true);
     req.onload = function () {
+        console.log(JSON.parse(this.response))
         JSON.parse(this.response).items.forEach(post => {
             document.querySelector('.row.post .posts').innerHTML += `
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 d-flex align-items-stretch">

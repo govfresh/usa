@@ -9,22 +9,26 @@
 </head>
 
 <body class="home">
-        <div class="jump-to-top"></div>
-        <script src="/includes/include.js"></script>
-        <script>
-            include("nav.html", ".nav-include");
-            include("head.html", "head");
-            include("footer.html", ".footer-include");
-            include("jump.html", ".jump-to-top");
-        </script>
-        <div class="nav-include" id="nav"></div>
+    <div class="jump-to-top"></div>
+    <script src="/includes/include.js"></script>
+    <script>
+        include("nav.html", ".nav-include");
+        include("head.html", "head");
+        include("footer.html", ".footer-include");
+        include("jump.html", ".jump-to-top");
+    </script>
+    <div class="nav-include" id="nav"></div>
     <main>
         <div class="nav-include"></div>
-    <ol class="breadcrumb">
-        <li aria-current="page" class="breadcrumb-item">
-            <a href="/covid/">COVID-19</a>
-        </li>
-    </ol>
+        <ol class="breadcrumb">
+            <li aria-current="page" class="breadcrumb-item">
+                <a href="/covid/">COVID-19</a>
+            </li>
+        </ol>
+        <div class="alert alert-warning">
+            <p>As of May 11, the US COVID-19 public health emergency is over. The data shown is from the last update on
+                May 10.</p>
+        </div>
         <div class="jumbotron">
             <div class="container">
                 <div class="row home">
@@ -39,12 +43,13 @@
                             <div class="form-group">
                                 <label for="states" class="d-none">State selection</label>
                             </div>
-                                <select name="States" id="states" class="form-control">
-                                    <option value="" disabled selected>- select a state -</option>
-                                </select>
+                            <select name="States" id="states" class="form-control">
+                                <option value="" disabled selected>- select a state -</option>
+                            </select>
                         </form>
                         <p class="source">
-                            Data: <a href="https://data.cdc.gov/resource/unsk-b7fc">Centers for Disease Control and Prevention</a>
+                            Data: <a href="https://data.cdc.gov/resource/unsk-b7fc">Centers for Disease Control and
+                                Prevention</a>
                         </p>
                         <div class="url-result"></div>
                     </div>
@@ -166,12 +171,7 @@
                         <button id="locations-button" type="button" class="btn btn-primary btn-md find-site">
                             Show locations
                         </button>
-                        <div class="col-sm-9 d-sm-block d-none">
-                            <iframe
-                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA1G0PbkHalaKDxMUnZR9-RTM1g8QI5lq4&q=Centers+for+Disease+Control+and+Prevention,+1600+Clifton+Road,+Atlanta,+GA+30329+USA"
-                                frameborder="0"></iframe>
-                        </div>
-                        <div class="col-sm-3"></div>
+                        <div id="locations-list"></div>
                     </div>
                 </div>
             </div>
@@ -179,9 +179,9 @@
                 <div class="col-12">
                     <p>
                         <small>
-                        Data:
-                        <a
-                        href="https://data.cdc.gov/Vaccinations/Vaccines-gov-COVID-19-vaccinating-provider-locatio/5jp2-pgaw">Vaccines.gov</a>
+                            Data:
+                            <a
+                                href="https://data.cdc.gov/Vaccinations/Vaccines-gov-COVID-19-vaccinating-provider-locatio/5jp2-pgaw">Vaccines.gov</a>
                         </small>
                     </p>
                 </div>

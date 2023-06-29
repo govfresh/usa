@@ -1,7 +1,7 @@
 const select = document.querySelector('select#states');
 const request = new XMLHttpRequest();
-const states = new Array();
-const populations = new Array();
+const states = [];
+const populations = [];
 let htmlLocations;
 request.open('GET', 'https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=state:*', true);
 request.onload = function () {
@@ -28,8 +28,8 @@ request.onload = function () {
   states.forEach(state => {
     select.innerHTML += '<option value="' + Array.prototype.indexOf.call(states, state) + '">' + state + '</option>';
   });
-  const vaccines = new Array();
-  const vaccinesOld = new Array();
+  const vaccines = [];
+  const vaccinesOld = [];
   const stateCodes = [
     {
       "State": "Alabama",
@@ -240,10 +240,7 @@ request.onload = function () {
   cdcRequest.open('GET', 'https://data.cdc.gov/resource/unsk-b7fc.json', true);
   cdcRequest.onload = function () {
     let data = JSON.parse(this.response);
-    let wednesday = new Date();
-    if (wednesday.getDay() == 4)
-      wednesday = new Date(wednesday.getTime() - 604800000);
-    wednesday.setDate(wednesday.getDate() - wednesday.getDay() + 3)
+    let wednesday = new Date('2023-05-10T00:00:00.000');
     let lastWeek = new Date(wednesday.getTime() - 604800000);
     data.forEach(stat => {
       const date = new Date(stat.date);
@@ -252,7 +249,6 @@ request.onload = function () {
       else if (date.getDate() == lastWeek.getDate())
         vaccinesOld.push(stat);
     });
-    vaccinesLoaded = false;
 
     let siteRequest = new XMLHttpRequest();
     let locationsLoaded = false;
@@ -283,14 +279,12 @@ request.onload = function () {
       siteRequest.open('GET', 'https://data.cdc.gov/resource/5jp2-pgaw.json?$limit=194000', true);
       siteRequest.onload = function () {
         let data = JSON.parse(this.response).filter(site => { return site.loc_admin_state == stateCodes[parseInt(select.value)].Code && site.in_stock });
-        const regex = new RegExp(/safeway|walmart|walgreens|rite aid/g, 'i')
         data.forEach(location => {
-          if (!location.loc_name.match(regex))
-            htmlLocations += `<p onclick="try{document.querySelector('.address-selected').classList.remove('address-selected');}catch{}this.classList.add('address-selected');document.querySelector('iframe').src = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyA1G0PbkHalaKDxMUnZR9-RTM1g8QI5lq4&q=${location.loc_admin_street1}, ${location.loc_admin_city}, ${location.loc_admin_state}, ${location.loc_admin_zip}&zoom=15';"><strong>${location.loc_name}</strong><br><a href="https://www.google.com/maps/place/${location.loc_admin_street1}, ${location.loc_admin_city}, ${location.loc_admin_state}, ${location.loc_admin_zip}" target="_blank">${location.loc_admin_street1.toLowerCase()}, ${location.loc_admin_city.toLowerCase()} ${location.loc_admin_state}, ${location.loc_admin_zip}</a><br>${location.loc_phone}</p>`;
+          htmlLocations += `<p><strong>${location.loc_name}</strong><br><a href="https://www.google.com/maps/place/${location.loc_admin_street1}, ${location.loc_admin_city}, ${location.loc_admin_state}, ${location.loc_admin_zip}" target="_blank">${location.loc_admin_street1.toLowerCase()}, ${location.loc_admin_city.toLowerCase()} ${location.loc_admin_state}, ${location.loc_admin_zip}</a><br>${location.loc_phone}</p>`;
         });
         locationsLoaded = true;
         document.head.innerHTML += '<style>button#locations-button {height: 48px; visibility: inherit;}</style>';
-        document.querySelector("#locations").innerHTML = '<div class="alert alert-success container" role="alert"><i class="fas fa-check-circle"></i> Vaccine sites loaded.</div><button id="locations-button" type="button" class="btn btn-primary btn-md find-site"><i class="fas fa-eye"></i> Show locations</button><div class="col-sm-9 float-right d-sm-block d-none"><iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA1G0PbkHalaKDxMUnZR9-RTM1g8QI5lq4&q=Centers+for+Disease+Control+and+Prevention,+1600+Clifton+Road,+Atlanta,+GA+30329+USA" frameborder="0"></iframe></div><div class="col-sm-3"></div>';
+        document.querySelector("#locations").innerHTML = '<div class="alert alert-success container" role="alert"><i class="fas fa-check-circle"></i> Vaccine sites loaded.</div><button id="locations-button" type="button" class="btn btn-primary btn-md find-site"><i class="fas fa-eye"></i> Show locations</button><div id="locations-list"></div>';
         document.querySelector('button#locations-button').onclick = locationsClick;
       }
       siteRequest.send();
@@ -303,7 +297,7 @@ request.onload = function () {
       let vaccinesGiven;
       let lastWeekVaccines;
       stateCodes.forEach(state => {
-        if (state.State == states[parseInt(select.value)])
+        if (state.State == states[parseInt(select.value)]) {
           vaccines.forEach(vaccine => {
             if (vaccine.location == state.Code) {
               vaccinesGiven = parseInt(vaccine.series_complete_yes);
@@ -313,13 +307,13 @@ request.onload = function () {
               });
             }
           });
+        }
       });
       let percent = Math.ceil((100 / (parseInt(populations[parseInt(select.value)]) / vaccinesGiven)) * 100) / 100;
       let population = 0;
       populations.forEach(pop => {
         population += parseInt(pop);
       });
-      usPercent = Math.ceil((100 / (population / nationwide)) * 100) / 100;
       document.querySelector('#name').innerHTML = states[parseInt(select.value)];
       document.querySelector("h5.vaccinated").innerHTML = vaccinesGiven.toLocaleString();
       document.querySelector('h5.pie-chart').innerHTML = percent + '%';
@@ -328,7 +322,6 @@ request.onload = function () {
         document.querySelector('h5.pie-chart.yesterday').innerHTML = Math.ceil((100 / (parseInt(populations[parseInt(select.value)]) / lastWeekVaccines)) * 100) / 100 + '%';
       }
       catch (e) { console.error(e) }
-      //  document.querySelector('h5.mask').innerHTML = masks[parseInt(select.value)];
       stateCodes.forEach(code => {
         if (code.State == states[parseInt(select.value)]) {
           stateCode = code.Code;
@@ -365,9 +358,7 @@ function locationsClick() {
     document.querySelector('button#locations-button').onclick();
   }
   if (addLocations) {
-    document.querySelector('div#locations > div.alert').innerHTML = '<i class="fas fa-check-circle"></i> Vaccine sites loaded. Click a location to view it on the map.';
-    document.querySelector('div#locations > div.col-sm-3').innerHTML += htmlLocations;
-    document.querySelector('iframe').style.height = '100vh';
+    document.querySelector('div#locations > div.alert').innerHTML = '<i class="fas fa-check-circle"></i> Vaccine sites loaded.';
+    document.querySelector('div#locations > div#locations-list').innerHTML += htmlLocations;
   }
 }
-//LAST UPDATED AT 8:08AM 10/6/21 PDT

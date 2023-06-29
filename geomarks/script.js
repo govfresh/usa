@@ -36,6 +36,7 @@ require([
                         let filesLoaded = 0;
                         if (typeof region.file == 'string')
                             region.file = [region.file];
+                        region.file = ['ca0.json']
                         for (const file of region.file)
                             await fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/' + file).then(res => res.json()).then(data => {
                                 for (const marker of data.markers) {
@@ -109,6 +110,7 @@ require([
                                     <p>Location: <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}</a></p>
                                     <p style="text-transform: capitalize">{type} {setting}.</p>
                                     <p style="text-transform: capitalize">{desc}</p>
+                                    <p>Loading images...</p>
                                     <p style="text-transform: capitalize">{history}</p>
                                     <p>
                                         <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true" class="btn btn-primary">Submit recovery</a>
@@ -139,12 +141,32 @@ require([
                         center: [
                             long, lat
                         ],
-                        zoom: zoom,
-                        map: map,
+                        zoom,
+                        map,
                     });
                     view.popup.dockOptions = { position: 'top-right' };
                     const search = new Search({
-                        view: view
+                        view
+                    });
+                    view.popup.watch('selectedFeature', feature => {
+                        setTimeout(() => {
+                            view.popup.content = view.popup.content
+                            /*
+                            const popup = view.popup;
+                            fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://geodesy.noaa.gov/cgi-bin/get_image.prl?PROCESSING=list&PID=' + view.popup.title)}`).then(res => res.json()).then(data => {
+                                let images = data.contents.substring(data.contents.indexOf('<body>') + 6, data.contents.indexOf('</body>')).replaceAll('\n', '');
+                                //  console.log(images);
+                                if (images.includes('<img')) {
+                                    let html = '<div>';
+                                    [...images.matchAll(/href="([^ ]*)">/gm)].forEach(image => {
+                                        //  console.log('https://geodesy.noaa.gov' + image[1])
+                                        html += '<img src="https://geodesy.noaa.gov' + image[1] + '">';
+                                    });
+                                    html += '</div>';
+                                    //  popup.content = popup.content.replace('Loading images...', html)
+                                }
+                            });*/
+                        }, 100);
                     });
                     search.on('search-complete', e => loadMap(e.results[0].results[0].extent.center.latitude, e.results[0].results[0].extent.center.longitude, 11));
                     view.ui.add(search, {
