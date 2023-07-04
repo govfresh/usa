@@ -1,370 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta content="IE=edge" http-equiv="X-UA-Compatible">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>U.S. national parks - USA.GovFresh</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>U.S. national parks - USA.GovFresh</title>
+</head>
 
-    <body>
-        <div class="jump-to-top"></div>
-        <script src="/includes/include.js"></script>
-        <script>
-            include("head.html", "head");
-            include("nav.html", ".nav-include");
-            include("footer.html", ".footer-include");
-            include("loading.html", ".loading-include");
-            include("jump.html", ".jump-to-top");
-        </script>
-        <div class="nav-include" id="nav"></div>
-        <main>
-            <ol class="breadcrumb">
-                <li aria-current="page" class="breadcrumb-item">
-                    <a href="/parks/">U.S. national parks</a>
-                </li>
-            </ol>
-            <div class="jumbotron">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h1>U.S. national parks</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<body>
+    <div class="jump-to-top"></div>
+    <script src="/includes/include.js"></script>
+    <script>
+        include("head.html", "head");
+        include("nav.html", ".nav-include");
+        include("footer.html", ".footer-include");
+        include("loading.html", ".loading-include");
+        include("jump.html", ".jump-to-top");
+    </script>
+    <div class="nav-include" id="nav"></div>
+    <main>
+        <ol class="breadcrumb">
+            <li aria-current="page" class="breadcrumb-item">
+                <a href="/parks/">U.S. national parks</a>
+            </li>
+        </ol>
+        <div class="jumbotron">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="park-list"></div>
+                        <h1>U.S. national parks</h1>
                     </div>
                 </div>
             </div>
-            <div class="park-data">
-                <!-- Info -->
-                <div class="container">
-                    <div class="park-info">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h2>Info</h2>
-                                <div class="accordion">
-                                    <div class="accordion-item">
-                                        <div class="about">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="hours" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#about" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-circle-info"></i>
-                                                        &nbsp; About</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="about">
-                                                <div class="col-sm-10"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item contact">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="park-list"></div>
+                </div>
+            </div>
+        </div>
+        <div class="park-data">
+            <!-- Info -->
+            <div class="container">
+                <div class="park-info">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>Info</h2>
+                            <div class="accordion">
+                                <div class="accordion-item">
+                                    <div class="about">
                                         <div class="row">
                                             <h3 class="accordion-header">
-                                                <button aria-controls="contact" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#contact" data-bs-toggle="collapse" type="button">
-                                                    <i class="fa-solid fa-phone"></i>
-                                                    &nbsp; Contact</button>
+                                                <button aria-controls="hours" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#about"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-circle-info"></i>
+                                                    &nbsp; About</button>
                                             </h3>
                                         </div>
-                                        <div class="accordion-body collapse" id="contact">
-                                            <div class="row">
-                                                <div class="col-sm-10 website">
-                                                    <h4>Website:</h4>
-                                                    <ul>
-                                                        <li><a></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-10">
-                                                    <h4>Call:</h4>
-                                                    <ul class="call"></ul>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-10">
-                                                    <h4>Email:</h4>
-                                                    <ul class="email"></ul>
-                                                </div>
-                                            </div>
+                                        <div class="accordion-body collapse" id="about">
+                                            <div class="col-sm-10"></div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item">
-                                        <div class="hours">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="hours" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#hours" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-clock"></i>
-                                                        &nbsp; Hours</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="hours">
-                                                <div class="col-sm-10"></div>
+                                </div>
+                                <div class="accordion-item contact">
+                                    <div class="row">
+                                        <h3 class="accordion-header">
+                                            <button aria-controls="contact" aria-expanded="true"
+                                                class="accordion-button collapsed" data-bs-target="#contact"
+                                                data-bs-toggle="collapse" type="button">
+                                                <i class="fa-solid fa-phone"></i>
+                                                &nbsp; Contact</button>
+                                        </h3>
+                                    </div>
+                                    <div class="accordion-body collapse" id="contact">
+                                        <div class="row">
+                                            <div class="col-sm-10 website">
+                                                <h4>Website:</h4>
+                                                <ul>
+                                                    <li><a></a></li>
+                                                </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <div class="activities">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="activities" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#activities" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-person-hiking"></i>
-                                                        &nbsp; Activities</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="activities">
-                                                <div class="col-sm-10">
-                                                    <p>
-                                                        <ul></ul>
-                                                    </p>
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <h4>Call:</h4>
+                                                <ul class="call"></ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <div class="campgrounds">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="campgrounds" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#campgrounds" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-tent"></i>&nbsp; Campgrounds</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="campgrounds">
-                                                <div class="col-sm-10">
-                                                    <p>
-                                                        <ul></ul>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <div class="directions">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="directions" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#directions" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-map"></i>&nbsp; Directions</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="directions">
-                                                <div class="col-sm-10"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <div class="parking">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="parking" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#parking" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-car"></i>&nbsp; Parking</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="parking">
-                                                <div class="col-sm-10">
-                                                    <p>
-                                                        <ul></ul>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <div class="entrance-fees">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="entrance-fees" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#entrance-fees" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-money-check-dollar"></i>&nbsp; Entrance
-                                                        fees</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="entrance-fees">
-                                                <div class="col-sm-10">
-                                                    <p>
-                                                        <ul></ul>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <div class="passes">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="passes" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#passes" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-ticket"></i>&nbsp; Passes</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="passes">
-                                                <div class="col-sm-10">
-                                                    <p>
-                                                        <ul></ul>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <div class="fees">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="fees" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#fees" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-money-bill"></i>
-                                                        &nbsp; Fees</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="fees">
-                                                <div class="col-sm-10">
-                                                    <p>
-                                                        <ul></ul>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <div class="weather">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="weather" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#weather" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-temperature-empty"></i>&nbsp; Weather</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="weather">
-                                                <div class="row weather-data">
-                                                    <div class="col-sm-10">
-                                                        <p>
-                                                            <button class="previous">
-                                                                <i class="fa-solid fa-arrow-left-long"></i>
-                                                            </button>
-                                                            <button class="time-unit">Hour</button>
-                                                            <button class="next">
-                                                                <i class="fa-solid fa-arrow-right-long"></i>
-                                                            </button>
-                                                        </p>
-                                                        <div></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <div class="state">
-                                            <div class="row">
-                                                <h3 class="accordion-header">
-                                                    <button aria-controls="state" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#state" data-bs-toggle="collapse" type="button">
-                                                        <i class="fa-solid fa-location-dot"></i>&nbsp; State</button>
-                                                </h3>
-                                            </div>
-                                            <div class="accordion-body collapse" id="state">
-                                                <div class="col-sm-10"></div>
+                                        <div class="row">
+                                            <div class="col-sm-10">
+                                                <h4>Email:</h4>
+                                                <ul class="email"></ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <h2>Map</h2>
-                                <iframe frameborder="0" style="width: 100%; aspect-ratio:1;"></iframe>
+                                <div class="accordion-item">
+                                    <div class="hours">
+                                        <div class="row">
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="hours" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#hours"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-clock"></i>
+                                                    &nbsp; Hours</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="hours">
+                                            <div class="col-sm-10"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="activities">
+                                        <div class="row">
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="activities" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#activities"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-person-hiking"></i>
+                                                    &nbsp; Activities</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="activities">
+                                            <div class="col-sm-10">
+                                                <p>
+                                                <ul></ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="campgrounds">
+                                        <div class="row">
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="campgrounds" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#campgrounds"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-tent"></i>&nbsp; Campgrounds</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="campgrounds">
+                                            <div class="col-sm-10">
+                                                <p>
+                                                <ul></ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="directions">
+                                        <div class="row">
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="directions" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#directions"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-map"></i>&nbsp; Directions</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="directions">
+                                            <div class="col-sm-10"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="parking">
+                                        <div class="row">
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="parking" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#parking"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-car"></i>&nbsp; Parking</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="parking">
+                                            <div class="col-sm-10">
+                                                <p>
+                                                <ul></ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="entrance-fees">
+                                        <div class="row">
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="entrance-fees" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#entrance-fees"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-money-check-dollar"></i>&nbsp; Entrance
+                                                    fees</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="entrance-fees">
+                                            <div class="col-sm-10">
+                                                <p>
+                                                <ul></ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="passes">
+                                        <div class="row">
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="passes" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#passes"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-ticket"></i>&nbsp; Passes</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="passes">
+                                            <div class="col-sm-10">
+                                                <p>
+                                                <ul></ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="fees">
+                                        <div class="row">
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="fees" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#fees"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-money-bill"></i>
+                                                    &nbsp; Fees</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="fees">
+                                            <div class="col-sm-10">
+                                                <p>
+                                                <ul></ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="weather">
+                                        <div class="row">
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="weather" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#weather"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-temperature-empty"></i>&nbsp; Weather</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="weather">
+                                            <div class="row weather-data">
+                                                <div class="col-sm-10">
+                                                    <p>
+                                                        <button class="previous">
+                                                            <i class="fa-solid fa-arrow-left-long"></i>
+                                                        </button>
+                                                        <button class="time-unit">Hour</button>
+                                                        <button class="next">
+                                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                                        </button>
+                                                    </p>
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="state">
+                                        <div class="row">
+                                            <h3 class="accordion-header">
+                                                <button aria-controls="state" aria-expanded="true"
+                                                    class="accordion-button collapsed" data-bs-target="#state"
+                                                    data-bs-toggle="collapse" type="button">
+                                                    <i class="fa-solid fa-location-dot"></i>&nbsp; State</button>
+                                            </h3>
+                                        </div>
+                                        <div class="accordion-body collapse" id="state">
+                                            <div class="col-sm-10"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Photos -->
-                <div class="container">
-                    <div class="photos">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h2>Photos
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row" id="photos">
-                            <div class="col-sm-12">
-                                <div class="card-deck"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="videos">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h2>Videos
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row" id="videos">
-                            <div class="col-sm-12">
-                                <div class="card-deck"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="articles">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h2>Articles
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row" id="articles">
-                            <div class="col-sm-12">
-                                <ul class="list-unstyled"></ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container" style="padding-bottom: 2rem;">
+            </div>
+            <!-- Photos -->
+            <div class="container">
+                <div class="photos">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="tags">
-                                <h2>Tags</h2>
-                            </div>
+                            <h2>Photos
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="row" id="photos">
+                        <div class="col-sm-12">
+                            <div class="card-deck"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card-deck park-list"></div>
-            <div class="loading-include"></div>
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <p class="source">
-                            Data:
-                            <a href="https://www.nps.gov/subjects/developer/api-documentation.htm">National Park Service</a>
-                        </p>
+                <div class="videos">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>Videos
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="row" id="videos">
+                        <div class="col-sm-12">
+                            <div class="card-deck"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </main>
-        <div class="footer-include"></div>
-        <div class="js-include"></div>
-        <script src="script.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script crossorigin="anonymous" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script crossorigin="anonymous" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-        <div class="scripts">
-            <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag() {
-                    dataLayer.push(arguments);
-                }
-                gtag("js", new Date());
-
-                gtag("config", "G-NCRSGQDG05");
-            </script>
-            <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-            <script crossorigin="anonymous" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-            <script crossorigin="anonymous" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+            <div class="container">
+                <div class="articles">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>Articles
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="row" id="articles">
+                        <div class="col-sm-12">
+                            <ul class="list-unstyled"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="padding-bottom: 2rem;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="tags">
+                            <h2>Tags</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </body>
+        <div class="card-deck park-list"></div>
+        <div class="loading-include"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="source">
+                        Data:
+                        <a href="https://www.nps.gov/subjects/developer/api-documentation.htm">National Park Service</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="footer-include"></div>
+    <div class="js-include"></div>
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <div class="scripts">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "G-NCRSGQDG05");
+        </script>
+        <script crossorigin="anonymous"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script crossorigin="anonymous"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script crossorigin="anonymous"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    </div>
+</body>
 
 </html>

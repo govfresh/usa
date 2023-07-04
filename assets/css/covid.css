@@ -92,7 +92,7 @@ div#locations>div.col-sm-3>p.address-selected, div#locations>div.col-sm-3>p.addr
     color: var(--color-4) !important;
 }
 
-#locations #locations-list p {
+#locations #locations-list .card-body {
     text-transform: capitalize;
 }
 

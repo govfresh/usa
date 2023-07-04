@@ -252,23 +252,7 @@ request.onload = function () {
 
     let siteRequest = new XMLHttpRequest();
     let locationsLoaded = false;
-    if (location.hash != '') {
-      siteRequest.open('GET', 'https://data.cdc.gov/resource/5jp2-pgaw.json?$limit=194000', true);
-      siteRequest.onload = function () {
-        let data = JSON.parse(this.response).filter(site => { return site.loc_admin_state == stateCodes[parseInt(select.value)].Code && site.in_stock });
-        const regex = new RegExp(/safeway|walmart|walgreens|rite aid/g, 'i')
-        data.forEach(location => {
-          if (!location.loc_name.match(regex))
-            htmlLocations += `<p onclick="try{document.querySelector('.address-selected').classList.remove('address-selected');}catch{}this.classList.add('address-selected');document.querySelector('iframe').src = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyA1G0PbkHalaKDxMUnZR9-RTM1g8QI5lq4&q=${location.loc_admin_street1}, ${location.loc_admin_city}, ${location.loc_admin_state}, ${location.loc_admin_zip}&zoom=15';"><strong>${location.loc_name}</strong><br><a href="https://www.google.com/maps/place/${location.loc_admin_street1}, ${location.loc_admin_city}, ${location.loc_admin_state}, ${location.loc_admin_zip}" target="_blank">${location.loc_admin_street1.toLowerCase()}, ${location.loc_admin_city.toLowerCase()} ${location.loc_admin_state}, ${location.loc_admin_zip}</a><br>${location.loc_phone}</p>`;
-        });
-        locationsLoaded = true;
-        document.head.innerHTML += '<style>button#locations-button {height: 48px; visibility: inherit;}</style>';
-        document.querySelector("#locations").innerHTML = '<div class="alert alert-success container" role="alert"><i class="fas fa-check-circle"></i> Vaccine sites loaded.</div><button id="locations-button" type="button" class="btn btn-primary btn-md find-site"><i class="fas fa-eye"></i> Show locations</button><div class="col-sm-9 float-right d-sm-block d-none"><iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA1G0PbkHalaKDxMUnZR9-RTM1g8QI5lq4&q=Centers+for+Disease+Control+and+Prevention,+1600+Clifton+Road,+Atlanta,+GA+30329+USA" frameborder="0"></iframe></div><div class="col-sm-3"></div>';
-        document.querySelector('button#locations-button').onclick = locationsClick;
-      }
-      siteRequest.send();
-    }
-    else
+    if (!location.hash)
       document.querySelector('.breadcrumb').style.display = 'none';
     let stateCode;
     let nationwide;
@@ -278,13 +262,24 @@ request.onload = function () {
       let siteRequest = new XMLHttpRequest();
       siteRequest.open('GET', 'https://data.cdc.gov/resource/5jp2-pgaw.json?$limit=194000', true);
       siteRequest.onload = function () {
-        let data = JSON.parse(this.response).filter(site => { return site.loc_admin_state == stateCodes[parseInt(select.value)].Code && site.in_stock });
-        data.forEach(location => {
-          htmlLocations += `<p><strong>${location.loc_name}</strong><br><a href="https://www.google.com/maps/place/${location.loc_admin_street1}, ${location.loc_admin_city}, ${location.loc_admin_state}, ${location.loc_admin_zip}" target="_blank">${location.loc_admin_street1.toLowerCase()}, ${location.loc_admin_city.toLowerCase()} ${location.loc_admin_state}, ${location.loc_admin_zip}</a><br>${location.loc_phone}</p>`;
-        });
+        let data = JSON.parse(this.response).filter(site => { return site.loc_admin_state == stateCodes[parseInt(select.value)].Code && site.in_stock }).sort((a, b) => a.loc_name > b.loc_name);
+        for (let i = 0; i < data.length; i++) {
+          const location = data[i];
+          //htmlLocations += `<p><strong>${location.loc_name.toLowerCase()}</strong><br><a href="https://www.google.com/maps/place/${location.loc_admin_street1}, ${location.loc_admin_city}, ${location.loc_admin_state}, ${location.loc_admin_zip}" target="_blank">${location.loc_admin_street1.toLowerCase()}, ${location.loc_admin_city.toLowerCase()} ${location.loc_admin_state}, ${location.loc_admin_zip}</a><br>${location.loc_phone ? location.loc_phone.replace(/(?:\(|)(\d{3})(?:\) |-|)(\d{3})(?:-|)(\d{4})/g, '($1) $2-$3') : ''}</p>`;
+          htmlLocations += `
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex align-items-stretch">
+              <div class="card">
+                <div class="card-body">
+                  <strong>${location.loc_name.toLowerCase()}</strong>
+                  <br><a href="https://www.google.com/maps/place/${location.loc_admin_street1}, ${location.loc_admin_city}, ${location.loc_admin_state}, ${location.loc_admin_zip}" target="_blank">${location.loc_admin_street1.toLowerCase()}, ${location.loc_admin_city.toLowerCase()} ${location.loc_admin_state}, ${location.loc_admin_zip}</a>
+                  <br>${location.loc_phone ? location.loc_phone.replace(/(?:\(|)(\d{3})(?:\) |-|)(\d{3})(?:-|)(\d{4})/g, '($1) $2-$3') : ''}
+                </div>
+              </div>
+            </div>`;
+        }
         locationsLoaded = true;
         document.head.innerHTML += '<style>button#locations-button {height: 48px; visibility: inherit;}</style>';
-        document.querySelector("#locations").innerHTML = '<div class="alert alert-success container" role="alert"><i class="fas fa-check-circle"></i> Vaccine sites loaded.</div><button id="locations-button" type="button" class="btn btn-primary btn-md find-site"><i class="fas fa-eye"></i> Show locations</button><div id="locations-list"></div>';
+        document.querySelector("#locations").innerHTML = '<div class="alert alert-success container" role="alert"><i class="fas fa-check-circle"></i> Vaccine sites loaded.</div><button id="locations-button" type="button" class="btn btn-primary btn-md find-site"><i class="fas fa-eye"></i> Show locations</button><div id="locations-list" class="card-deck"></div>';
         document.querySelector('button#locations-button').onclick = locationsClick;
       }
       siteRequest.send();

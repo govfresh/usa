@@ -36,7 +36,6 @@ require([
                         let filesLoaded = 0;
                         if (typeof region.file == 'string')
                             region.file = [region.file];
-                        region.file = ['ca0.json']
                         for (const file of region.file)
                             await fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/' + file).then(res => res.json()).then(data => {
                                 for (const marker of data.markers) {
@@ -44,13 +43,19 @@ require([
                                     marker.history.forEach(recovery => {
                                         history += recovery.date.substring(0, 4) + ' - ' + recovery.condition.toLowerCase().replace('see', 'see description') + '<br>';
                                     });
+                                    let setting;
                                     if (!marker.setting)
-                                        marker.setting = 'UNDEFINED SETTING';
+                                        setting = 'UNDEFINED SETTING';
+                                    else {
+                                        setting = (marker.setting.includes('SET IN') ? '' : 'set in ') + marker.setting.toLowerCase()
+                                        if (setting.endsWith('.'))
+                                            setting = setting.slice(0, -1);
+                                    }
                                     markers.push({
                                         type: 'Feature',
                                         properties: {
                                             id: marker.id,
-                                            setting: (marker.setting.includes('SET IN') ? '' : 'set in ') + marker.setting.toLowerCase(),
+                                            setting,
                                             desc: marker.description.toLowerCase(),
                                             type: marker.marker.toLowerCase(),
                                             lat: marker.lat,
@@ -110,7 +115,7 @@ require([
                                     <p>Location: <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}</a></p>
                                     <p style="text-transform: capitalize">{type} {setting}.</p>
                                     <p style="text-transform: capitalize">{desc}</p>
-                                    <p>Loading images...</p>
+                                    <div class="images-{id} container"></div>
                                     <p style="text-transform: capitalize">{history}</p>
                                     <p>
                                         <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true" class="btn btn-primary">Submit recovery</a>
@@ -145,27 +150,28 @@ require([
                         map,
                     });
                     view.popup.dockOptions = { position: 'top-right' };
-                    const search = new Search({
-                        view
-                    });
+                    const search = new Search({ view });
                     view.popup.watch('selectedFeature', feature => {
-                        setTimeout(() => {
-                            view.popup.content = view.popup.content
-                            /*
-                            const popup = view.popup;
-                            fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://geodesy.noaa.gov/cgi-bin/get_image.prl?PROCESSING=list&PID=' + view.popup.title)}`).then(res => res.json()).then(data => {
-                                let images = data.contents.substring(data.contents.indexOf('<body>') + 6, data.contents.indexOf('</body>')).replaceAll('\n', '');
-                                //  console.log(images);
-                                if (images.includes('<img')) {
-                                    let html = '<div>';
-                                    [...images.matchAll(/href="([^ ]*)">/gm)].forEach(image => {
-                                        //  console.log('https://geodesy.noaa.gov' + image[1])
-                                        html += '<img src="https://geodesy.noaa.gov' + image[1] + '">';
-                                    });
-                                    html += '</div>';
-                                    //  popup.content = popup.content.replace('Loading images...', html)
-                                }
-                            });*/
+                        const interval = setInterval(() => {
+                            const id = view.popup.title, imageList = document.querySelector('.images-' + id);
+                            if (id && imageList)
+                                fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://geodesy.noaa.gov/cgi-bin/get_image.prl?PROCESSING=list&PID=' + id)}`).then(res => res.json()).then(data => {
+                                    const images = [...data.contents.matchAll(/<img.*?src="(.*?)".*?>/gmi)];
+                                    if (images.length > 0) {
+                                        let html = '<div class="card-deck clean">';
+                                        for (const image of images)
+                                            html += `
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
+                                                    <div class="card">
+                                                        <img src="https://geodesy.noaa.gov/${image[1].replace('get_thumbnail', 'get_image')}">
+                                                    </div>
+                                                </div>`;
+                                        imageList.innerHTML = html + '</div>';
+                                    }
+                                    else
+                                        imageList.innerHTML = ''
+                                    clearInterval(interval);
+                                });
                         }, 100);
                     });
                     search.on('search-complete', e => loadMap(e.results[0].results[0].extent.center.latitude, e.results[0].results[0].extent.center.longitude, 11));

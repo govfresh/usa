@@ -79,7 +79,6 @@ if (urlParams.has('park')) {
         <p>
             ${data.addresses[0].line1}, ${data.addresses[0].city}, ${data.addresses[0].stateCode}
         </p>`;
-        document.querySelector('iframe').src = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyA1G0PbkHalaKDxMUnZR9-RTM1g8QI5lq4&q=' + data.name + ',' + data.addresses[0].line1 + ',' + data.addresses[0].city + ',' + data.addresses[0].stateCode;
 
         data.entranceFees.forEach(entranceFee => {
             document.querySelector('.entrance-fees ul').innerHTML += `

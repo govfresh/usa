@@ -551,7 +551,7 @@ sup {
 .video-overlay i {
     background: var(--color-1);
     border-radius: var(--size-4);
-    color: var(--color-4);
+    color: var(--color-4) !important;
     padding: var(--size-5) var(--size-8);
 }
 

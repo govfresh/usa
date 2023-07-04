@@ -6,7 +6,6 @@ if (params.has('member')) {
     req.open('GET', 'https://api.congress.gov/v3/member/' + params.get('member') + '?api_key=hExsrBBSxIrdS8bwKMuQd3oxFjLMEoIb4YkQZNMx&format=json');
     req.onload = function () {
         const data = JSON.parse(this.response).member;
-        console.log(data);
 
         document.head.querySelector('title').innerHTML = 'Senator ' + data.directOrderName + ' - USA.govfresh';
         document.querySelector('.jumbotron h1').innerHTML = 'Senator ' + data.directOrderName;
@@ -18,23 +17,23 @@ if (params.has('member')) {
             <h2>Contact</h2>
             <ul>
             <li>Mail: ${data.addressInformation.officeAddress}</li>
-            <li>Phone: <a href="tel:${data.addressInformation.officeTelephone.phoneNumber}">${data.addressInformation.officeTelephone.phoneNumber}</a></li>
+            <li>Phone: <a href="tel:${data.addressInformation.phoneNumber}">${data.addressInformation.phoneNumber}</a></li>
             <li>Website: <a href="${data.officialWebsiteUrl}">${new URL(data.officialWebsiteUrl).hostname}</a></li>
             </ul>
             <h2>Terms</h2>
             <ul class="terms"></ul>
             <h2>Sponsored legislation</h2>
-            <p class="source"></p>
+            <p class="source" id="legislation-count"></p>
             <ul class="legislation"></ul>
         `;
-        document.querySelector('.source').innerHTML += `<p class="source">Photo source: ${data.depiction.attribution || ''}</p>`;
+        document.querySelector('.member-data .col-sm-3').innerHTML += `<p class="source">Photo source: ${data.depiction.attribution || ''}</p>`;
         data.terms.reverse().forEach(term => {
-            document.querySelector('ul.terms').innerHTML += `<li>${term.termBeginYear}-${term.termEndYear || 'Present'} (${term.chamber})</li>`
+            document.querySelector('ul.terms').innerHTML += `<li>${term.startYear}-${term.endYear || 'Present'} (${term.chamber})</li>`
         });
         req.open('GET', data.sponsoredLegislation.url + '?format=json&limit=250&api_key=hExsrBBSxIrdS8bwKMuQd3oxFjLMEoIb4YkQZNMx');
         req.onload = function () {
             let leg = JSON.parse(this.response).sponsoredLegislation.filter(piece => { return piece.type != null; });
-            document.querySelector('p.source').innerText = '(' + leg.length + ' most recent)';
+            document.getElementById('legislation-count').innerText = '(' + leg.length + ' most recent)';
             for (let i = 0; i < leg.length; i++)
                 leg[i].introducedDate = new Date(leg[i].introducedDate);
             leg.sort((a, b) => { return a.introducedDate.getTime() - b.introducedDate.getTime(); });
@@ -79,19 +78,19 @@ else {
                     name = name.slice(0, -1);
                 deck = document.querySelector('.senators');
                 deck.innerHTML += `
-             <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex align-items-stretch">
-                 <div class="card">
-                     <div class="card-body">
-                         <div class="fancy-2 ">
-                             <img src="${(member.depiction && member.depiction.imageUrl) ? member.depiction.imageUrl : '/assets/img/icons/1F9D1-200D-1F4BC.png'}" class="md rounded-circle mb-3 ${member.partyName.toLowerCase().replace(' ', '-')}" alt="Headshot of ${name}">
-                         </div>
-                         <h3 class="h5">
-                             <a class="stretched-link" href="?member=${member.bioguideId}">${name}</a>
-                         </h3>
-                         <p class="description small">${member.state} (${member.partyName})</p>
-                     </div>
-                 </div>
-             </div>`;
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex align-items-stretch">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="fancy-2 ">
+                                    <img src="${(member.depiction && member.depiction.imageUrl) ? member.depiction.imageUrl : '/assets/img/icons/1F9D1-200D-1F4BC.png'}" class="md rounded-circle mb-3 ${member.partyName.toLowerCase().replace(' ', '-')}" alt="Headshot of ${name}">
+                                </div>
+                                <h3 class="h5">
+                                    <a class="stretched-link" href="?member=${member.bioguideId}">${name}</a>
+                                </h3>
+                                <p class="description small">${member.state} (${member.partyName})</p>
+                            </div>
+                        </div>
+                    </div>`;
             }
             document.querySelector('.loading1').innerHTML = '';
         };

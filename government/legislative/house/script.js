@@ -78,19 +78,19 @@ else {
                     name = name.slice(0, -1);
                 deck = document.querySelector('.reps');
                 deck.innerHTML += `
-             <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex align-items-stretch">
-                 <div class="card">
-                     <div class="card-body">
-                         <div class="fancy-2 ">
-                             <img src="${(member.depiction && member.depiction.imageUrl) ? member.depiction.imageUrl : '/assets/img/icons/1F9D1-200D-1F4BC.png'}" class="md rounded-circle mb-3 ${member.partyName.toLowerCase().replace(' ', '-')}" alt="Headshot of ${name}">
-                         </div>
-                         <h3 class="h5">
-                             <a class="stretched-link" href="?member=${member.bioguideId}">${name}</a>
-                         </h3>
-                         <p class="description small">${member.state}, ${member.district ? 'District ' + member.district : 'Delegate'} (${member.partyName})</p>
-                     </div>
-                 </div>
-             </div>`;
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 d-flex align-items-stretch">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="fancy-2 ">
+                                    <img src="${(member.depiction && member.depiction.imageUrl) ? member.depiction.imageUrl : '/assets/img/icons/1F9D1-200D-1F4BC.png'}" class="md rounded-circle mb-3 ${member.partyName.toLowerCase().replace(' ', '-')}" alt="Headshot of ${name}">
+                                </div>
+                                <h3 class="h5">
+                                    <a class="stretched-link" href="?member=${member.bioguideId}">${name}</a>
+                                </h3>
+                                <p class="description small">${member.state}, ${member.district ? 'District ' + member.district : 'Delegate'} (${member.partyName})</p>
+                            </div>
+                        </div>
+                    </div>`;
             }
             document.querySelector('.loading2').innerHTML = '';
         }
