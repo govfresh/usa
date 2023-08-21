@@ -93,4 +93,7 @@ else {
 req.send();
 req.onloadend = function () {
     document.querySelector('.loading-include').removeChild(document.querySelector('.loading-include > *'));
+    document.querySelectorAll('img').forEach(img => {
+        img.onerror = () => { img.src = '/assets/img/icons/1F3DB.png' };
+    });
 };

@@ -1,5 +1,8 @@
 const req = new XMLHttpRequest();
 const params = new URLSearchParams(location.search);
+const replaceLinks = text => {
+    return text.toString().replaceAll(/((https?:\/\/|)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))/gmi, '<a href="$1">$1</a>');
+};
 
 if (params.has('job') && params.has('code')) {
     req.open('GET', 'https://data.usajobs.gov/api/codelist/positionscheduletypes');
@@ -30,24 +33,29 @@ if (params.has('job') && params.has('code')) {
                     document.querySelector('.jumbotron h1').classList.add('h2');
                     document.querySelector('.jumbotron p').innerHTML = job.DepartmentName;
                     document.querySelector('.job-info').innerHTML += `
-                    <div class="alert alert-info p-3 mb-4 info-job">
+                    <div class="p-3 mb-4 info-job">
                         <div class="container">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-3">
                                     <img src="/assets/img/icons/1F4B5.png" class="xs">
                                     <h2 class="h4">Salary/${job.PositionRemuneration[0].Description.substring(4).toLowerCase()}</h2>
                                     <p>$${parseInt(job.PositionRemuneration[0].MinimumRange).toLocaleString()} -
                                         $${parseInt(job.PositionRemuneration[0].MaximumRange).toLocaleString()}</p>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <img src="/assets/img/icons/1F5D3.png" class="xs">
                                     <h2 class="h4">Schedule</h2>
                                     <p>${scheduleMap.get(job.PositionSchedule[0].Code)}</p>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <img src="/assets/img/icons/1F3E0.png" class="xs">
                                     <h2 class="h4">Remote</h2>
                                     <p>${job.UserArea.Details.TeleworkEligible ? 'Yes' : 'No'}</p>
+                                </div>
+                                <div class="col-3">
+                                    <img src="/assets/img/icons/1F4C2.png" class="xs">
+                                    <h2 class="h4">Openings</h2>
+                                    <p>${job.UserArea.Details.TotalOpenings}</p>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +90,7 @@ if (params.has('job') && params.has('code')) {
                                         </div>
                                         <div class="accordion-body collapse" id="desc">
                                             <div class="row">
-                                                <p>${job.UserArea.Details.JobSummary}</p>
+                                                <p>${replaceLinks(job.UserArea.Details.JobSummary)}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +103,7 @@ if (params.has('job') && params.has('code')) {
                                         </div>
                                         <div class="accordion-body collapse" id="duties">
                                             <div class="row">
-                                                <p>${job.UserArea.Details.MajorDuties}</p>
+                                                <p>${replaceLinks(job.UserArea.Details.MajorDuties)}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +129,7 @@ if (params.has('job') && params.has('code')) {
                                         </div>
                                         <div class="accordion-body collapse" id="ed">
                                             <div class="row">
-                                                <p>${job.UserArea.Details.Education}</p>
+                                                <p>${replaceLinks(job.UserArea.Details.Education)}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +142,7 @@ if (params.has('job') && params.has('code')) {
                                         </div>
                                         <div class="accordion-body collapse" id="quals">
                                             <div class="row">
-                                                <p>${job.QualificationSummary}</p>
+                                                <p>${replaceLinks(job.QualificationSummary)}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -147,20 +155,7 @@ if (params.has('job') && params.has('code')) {
                                         </div>
                                         <div class="accordion-body collapse" id="docs">
                                             <div class="row">
-                                                <p>${job.UserArea.Details.RequiredDocuments}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item openings">
-                                        <div class="row">
-                                            <h3 class="accordion-header">
-                                                <button aria-controls="openings" aria-expanded="true" class="accordion-button collapsed"
-                                                    data-bs-target="#openings" data-bs-toggle="collapse" type="button">Openings</button>
-                                            </h3>
-                                        </div>
-                                        <div class="accordion-body collapse" id="openings">
-                                            <div class="row">
-                                                <p>${job.UserArea.Details.TotalOpenings}</p>
+                                                <p>${replaceLinks(job.UserArea.Details.RequiredDocuments)}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -173,7 +168,7 @@ if (params.has('job') && params.has('code')) {
                                         </div>
                                         <div class="accordion-body collapse" id="benefits">
                                             <div class="row">
-                                                <p>${job.UserArea.Details.Benefits}</p>
+                                                <p>${replaceLinks(job.UserArea.Details.Benefits)}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -186,7 +181,7 @@ if (params.has('job') && params.has('code')) {
                                         </div>
                                         <div class="accordion-body collapse" id="other">
                                             <div class="row">
-                                                <p>${job.UserArea.Details.OtherInformation}</p>
+                                                <p>${replaceLinks(job.UserArea.Details.OtherInformation)}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -224,7 +219,7 @@ if (params.has('job') && params.has('code')) {
                             `<div class="col-4">
                                 <img src="/assets/img/icons/1F5A5.png" class="xs float-left mr-5">
                                 <h3>Website</h3>
-                                <p>
+                                <p style="word-break: break-word;">
                                     <a
                                         href="${job.UserArea.Details.AgencyContactWebsite}">${job.UserArea.Details.AgencyContactWebsite.toLowerCase()}</a>
                                 </p>
@@ -307,6 +302,12 @@ if (params.has('job') && params.has('code')) {
     };
     req.send();
 } else {
+    params.forEach((value, key) => {
+        const input = document.querySelector('input[param="' + key + '"]');
+        if (input)
+            input.value = value;
+    });
+
     req.open('GET', 'https://data.usajobs.gov/api/search?ResultsPerPage=100&' + params);
     req.setRequestHeader('User-Agent', 'admin@govfresh.com');
     req.setRequestHeader('Authorization-Key', 'aJK6I8oFNizc/BUOqsEc2Uzv7I1On4wZRHa3iPYijEw=');

@@ -1423,3 +1423,7 @@ div.dark-toggle {
 .pagination-item a {
     text-decoration: none;
 }
+
+.weather-data button:disabled i {
+    color: inherit;
+}
