@@ -294,7 +294,9 @@ body {
     font-size: var(--size-7);
 }
 
-a, a:visited, a:hover {
+a,
+a:visited,
+a:hover {
     color: var(--color-1);
 }
 
@@ -327,7 +329,25 @@ sup {
 
 /* Styles with bold */
 
-.breadcrumb, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
+.breadcrumb,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
     font-family: var(--font-3) !important;
 }
 
@@ -337,7 +357,9 @@ sup {
     font-family: var(--font-3);
 }
 
-.logo a, .logo a:visited, .logo a:hover {
+.logo a,
+.logo a:visited,
+.logo a:hover {
     text-decoration: none;
 }
 
@@ -372,7 +394,8 @@ sup {
     margin-bottom: var(--size-6);
 }
 
-.nav-tabs .nav-link.active, .nav-pills .show>.nav-link {
+.nav-tabs .nav-link.active,
+.nav-pills .show>.nav-link {
     background-color: var(--color-1);
     color: var(--color-4);
 }
@@ -410,7 +433,8 @@ sup {
     font-size: var(--size-6) !important;
 }
 
-.esri-feature-content a, .esri-feature-content a:visited {
+.esri-feature-content a,
+.esri-feature-content a:visited {
     color: var(--color-1);
 }
 
@@ -422,7 +446,8 @@ sup {
 
 /* Official */
 
-.official, .official-2 {
+.official,
+.official-2 {
     background: var(--color-8);
     border-bottom: var(--color-7) var(--size-2) solid;
 }
@@ -431,7 +456,8 @@ sup {
     border-bottom: none;
 }
 
-.official a, .official a:visited {
+.official a,
+.official a:visited {
     text-decoration: underline;
 }
 
@@ -463,7 +489,8 @@ sup {
     color: var(--color-4) !important;
 }
 
-.brand a, .brand a:visited {
+.brand a,
+.brand a:visited {
     color: var(--color-4) !important;
 }
 
@@ -479,11 +506,13 @@ sup {
     font-size: var(--size-8);
 }
 
-.logo, .footer {
+.logo,
+.footer {
     background: var(--color-4);
 }
 
-.logo a, .logo a:visited {
+.logo a,
+.logo a:visited {
     color: var(--color-1) !important;
 }
 
@@ -530,12 +559,15 @@ sup {
 
 /* Post */
 
-.post h2, .post h3, .post h4 {
+.post h2,
+.post h3,
+.post h4 {
     padding-bottom: var(--size-3);
     padding-top: var(--size-6);
 }
 
-.post p, .post ul {
+.post p,
+.post ul {
     font-family: var(--font-2);
     padding-bottom: var(--size-6);
 }
@@ -626,7 +658,8 @@ sup {
     outline: 0;
 }
 
-.accordion-header, .accordion h4 {
+.accordion-header,
+.accordion h4 {
     margin-bottom: 0;
     width: 100%;
     font-family: var(--font-1) !important;
@@ -722,7 +755,8 @@ button.btn-link {
     margin-bottom: var(--size-10);
 }
 
-.card.button, .accordion-button {
+.card.button,
+.accordion-button {
     border-color: var(--color-5);
 }
 
@@ -739,7 +773,11 @@ button.btn-link {
     font-size: var(--size-6) !important;
 }
 
-.btn-primary, a.btn-primary, a.btn-primary:active, a.btn-primary:hover, a.btn-primary:visited {
+.btn-primary,
+a.btn-primary,
+a.btn-primary:active,
+a.btn-primary:hover,
+a.btn-primary:visited {
     background-color: var(--color-1);
     border: var(--size-2) solid var(--color-4);
     border-radius: var(--size-4);
@@ -753,7 +791,9 @@ button.btn-link {
     transition-property: background, border;
 }
 
-a.btn-primary:hover, .categories a.nav-link:hover, .categories a.nav-link:hover {
+a.btn-primary:hover,
+.categories a.nav-link:hover,
+.categories a.nav-link:hover {
     background-color: var(--color-5);
     border: var(--size-2) solid var(--color-5);
 }
@@ -776,7 +816,8 @@ a.btn-primary:hover, .categories a.nav-link:hover, .categories a.nav-link:hover 
     color: white;
 }
 
-.carousel-caption, .carousel button {
+.carousel-caption,
+.carousel button {
     background-color: rgba(0, 0, 0, 0.75);
     opacity: 1;
 }
@@ -844,7 +885,71 @@ img.agency-logo {
     margin-bottom: var(--size-6) !important;
 }
 
-.card-deck .col, .card-deck .col-1, .card-deck .col- .card-deck .col-11, .card-deck .col-12, .card-deck .col-2, .card-deck .col-3, .card-deck .col-4, .card-deck .col-5, .card-deck .col-6, .card-deck .col-7, .card-deck .col-8, .card-deck .col-9, .card-deck .col-auto, .card-deck .col-lg, .card-deck .col-lg-1, .card-deck .col-lg- .card-deck .col-lg-11, .card-deck .col-lg-12, .card-deck .col-lg-2, .card-deck .col-lg-3, .card-deck .col-lg-4, .card-deck .col-lg-5, .card-deck .col-lg-6, .card-deck .col-lg-7, .card-deck .col-lg-8, .card-deck .col-lg-9, .card-deck .col-lg-auto, .card-deck .col-md, .card-deck .col-md-1, .card-deck .col-md- .card-deck .col-md-11, .card-deck .col-md-12, .card-deck .col-md-2, .card-deck .col-md-3, .card-deck .col-md-4, .card-deck .col-md-5, .card-deck .col-md-6, .card-deck .col-md-7, .card-deck .col-md-8, .card-deck .col-md-9, .card-deck .col-md-auto, .card-deck .col-sm, .card-deck .col-sm-1, .card-deck .col-sm- .card-deck .col-sm-11, .card-deck .col-sm-12, .card-deck .col-sm-2, .card-deck .col-sm-3, .card-deck .col-sm-4, .card-deck .col-sm-5, .card-deck .col-sm-6, .card-deck .col-sm-7, .card-deck .col-sm-8, .card-deck .col-sm-9, .card-deck .col-sm-auto, .card-deck .col-xl, .card-deck .col-xl-1, .card-deck .col-xl- .card-deck .col-xl-11, .card-deck .col-xl-12, .card-deck .col-xl-2, .card-deck .col-xl-3, .card-deck .col-xl-4, .card-deck .col-xl-5, .card-deck .col-xl-6, .card-deck .col-xl-7, .card-deck .col-xl-8, .card-deck .col-xl-9, .card-deck .col-xl-auto {
+.card-deck .col,
+.card-deck .col-1,
+.card-deck .col- .card-deck .col-11,
+.card-deck .col-12,
+.card-deck .col-2,
+.card-deck .col-3,
+.card-deck .col-4,
+.card-deck .col-5,
+.card-deck .col-6,
+.card-deck .col-7,
+.card-deck .col-8,
+.card-deck .col-9,
+.card-deck .col-auto,
+.card-deck .col-lg,
+.card-deck .col-lg-1,
+.card-deck .col-lg- .card-deck .col-lg-11,
+.card-deck .col-lg-12,
+.card-deck .col-lg-2,
+.card-deck .col-lg-3,
+.card-deck .col-lg-4,
+.card-deck .col-lg-5,
+.card-deck .col-lg-6,
+.card-deck .col-lg-7,
+.card-deck .col-lg-8,
+.card-deck .col-lg-9,
+.card-deck .col-lg-auto,
+.card-deck .col-md,
+.card-deck .col-md-1,
+.card-deck .col-md- .card-deck .col-md-11,
+.card-deck .col-md-12,
+.card-deck .col-md-2,
+.card-deck .col-md-3,
+.card-deck .col-md-4,
+.card-deck .col-md-5,
+.card-deck .col-md-6,
+.card-deck .col-md-7,
+.card-deck .col-md-8,
+.card-deck .col-md-9,
+.card-deck .col-md-auto,
+.card-deck .col-sm,
+.card-deck .col-sm-1,
+.card-deck .col-sm- .card-deck .col-sm-11,
+.card-deck .col-sm-12,
+.card-deck .col-sm-2,
+.card-deck .col-sm-3,
+.card-deck .col-sm-4,
+.card-deck .col-sm-5,
+.card-deck .col-sm-6,
+.card-deck .col-sm-7,
+.card-deck .col-sm-8,
+.card-deck .col-sm-9,
+.card-deck .col-sm-auto,
+.card-deck .col-xl,
+.card-deck .col-xl-1,
+.card-deck .col-xl- .card-deck .col-xl-11,
+.card-deck .col-xl-12,
+.card-deck .col-xl-2,
+.card-deck .col-xl-3,
+.card-deck .col-xl-4,
+.card-deck .col-xl-5,
+.card-deck .col-xl-6,
+.card-deck .col-xl-7,
+.card-deck .col-xl-8,
+.card-deck .col-xl-9,
+.card-deck .col-xl-auto {
     padding-left: var(--color-1) !important;
     padding-right: var(--color-1) !important;
 }
@@ -854,7 +959,8 @@ img.agency-logo {
     padding-top: .5rem;
 }
 
-.card h5, .card .h2 {
+.card h5,
+.card .h2 {
     margin-bottom: 0;
     padding-bottom: 0;
 }
@@ -912,7 +1018,8 @@ div.card-body>i {
     margin-top: var(--size-1) !important;
 }
 
-.alert-success p, .alert-warning p {
+.alert-success p,
+.alert-warning p {
     margin: var(--size-1);
     padding: var(--size-1);
 }
@@ -934,7 +1041,8 @@ div.card-body>i {
     padding: var(--size-5);
 }
 
-.alert-info a, .alert-info a:visited {
+.alert-info a,
+.alert-info a:visited {
     font-family: var(--font-4);
 }
 
@@ -961,14 +1069,18 @@ body.home label {
     margin-bottom: 1rem;
 }
 
-.articles, .videos, .park-info, .photos {
+.articles,
+.videos,
+.park-info,
+.photos {
     border-bottom: var(--size-6) solid var(--color-1);
     border-bottom-left-radius: var(--size-5);
     padding-bottom: var(--size-9);
     margin-bottom: var(--size-8);
 }
 
-.tags, .tags h2 {
+.tags,
+.tags h2 {
     padding-bottom: var(--size-4);
 }
 
@@ -1078,7 +1190,8 @@ img.xl {
     border-top: var(--size-4) solid var(--color-6);
 }
 
-.fancy-2 img, .fancy-2 img {
+.fancy-2 img,
+.fancy-2 img {
     margin-bottom: var(--size-4);
     margin-top: var(--size-4);
 }
@@ -1096,7 +1209,9 @@ img.xl {
     padding-bottom: var(--size-6);
 }
 
-.breadcrumb a, .breadcrumb a:visited, .breadcrumb a:hover {
+.breadcrumb a,
+.breadcrumb a:visited,
+.breadcrumb a:hover {
     color: var(--color-1);
     text-decoration: none;
 }
@@ -1104,7 +1219,8 @@ img.xl {
 /* Link */
 
 /* Doc */
-a[href$=".doc"], a[href$=".docx"] {
+a[href$=".doc"],
+a[href$=".docx"] {
     background-image: url(/assets/font-awesome/svgs/solid/file-word.svg);
     background-position: 100% 50%;
     background-repeat: no-repeat;
@@ -1112,7 +1228,8 @@ a[href$=".doc"], a[href$=".docx"] {
 }
 
 /* Powerpoint */
-a[href$=".ppt"], a[href$=".pptx"] {
+a[href$=".ppt"],
+a[href$=".pptx"] {
     background-image: url(/assets/font-awesome/svgs/solid/file-powerpoint.svg);
     background-position: 100% 50%;
     background-repeat: no-repeat;
@@ -1120,7 +1237,8 @@ a[href$=".ppt"], a[href$=".pptx"] {
 }
 
 /* Excel */
-a[href$=".xls"], a[href$=".xlsx"] {
+a[href$=".xls"],
+a[href$=".xlsx"] {
     background-image: url(/assets/font-awesome/svgs/solid/file-excel.svg);
     background-position: 100% 50%;
     background-repeat: no-repeat;
@@ -1152,7 +1270,8 @@ a[href$=".mp4"] {
 }
 
 /* Image */
-a[href$=".png"], a[href$=".jpg"] {
+a[href$=".png"],
+a[href$=".jpg"] {
     background-image: url(/assets/font-awesome/svgs/solid/file-image.svg);
     background-position: 100% 50%;
     background-repeat: no-repeat;
@@ -1161,7 +1280,10 @@ a[href$=".png"], a[href$=".jpg"] {
 
 /* Main */
 
-main a, main a:visited, .alert a, .alert a:visited {
+main a,
+main a:visited,
+.alert a,
+.alert a:visited {
     text-decoration: underline;
 }
 
@@ -1213,7 +1335,8 @@ main a:hover {
     font-size: var(--size-6);
 }
 
-.footer p, .footer li {
+.footer p,
+.footer li {
     font-family: var(--font-1);
     margin: var(--color-1);
     padding: var(--color-1);
@@ -1223,7 +1346,10 @@ main a:hover {
     padding-bottom: var(--size-7);
 }
 
-.footer a, .footer a:visited, .footer, .footer h5 {
+.footer a,
+.footer a:visited,
+.footer,
+.footer h5 {
     color: var(--color-4);
 }
 
@@ -1298,7 +1424,7 @@ path {
     transition: .5s;
 }
 
-path:hover {
+div#diseases-map path:hover {
     fill: var(--color-1) !important;
 }
 
@@ -1306,7 +1432,8 @@ path:hover {
     max-width: 100%;
 }
 
-.drugs, .drug-name {
+.drugs,
+.drug-name {
     text-transform: capitalize;
 }
 
@@ -1338,7 +1465,8 @@ path:hover {
     --color-6: #d9c373;
 }
 
-.reps .card-body, .senators .card-body {
+.reps .card-body,
+.senators .card-body {
     padding: 0;
 }
 
@@ -1364,7 +1492,10 @@ html.dark .card {
     border: 1px solid rgba(255, 255, 255, .125);
 }
 
-html.dark .navbar a, html.dark .navbar sup, html.dark footer *, html.dark a.btn.btn-primary {
+html.dark .navbar a,
+html.dark .navbar sup,
+html.dark footer *,
+html.dark a.btn.btn-primary {
     color: var(--color-2) !important;
 }
 

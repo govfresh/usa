@@ -1,299 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-        <title>GeoMarks - USA.GovFresh</title>
-        <style>
-            html, html *, {
-                padding: 0;
-                margin: 0;
-                height: 100%;
-                width: 100%;
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>GeoMarks - USA.GovFresh</title>
+    <link rel="stylesheet" href="leaflet/leaflet.css">
+    <script src="leaflet/leaflet.js"></script>
+    <script src="leaflet/leaflet-search.js"></script>
+    <link rel="stylesheet" href="leaflet/leaflet-search.css">
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            overflow-y: hidden;
+        }
+
+        .overlay {
+            z-index: 2;
+            background-color: white;
+            padding: var(--size-6);
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        textarea#block {
+            height: 8rem;
+        }
+
+        nav {
+            height: 4em;
+        }
+
+        .copied {
+            position: absolute;
+            left: 11.5em;
+            top: -2em;
+            background: var(--color-1);
+            padding: 0.5em;
+            border-radius: 0.25em;
+            opacity: 0;
+        }
+
+        .copied.animated {
+            animation: fadeout 3s linear;
+        }
+
+        @keyframes fadeout {
+            5% {
+                opacity: 1;
             }
 
-            .loading-markers {
-                height: 2rem !important;
-                padding: 0;
-                display: block;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                -ms-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
-                width: 25%;
-                border: 2px solid black;
+            70% {
+                opacity: 1;
             }
 
-            .bar {
-                width: 0;
-                display: block;
-                height: calc(2rem - 4px);
-                margin: 0;
-                background-color: var(--color-1);
-            }
-
-            .overlay {
-                position: absolute;
-                z-index: 2;
-                background-color: white;
-                padding: var(--size-6);
-                display: none;
-                width: 100%;
-                height: 100%;
-            }
-
-            textarea#block {
-                height: 8rem;
-            }
-
-            nav {
-                height: 4em;
-            }
-
-            .copied {
-                position: absolute;
-                left: 11.5em;
-                top: -2em;
-                background: var(--color-1);
-                padding: 0.5em;
-                border-radius: 0.25em;
+            100% {
                 opacity: 0;
             }
+        }
 
-            .copied.animated {
-                animation: fadeout 3s linear;
+        main {
+            height: calc(100% - 4em);
+        }
+
+        .col-sm-12 {
+            padding: 0 !important;
+        }
+
+        html,
+        body,
+        main div:not(#map div) {
+            height: 100%;
+            height: -webkit-fill-available;
+        }
+
+        #map {
+            height: 100%;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
             }
 
-            @keyframes fadeout {
-                5% {
-                    opacity: 1;
-                }
-
-                70% {
-                    opacity: 1;
-                }
-
-                100% {
-                    opacity: 0;
-                }
+            100% {
+                transform: rotate(360deg);
             }
+        }
 
-            main {
-                height: calc(100% - 4em);
-            }
+        #loading {
+            display: none;
+        }
 
-            .col-sm-12 {
-                padding: 0 !important;
-            }
+        main.loading-markers #loading {
+            display: block;
+        }
+    </style>
 
-            html,
-            body,
-            main div:not(#map div) {
-                height: 100%;
-                height: -webkit-fill-available;
-            }
-        </style>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/favicon/manifest.json">
+    <meta content="#ffffff" name="msapplication-TileColor">
+    <meta name="msapplication-TileImage" content="/assets/img/favicon/ms-icon-144x144.png">
+    <meta content="#ffffff" name="theme-color">
 
-        <!-- Favicon -->
-        <link
-            rel="apple-touch-icon"
-            sizes="57x57"
-            href="/assets/img/favicon/apple-icon-57x57.png">
-        <link
-            rel="apple-touch-icon"
-            sizes="60x60"
-            href="/assets/img/favicon/apple-icon-60x60.png">
-        <link
-            rel="apple-touch-icon"
-            sizes="72x72"
-            href="/assets/img/favicon/apple-icon-72x72.png">
-        <link
-            rel="apple-touch-icon"
-            sizes="76x76"
-            href="/assets/img/favicon/apple-icon-76x76.png">
-        <link
-            rel="apple-touch-icon"
-            sizes="114x114"
-            href="/assets/img/favicon/apple-icon-114x114.png">
-        <link
-            rel="apple-touch-icon"
-            sizes="120x120"
-            href="/assets/img/favicon/apple-icon-120x120.png">
-        <link
-            rel="apple-touch-icon"
-            sizes="144x144"
-            href="/assets/img/favicon/apple-icon-144x144.png">
-        <link
-            rel="apple-touch-icon"
-            sizes="152x152"
-            href="/assets/img/favicon/apple-icon-152x152.png">
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/assets/img/favicon/apple-icon-180x180.png">
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="192x192"
-            href="/assets/img/favicon/android-icon-192x192.png">
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/assets/img/favicon/favicon-32x32.png">
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="96x96"
-            href="/assets/img/favicon/favicon-96x96.png">
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/assets/img/favicon/favicon-16x16.png">
-        <link rel="manifest" href="/assets/img/favicon/manifest.json">
-        <meta content="#ffffff" name="msapplication-TileColor">
-        <meta name="msapplication-TileImage" content="/assets/img/favicon/ms-icon-144x144.png">
-        <meta content="#ffffff" name="theme-color">
+    <!-- Social media -->
+    <meta content="/index" property="og:url">
+    <meta content="website" property="og:type">
+    <meta content="USA.GovFresh" property="og:title">
+    <meta content="" property="og:description">
+    <meta content="https://usa.govfresh.com/assets/img/apps/geomarks.png" property="og:image">
+</head>
 
-        <!-- Social media -->
-        <meta content="/index" property="og:url">
-        <meta content="website" property="og:type">
-        <meta content="USA.GovFresh" property="og:title">
-        <meta content="" property="og:description">
-        <meta content="https://usa.govfresh.com/assets/img/apps/geomarks.png" property="og:image">
-
-        <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css" />
-    </head>
-
-    <body>
-        <script src="/includes/include.js"></script>
-        <script>
-            include("head.html", "head");
-        </script>
-        <div class="overlay info">
-            <span style="float: right; font-size: 2rem; cursor: pointer;" onclick="document.querySelector('.overlay').style.display = 'none'">✕</span>
-            <h1>About</h1>
-
-            Geomarks is a USA.GovFresh project.
-
-            <h2>Data</h2>
-
-            <p>Survey mark data provided by the U.S. National Geodetic Survey.</p>
-        </div>
-        <div class="overlay options">
-            <span style="float: right; font-size: 2rem; cursor: pointer;" onclick="document.querySelector('.overlay.options').style.display = 'none'">✕</span>
-            <form>
-                <label for="radius">Radius:
-                    <span class="radius">5</span>
-                    miles
-                </label>
-                <br>
-                <input
-                    value="5"
-                    min="1"
-                    max="50"
-                    type="range"
-                    name="radius"
-                    id="radius"
-                    oninput="document.querySelector('span.radius').innerText = this.value">
-                <br>
-                <label for="block">Words to block (RegEx)</label>
-                <br>
-                <textarea
-                    name="block"
-                    id="block"
-                    cols="30"></textarea>
-                <br>
-                <input
-                    checked
-                    type="checkbox"
-                    name="relocate"
-                    id="relocate">
-                <label for="relocate">Relocate on click</label>
-                <br>
-                <input
-                    class="btn btn-primary"
-                    type="submit"
-                    value="Apply changes">
-            </form>
-        </div>
-        <div id="nav">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom navbar-app">
-                <div class="navbar-nav d-flex flex-row me-1">
-                    <a
-                        title="Relocate"
-                        class="nav-item nav-link recenter"
-                        href="javascript:void(0)"
-                        onclick="navigator.geolocation.getCurrentPosition(pos=>loadMap(pos.coords.latitude,pos.coords.longitude,view.zoom||11))">
-                        <i class="fa-solid fa-location-arrow fa-2x"></i>
-                    </a>
-                    <a
-                        title="Info"
-                        class="nav-item nav-link info"
-                        href="javascript:void(0)"
-                        onclick="document.querySelector('.overlay.info').style.display = 'block'">
-                        <i class="fa-solid fa-circle-info fa-2x"></i>
-                    </a>
-                    <a
-                        title="Options"
-                        class="nav-item nav-link options"
-                        href="javascript:void(0)"
-                        onclick="document.querySelector('.options.options').style.display = 'block'">
-                        <i class="fa-solid fa-gear fa-2x"></i>
-                    </a>
-                    <a
-                        title="Share"
-                        class="nav-item nav-link share"
-                        href="javascript:void(0)"
-                        onclick="document.querySelector('.copied').classList.remove('animated'); void document.querySelector('.copied').offsetWidth; navigator.clipboard.writeText('https://usa.govfresh.com/geomarks?lat='+view.center.latitude+'&long='+view.center.longitude); document.querySelector('.copied').classList.add('animated');">
-                        <i class="fa-solid fa-share fa-2x"></i>
-                        <span class="copied">Copied!</span>
-                    </a>
-                </div>
-            </nav>
-        </div>
-        <main>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="loading-markers">
-                            <span class="bar"></span>
-                        </div>
-                        <div id="map"></div>
-                    </div>
+<body>
+    <script src="/includes/include.js"></script>
+    <script>
+        include("head.html", "head");
+    </script>
+    <div class="overlay info" id="info">
+        <span style="float: right; font-size: 2rem; cursor: pointer;"
+            onclick="document.getElementById('info').style.display = 'none'">✕</span>
+        <h1>About</h1>
+        Geomarks is a USA.GovFresh project.
+        <h2>Data</h2>
+        <p>Survey marker data provided by the
+            <a href="https://geodesy.noaa.gov/datasheets/">
+                <i class="fa-solid fa-book-atlas"></i> U.S. National Geodetic Survey
+            </a>
+            accessed with
+            <a href="https://github.com/Narlotl/survey-markers">
+                <i class="fa-brands fa-github"></i>
+                Narlotl/survey-markers
+            </a>.
+        </p>
+        <h2>Source</h2>
+        <p><a href="https://github.com/govfresh/usa/tree/main/geomarks"><i class="fa-brands fa-github"></i>
+                Govfresh/USA</a></p>
+    </div>
+    <div class="overlay" id="options">
+        <span style="float: right; font-size: 2rem; cursor: pointer;"
+            onclick="document.getElementById('options').style.display = 'none'">✕</span>
+        <form id="options-form">
+            <label for="radius">Radius:
+                <span class="radius">5</span>
+                miles
+            </label>
+            <br>
+            <input value="5" min="1" max="50" type="range" name="radius" id="radius"
+                oninput="document.querySelector('span.radius').innerText = this.value">
+            <br>
+            <label for="block">Phrases to block</label>
+            <br>
+            <textarea name="block" id="block" cols="30"></textarea>
+            <br>
+            <input checked type="checkbox" name="relocate" id="relocate">
+            <label for="relocate">Relocate on click</label>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Apply changes">
+        </form>
+    </div>
+    <div id="nav">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom navbar-app">
+            <div class="navbar-nav d-flex flex-row me-1">
+                <a title="Relocate" class="nav-item nav-link" id="recenter" href="javascript:void(0)">
+                    <i class="fa-solid fa-location-arrow fa-2x"></i>
+                </a>
+                <a title="Info" class="nav-item nav-link info" href="javascript:void(0)"
+                    onclick="document.querySelector('.overlay.info').style.display = 'block'">
+                    <i class="fa-solid fa-circle-info fa-2x"></i>
+                </a>
+                <a title="Options" class="nav-item nav-link options" href="javascript:void(0)"
+                    onclick="document.getElementById('options').style.display = 'block'">
+                    <i class="fa-solid fa-gear fa-2x"></i>
+                </a>
+                <!--<a title="Share" class="nav-item nav-link share" href="javascript:void(0)"
+                    onclick="document.querySelector('.copied').classList.remove('animated'); void document.querySelector('.copied').offsetWidth; navigator.clipboard.writeText('https://usa.govfresh.com/geomarks?lat='+view.center.latitude+'&long='+view.center.longitude); document.querySelector('.copied').classList.add('animated');">
+                    <i class="fa-solid fa-share fa-2x"></i>
+                    <span class="copied">Copied!</span>
+                </a>-->
+            </div>
+        </nav>
+    </div>
+    <main id="main" class="loading-markers">
+        <div class="container-fluid" id="loading">
+            <div class="row">
+                <div class="col-sm-12" style="display: flex; justify-content: center; align-items: center;">
+                    <img src="loading.png" alt="Loading" style="height: 50%;">
                 </div>
             </div>
-        </main>
-        <div class="loading-include"></div>
-        <div class="scripts">
-            <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag() {
-                    dataLayer.push(arguments);
-                }
-                gtag("js", new Date());
-
-                gtag("config", "G-NCRSGQDG05");
-            </script>
-            <script
-                crossorigin="anonymous"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-            <script
-                crossorigin="anonymous"
-                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-            <script
-                crossorigin="anonymous"
-                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-            <script src="https://js.arcgis.com/4.25/"></script>
-            <script src="script.js"></script>
         </div>
-    </body>
+        <div id="map"></div>
+    </main>
+    <div class="loading-include"></div>
+    <div class="scripts">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "G-NCRSGQDG05");
+        </script>
+        <script crossorigin="anonymous"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script crossorigin="anonymous"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script crossorigin="anonymous"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <!--<script src="https://js.arcgis.com/4.25/"></script>-->
+        <script src="script.js" type="module"></script>
+    </div>
+</body>
+
 </html>

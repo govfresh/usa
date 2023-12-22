@@ -1,204 +1,150 @@
-let loadMap, view, relocate = true, radius = 5;
-let blockedPhrases = ['not found', 'not recovered', 'destroyed', 'no evidence of the mark', 'inaccessible', 'below the street', 'underground', 'under.* the (street|ground)', 'station lost', 'considered as lost', 'verified lost'];
-document.querySelector('textarea#block').value = blockedPhrases.join('\n');
-document.querySelector('input#radius').value = radius;
-document.querySelector('input#relocate').checked = relocate;
+fetch('https://firebasestorage.googleapis.com/v0/b/survey-markers.appspot.com/o/states.json?alt=media&token=56e7422d-1377-4aa4-8607-30d946323b09').then(res => res.json()).then(states => {
+    states = new Map(states.map(state => [state.location, state.file.substring(0, 2)]));
 
-document.querySelector('.options form').onsubmit = () => {
-    blockedPhrases = document.querySelector('textarea#block').value.length > 0 ? document.querySelector('textarea#block').value.split('\n') : [];
-    radius = parseInt(document.querySelector('input#radius').value);
-    relocate = document.querySelector('input#relocate').checked;
-    if (view)
-        loadMap(view.center.latitude, view.center.longitude, view.zoom, true);
-    document.querySelector('.overlay.options').style.display = 'none'
-    return false;
-};
+    fetch('us-states.json').then(res => res.json()).then(outlines => {
+        let radius = 5, relocateOnClick = true;
+        let blockedPhrases = ['not found', 'not recovered', 'destroyed', 'no evidence of the mark', 'inaccessible', 'below the street', 'underground', 'under the street', 'underneath the street', 'under the ground', 'underneath the ground', 'station lost', 'considered as lost', 'verified lost'];
+        document.getElementById('block').value = blockedPhrases.join('\n');
+        document.getElementById('options-form').onsubmit = e => {
+            radius = parseInt(document.getElementById('radius').value);
+            relocateOnClick = document.getElementById('relocate').checked;
+            blockedPhrases = document.getElementById('block').value.split('\n');
 
-require([
-    'esri/Map', 'esri/layers/GeoJSONLayer', 'esri/views/MapView', 'esri/widgets/Compass', 'esri/widgets/Search'
-], (Map, GeoJSONLayer, MapView, Compass, Search) => {
-    let markers = new Array(), states = new Array();
+            document.getElementById('options').style.display = 'none';
+            start(currentPos);
+            return false;
+        };
 
-    loadMap = function (lat, long, zoom, reload) {
-        const bar = document.querySelector('.bar');
-        fetch('https://nominatim.openstreetmap.org/reverse?lat=' + lat + '&lon=' + long + '&format=json').then(res => res.json()).then(location =>
-            fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/all.json').then(res => res.json()).then(async regions => {
-                if (reload) {
-                    states = [];
-                    markers = []
+        document.getElementById('recenter').onclick = () => {
+            navigator.geolocation.getCurrentPosition(pos => start(pos.coords));
+        };
+
+        const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        const stateLayers = L.geoJson(outlines).getLayers();
+        const getState = (lat, long) => {
+            const latLng = L.latLng(lat, long);
+            for (const layer of stateLayers)
+                if (layer.getBounds().contains(latLng))
+                    return states.get(layer.feature.properties.name);
+
+            return null;
+        }
+
+        const map = L.map('map');
+        L.tileLayer('https://api.mapbox.com/styles/v1/narlotl/clqfsdfzo006u01obcc0a9hsr/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibmFybG90bCIsImEiOiJjbDRsa3o2bmExbjllM2RvYmlkdHUwMXMyIn0.Ca8O9VKGSooSTBHsQ2e72g', {
+            maxZoom: 19
+        }).addTo(map);
+        L.control.scale().addTo(map);
+        map.addControl(new L.Control.Search({
+            autoCollapse: false,
+            autoResize: false,
+            autoType: false,
+            collapsed: false,
+            firstTipSubmit: true,
+            marker: null,
+            minLength: 2,
+            propertyLoc: ["lat", "lon"],
+            propertyName: "display_name",
+            textPlaceholder: "Jump to...",
+            moveToLocation: (latlng, title, map) => start({ latitude: latlng.lat, longitude: latlng.lng }),
+            url: "https://nominatim.openstreetmap.org/search?format=json&q={s}"
+        }));
+        map.on('click', e => {
+            if (relocateOnClick) {
+                zoom = map.getZoom();
+                start({ latitude: e.latlng.lat, longitude: e.latlng.lng });
+            }
+        });
+        const markerLayer = L.layerGroup().addTo(map);
+        let currentPos, zoom = 13;
+
+        const stateMarkers = new Map();
+
+        const main = document.getElementById('main');
+
+        const start = pos => {
+            main.classList = 'loading-markers';
+
+            const state = getState(pos.latitude, pos.longitude);
+            if (!state) return;
+
+            currentPos = pos;
+            map.setView([pos.latitude, pos.longitude], zoom);
+            markerLayer.clearLayers();
+
+            let locator = L.circleMarker([pos.latitude, pos.longitude], {
+                color: '#fff',
+                fillColor: '#0076d6',
+                fillOpacity: 1,
+                radius: 8,
+                weight: 1
+            }).addTo(markerLayer);
+
+            fetch('https://us-central1-survey-markers.cloudfunctions.net/getMarkers?state=' + state + '&data=id,description,latitude,longitude,history,marker,setting,stamping&location=' + pos.latitude + ',' + pos.longitude + '&radius=' + radius / 0.62137119).then(res => res.json()).then(data => {
+                const markers = data.markers;
+                for (let i = 0; i < markers.length; i++) {
+                    const marker = markers[i];
+                    //if (haversine(currentPos.latitude, currentPos.longitude, marker.latitude, marker.longitude) > radius) continue;
+                    let condition = 'MONUMENTED';
+                    if (marker.history.length > 0)
+                        condition = marker.history[marker.history.length - 1].condition;
+                    let opacity = (condition == 'POOR' || condition == 'GOOD' || condition == 'MONUMENTED') ? 1 : 0.25;
+                    for (const blockedPhrase of blockedPhrases)
+                        if (marker.description.toLowerCase().includes(blockedPhrase)) {
+                            opacity = 0.25;
+                            break;
+                        }
+                    const mapMarker = L.circleMarker([marker.latitude, marker.longitude],
+                        { color: '#fff', weight: 1, radius: 8, fillColor: '#000', opacity, fillOpacity: opacity }
+                    ).addTo(markerLayer);
+                    mapMarker.bindPopup(`
+                <div style="max-height: 45vh; overflow-y: scroll">
+                    <h2>${marker.id}</h2>
+                    <p>Location: <a href="https://www.google.com/maps/place/${marker.latitude},${marker.longitude}" target="_blank">${marker.latitude}, ${marker.longitude}</a></p>
+                    <p>${capitalizeFirstLetter(marker.marker || 'undefined')}${(marker.setting && !marker.setting.includes('UNSPECIFIED') && !marker.setting.includes('UNDEFINED')) ? ' set in ' + marker.setting.replace('set in ', '').toLowerCase() : ''}</p>
+                    ${marker.stamping ? '<p>Stamped "' + marker.stamping + '"</p>' : ''}
+                    <p style="text-transform: capitalize">${marker.description.toLowerCase()}</p>
+                    <div class="container"><div id="images-placeholder></div></div>
+                    <p>${marker.history.map(recovery => recovery.date.substring(0, 4) + ' - ' + capitalizeFirstLetter(recovery.condition)).join('<br>')}</p>
+                    <p>
+                        <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID=${marker.id}&liteMode=true" target="_blank" class="btn btn-primary">Submit recovery</a>
+                    </p>
+                    <p class="source">Data:
+                        <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox=${marker.id}" target="_blank">U.S. National Geodetic Survey</a>
+                    </p>
+                </div>
+            `, { minWidth: 144 }).on('popupopen', () => {
+                        if (mapMarker.getPopup().getContent().includes('<div id="images-placeholder></div>'))
+                            fetch('https://us-central1-survey-markers.cloudfunctions.net/getImages?id=' + marker.id).then(res => res.json()).then(data => {
+                                let html = '<div class="card-group clean pb-0 ">';
+                                if (data.length > 0) {
+                                    for (const image of data)
+                                        html += `
+                                <div class="col-12 d-flex align-items-stretch">
+                                    <div class="card">
+                                        <img src="${image}">
+                                    </div>
+                                </div>`;
+                                    html += '</div>';
+                                }
+                                else
+                                    html = ''
+
+                                mapMarker.setPopupContent(mapMarker.getPopup().getContent().replace('<div id="images-placeholder></div>', html));
+                            });
+                    });
                 }
-                for (const region of regions)
-                    if (region.location == location.address.state && (reload || !states.includes(location.address.state))) try {
-                        bar.style.width = '0';
-                        document.querySelector('#map').style.display = 'none';
-                        document.querySelector('.loading-markers').style.display = 'block';
-                        states.push(location.address.state);
-                        let filesLoaded = 0;
-                        if (typeof region.file == 'string')
-                            region.file = [region.file];
-                        for (const file of region.file)
-                            await fetch('https://raw.githubusercontent.com/Narlotl/markers/main/data/' + file).then(res => res.json()).then(data => {
-                                for (const marker of data.markers) {
-                                    let history = '';
-                                    marker.history.forEach(recovery => {
-                                        history += recovery.date.substring(0, 4) + ' - ' + recovery.condition.toLowerCase().replace('see', 'see description') + '<br>';
-                                    });
-                                    let setting;
-                                    if (!marker.setting)
-                                        setting = 'UNDEFINED SETTING';
-                                    else {
-                                        setting = (marker.setting.includes('SET IN') ? '' : 'set in ') + marker.setting.toLowerCase()
-                                        if (setting.endsWith('.'))
-                                            setting = setting.slice(0, -1);
-                                    }
-                                    markers.push({
-                                        type: 'Feature',
-                                        properties: {
-                                            id: marker.id,
-                                            setting,
-                                            desc: marker.description.toLowerCase(),
-                                            type: marker.marker.toLowerCase(),
-                                            lat: marker.lat,
-                                            long: marker.long,
-                                            found: (marker.description.toLowerCase().match(new RegExp(blockedPhrases.join('|'), 'gm')) && blockedPhrases.length > 0) ? 0 : ((history.includes('not found') && blockedPhrases.length > 0) ? 0 : 1),
-                                            history
-                                        },
-                                        geometry: {
-                                            type: 'Point',
-                                            coordinates: [marker.long, marker.lat]
-                                        }
-                                    });
-                                }
-                                filesLoaded++;
-                                bar.style.width = filesLoaded / region.file.length * 100 + '%';
-                            });
-                        break;
-                    } catch (e) { }
-            }).then(() => {
-                setTimeout(() => {
-                    const nearbyMarkers = new Array();
-                    for (const marker of markers) {
-                        const long1 = marker.properties.long * Math.PI / 180,
-                            long2 = long * Math.PI / 180,
-                            lat1 = marker.properties.lat * Math.PI / 180,
-                            lat2 = lat * Math.PI / 180;
-                        if (3963 * 2 * Math.asin(Math.sqrt(Math.pow(Math.sin((lat1 - lat2) / 2), 2)
-                            + Math.cos(lat1) * Math.cos(lat2)
-                            * Math.pow(Math.sin((long1 - long2) / 2), 2))) <= radius)
-                            nearbyMarkers.push(marker);
-                    }
-                    const renderer = {
-                        type: 'simple',
-                        symbol: {
-                            type: 'simple-marker',
-                            color: 'black',
-                            outline: {
-                                color: 'white',
-                            }
-                        },
-                        visualVariables: [{
-                            type: "opacity",
-                            field: "found",
-                            stops: [{ value: 0, opacity: 0.25 },
-                            { value: 1, opacity: 1 }]
-                        }]
-                    };
-                    const map = new Map({
-                        basemap: 'streets-navigation-vector', layers: [new GeoJSONLayer({
-                            url: URL.createObjectURL(new Blob([JSON.stringify({
-                                type: 'FeatureCollection',
-                                features: nearbyMarkers
-                            })])),
-                            popupTemplate: {
-                                title: '{id}',
-                                content: `
-                                    <p>Location: <a href="https://www.google.com/maps/place/{lat},{long}">{lat}, {long}</a></p>
-                                    <p style="text-transform: capitalize">{type} {setting}.</p>
-                                    <p style="text-transform: capitalize">{desc}</p>
-                                    <div class="images-{id} container"></div>
-                                    <p style="text-transform: capitalize">{history}</p>
-                                    <p>
-                                        <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID={id}&liteMode=true" class="btn btn-primary">Submit recovery</a>
-                                    </p>
-                                    <p class="source">Data:
-                                        <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox={id}">U.S. National Geodetic Survey</a>
-                                    </p>
-                                    <p><a href="https://usa.govfresh.com/geomarks?location={lat},{long}">Share</a></p>`
-                            },
-                            renderer
-                        })]
-                    });
-                    renderer.symbol.color = '#0076d6';
-                    map.add(new GeoJSONLayer({
-                        url: URL.createObjectURL(new Blob([JSON.stringify({
-                            type: 'FeatureCollection',
-                            features: [{
-                                type: 'Feature',
-                                geometry: {
-                                    type: 'Point',
-                                    coordinates: [long, lat]
-                                }
-                            }]
-                        })])),
-                        renderer
-                    }));
-                    view = new MapView({
-                        center: [
-                            long, lat
-                        ],
-                        zoom,
-                        map,
-                    });
-                    view.popup.dockOptions = { position: 'top-right' };
-                    const search = new Search({ view });
-                    view.popup.watch('selectedFeature', feature => {
-                        const interval = setInterval(() => {
-                            const id = view.popup.title, imageList = document.querySelector('.images-' + id);
-                            if (id && imageList)
-                                fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://geodesy.noaa.gov/cgi-bin/get_image.prl?PROCESSING=list&PID=' + id)}`).then(res => res.json()).then(data => {
-                                    const images = [...data.contents.matchAll(/<img.*?src="(.*?)".*?>/gmi)];
-                                    if (images.length > 0) {
-                                        let html = '<div class="card-deck clean">';
-                                        for (const image of images)
-                                            html += `
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex align-items-stretch">
-                                                    <div class="card">
-                                                        <img src="https://geodesy.noaa.gov/${image[1].replace('get_thumbnail', 'get_image')}">
-                                                    </div>
-                                                </div>`;
-                                        imageList.innerHTML = html + '</div>';
-                                    }
-                                    else
-                                        imageList.innerHTML = ''
-                                    clearInterval(interval);
-                                });
-                        }, 100);
-                    });
-                    search.on('search-complete', e => loadMap(e.results[0].results[0].extent.center.latitude, e.results[0].results[0].extent.center.longitude, 11));
-                    view.ui.add(search, {
-                        position: "bottom-right",
-                    });
-                    view.ui.add(new Compass({ view: view }), 'top-right');
-                    view.on('immediate-click', e => {
-                        view.hitTest(e)
-                            .then((hit) => {
-                                if (relocate && hit.results.length <= 1)
-                                    loadMap(e.mapPoint.latitude, e.mapPoint.longitude, view.zoom)
-                            });
-                    });
-                    view.container = 'map';
-                    document.querySelector('#map').style.display = 'flex';
-                    document.querySelector('.loading-markers').style.display = 'none';
-                }, 1000);
-            }));
-    }
-    const params = new URLSearchParams(location.search);
-    if (params.has('location')) {
-        const location = params.get('location').split(',');
-        loadMap(location[0], location[1], 11);
-    }
-    else if (navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(pos => loadMap(pos.coords.latitude, pos.coords.longitude, 11));
-    else
-        loadMap(38, -97, 3)
+
+                map.removeLayer(locator);
+                locator.setLatLng(L.latLng(currentPos.latitude, currentPos.longitude));
+                locator = locator.addTo(markerLayer);
+                main.classList = '';
+            });
+        };
+
+        if (navigator.geolocation)
+            navigator.geolocation.getCurrentPosition(pos => start(pos.coords));
+        else
+            start({ latitude: 39.833333, longitude: -98.583333 });
+    });
 });
