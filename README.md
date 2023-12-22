@@ -14,7 +14,7 @@ Website: [usa.govfresh.com](https://usa.govfresh.com)
 ## Maintainers
 
 * [Luke Fretwell](https://govfresh.com/people/lukefretwell)
-* Elias Fretwell
+* [Elias Fretwell](https://github.com/Narlotl)
 
 ## Roadmap
 
