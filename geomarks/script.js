@@ -101,7 +101,7 @@ fetch('https://firebasestorage.googleapis.com/v0/b/survey-markers.appspot.com/o/
                 <div style="max-height: 45vh; overflow-y: scroll">
                     <h2>${marker.id}</h2>
                     <p>Location: <a href="https://www.google.com/maps/place/${marker.latitude},${marker.longitude}" target="_blank">${marker.latitude}, ${marker.longitude}</a></p>
-                    <p>${capitalizeFirstLetter(marker.marker || 'undefined')}${(marker.setting && !marker.setting.includes('UNSPECIFIED') && !marker.setting.includes('UNDEFINED')) ? ' set in ' + marker.setting.replace('set in ', '').toLowerCase() : ''}</p>
+                    <p>${capitalizeFirstLetter(marker.marker || 'undefined')}${(marker.setting && !marker.setting.includes('UNSPECIFIED') && !marker.setting.includes('UNDEFINED')) ? ' set in ' + marker.setting.replace('SET IN ', '').toLowerCase() : ''}</p>
                     ${marker.stamping ? '<p>Stamped "' + marker.stamping + '"</p>' : ''}
                     <p style="text-transform: capitalize">${marker.description.toLowerCase()}</p>
                     <div class="container"><div id="images-placeholder></div></div>
