@@ -103,8 +103,7 @@ fetch('states.geojson').then(res => res.json()).then(outlines => {
                         opacity = 0.25;
                         break;
                     }
-                const mapMarker = L.circleMarker([marker.latitude, marker.longitude],
-                    { color: '#fff', weight: 1, radius: markerRadius, fillColor: '#000', opacity, fillOpacity: opacity, bubblingMouseEvents: false }
+                const mapMarker = L.circleMarker([marker.latitude, marker.longitude], { color: '#fff', weight: 1, radius: markerRadius, fillColor: '#000', opacity, fillOpacity: opacity, bubblingMouseEvents: false }
                 ).addTo(markerLayer);
                 mapMarker.on('click', e => {
                     markerInfoContent.innerHTML = `
@@ -147,42 +146,6 @@ fetch('states.geojson').then(res => res.json()).then(outlines => {
                         markerInfo.classList = '';
                     };
                 });
-                /*mapMarker.bindPopup(`
-                <div style="max-height: 45vh; overflow-y: scroll">
-                    <h2>${marker.id}</h2>
-                    <p>Location: <a href="https://www.google.com/maps/place/${marker.latitude},${marker.longitude}" target="_blank">${marker.latitude}, ${marker.longitude}</a></p>
-                    <p>${capitalizeFirstLetter(marker.marker || 'undefined')}${(marker.setting && !marker.setting.includes('UNSPECIFIED') && !marker.setting.includes('UNDEFINED')) ? ' set in ' + marker.setting.replace('SET IN ', '').toLowerCase() : ''}</p>
-                    ${marker.stamping ? '<p>Stamped "' + marker.stamping + '"</p>' : ''}
-                    <p style="text-transform: capitalize">${marker.description.toLowerCase()}</p>
-                    <div class="container"><div id="images-placeholder></div></div>
-                    <p>${marker.history.map(recovery => recovery.date.substring(0, 4) + ' - ' + capitalizeFirstLetter(recovery.condition)).join('<br>')}</p>
-                    <p>
-                        <a href="https://geodesy.noaa.gov/cgi-bin/mark_recovery_form.prl?PID=${marker.id}&liteMode=true" target="_blank" class="btn btn-primary">Submit recovery</a>
-                    </p>
-                    <p class="source">Data:
-                        <a href="https://www.ngs.noaa.gov/cgi-bin/ds_mark.prl?PidBox=${marker.id}" target="_blank">U.S. National Geodetic Survey</a>
-                    </p>
-                </div>
-            `, { minWidth: 144 }).on('popupopen', () => {
-                    if (mapMarker.getPopup().getContent().includes('<div id="images-placeholder></div>'))
-                        fetch('https://us-central1-survey-markers.cloudfunctions.net/getImages?id=' + marker.id).then(res => res.json()).then(data => {
-                            let html = '<div class="card-group clean pb-0 ">';
-                            if (data.length > 0) {
-                                for (const image of data)
-                                    html += `
-                                <div class="col-12 d-flex align-items-stretch">
-                                    <div class="card">
-                                        <img src="${image}">
-                                    </div>
-                                </div>`;
-                                html += '</div>';
-                            }
-                            else
-                                html = ''
-
-                            mapMarker.setPopupContent(mapMarker.getPopup().getContent().replace('<div id="images-placeholder></div>', html));
-                        });
-                });*/
             }
 
             map.removeLayer(locator);
@@ -192,9 +155,8 @@ fetch('states.geojson').then(res => res.json()).then(outlines => {
         });
     };
 
-    /*if (navigator.geolocation)
+    if (navigator.geolocation)
         navigator.geolocation.getCurrentPosition(pos => start(pos.coords));
     else
-        start({ latitude: 39.833333, longitude: -98.583333 });*/
-    start({ latitude: 38.8951, longitude: -77.0364 });
+        start({ latitude: 39.833333, longitude: -98.583333 });
 });
