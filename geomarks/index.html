@@ -74,13 +74,11 @@
 
         html,
         body,
-        main div:not(#map div) {
+        #map,
+        #loading,
+        #loading div {
             height: 100%;
             height: -webkit-fill-available;
-        }
-
-        #map {
-            height: 100%;
         }
 
         @keyframes spin {
@@ -99,6 +97,65 @@
 
         main.loading-markers #loading {
             display: block;
+        }
+
+        #marker-info {
+            z-index: 1000;
+            width: 100%;
+            height: 75% !important;
+            position: absolute;
+            bottom: 4em;
+            background-color: white;
+            padding: 13px 24px 0px 20px;
+            transition: 0.5s bottom;
+            font-size: 0.8em;
+        }
+
+        #marker-info.hidden {
+            bottom: -75%;
+        }
+
+        button.close {
+            float: right;
+            opacity: 1;
+        }
+
+        button.close>i {
+            color: black;
+        }
+
+        #marker-overview {
+            position: absolute;
+            width: 90%;
+            left: 5%;
+            background-color: white;
+            bottom: calc(4em + 5vw);
+            z-index: 1001;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: 2px solid #1e50a0;
+            transition: 0.5s bottom;
+        }
+
+        #marker-overview.hidden {
+            bottom: 0;
+        }
+
+        #content {
+            max-height: 100%;
+            overflow-y: scroll;
+        }
+
+        span.border-item {
+            padding-right: 0.5rem;
+        }
+
+        span.border-item:not(span.border-item:first-child) {
+            padding-left: 0.5rem;
+        }
+
+        span.border-item:not(span.border-item:last-child) {
+            border-right: 1px solid black;
         }
     </style>
 
@@ -136,8 +193,8 @@
         include("head.html", "head");
     </script>
     <div class="overlay info" id="info">
-        <span style="float: right; font-size: 2rem; cursor: pointer;"
-            onclick="document.getElementById('info').style.display = 'none'">✕</span>
+        <button class="close" onclick="document.getElementById('info').style.display = 'none'"><i
+                class="fa-solid fa-x"></i></button>
         <h1>About</h1>
         Geomarks is a USA.GovFresh project.
         <h2>Data</h2>
@@ -156,8 +213,8 @@
                 Govfresh/USA</a></p>
     </div>
     <div class="overlay" id="options">
-        <span style="float: right; font-size: 2rem; cursor: pointer;"
-            onclick="document.getElementById('options').style.display = 'none'">✕</span>
+        <button class="close" onclick="document.getElementById('options').style.display = 'none'"><i
+                class="fa-solid fa-x"></i></button>
         <form id="options-form">
             <label for="radius">Radius:
                 <span class="radius">5</span>
@@ -208,8 +265,14 @@
             </div>
         </div>
         <div id="map"></div>
+        <div id="marker-overview" class="hidden"></div>
+        <div id="marker-info" class="hidden">
+            <button class="close" onclick="this.parentElement.classList = 'hidden'"><i
+                    class="fa-solid fa-x"></i></button>
+            <div id="content"></div>
+        </div>
     </main>
-    <div class="loading-include"></div>
+
     <div class="scripts">
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCRSGQDG05"></script>
